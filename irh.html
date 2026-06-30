@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intergalactic Retirement Home — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Georgia&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --space:      #1A1A2E;
+      --space-mid:  #2D2D4A;
+      --purple:     #5B3D8A;
+      --purple-lt:  #8B6AB8;
+      --pink:       #C23B7A;
+      --green:      #1E7A4A;
+      --red:        #D94030;
+      --cream:      #F5F0E8;
+      --warm-white: #FAF8F3;
+      --ink:        #1A1A1A;
+      --ink-mid:    #3A3A3A;
+      --ink-light:  #7A7A7A;
+      --serif:      Georgia, serif;
+      --sans:       'DM Sans', sans-serif;
+      --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: rgba(91,61,138,0.2); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--ink-light); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px; font-weight: normal; font-style: italic;
+      color: var(--purple);
+    }
+
+    /* HERO */
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+      background: var(--space);
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,26,46,0.9) 0%, rgba(26,26,46,0.3) 60%, transparent 100%);
+    }
+    /* Stars */
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(2px 2px at 35% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 45%, rgba(255,255,255,0.5) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px; left: 56px; right: 56px;
+      z-index: 2;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(15, 15, 35, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 620px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--purple-lt); margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: normal; font-style: italic;
+      color: white;
+      line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 16px; font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      max-width: 500px; line-height: 1.65;
+    }
+
+    /* SECTION COMMON */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 40px;
+      background: var(--purple-lt);
+    }
+
+    /* OVERVIEW */
+    .overview {
+      background: var(--cream);
+      padding: 100px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .overview h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: normal;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--space);
+    }
+    .overview p {
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .detail-list {
+      list-style: none;
+      border-top: 1px solid rgba(91,61,138,0.3);
+    }
+    .detail-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(91,61,138,0.15);
+      font-size: 14px;
+    }
+    .detail-list li span:first-child {
+      color: var(--ink-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 11px;
+    }
+    .detail-list li span:last-child {
+      color: var(--ink);
+      font-weight: 500;
+      text-align: right;
+      max-width: 220px;
+    }
+
+    /* CARDS */
+    .cards-section {
+      background: var(--warm-white);
+      padding: 100px 80px;
+    }
+    .cards-section h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: normal;
+      color: var(--space);
+      margin-bottom: 12px;
+    }
+    .cards-intro {
+      font-size: 15px;
+      color: var(--ink-mid);
+      max-width: 600px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+    .card-types {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .card-type-wrap { border-radius: 8px; overflow: hidden; }
+    .card-type-wrap img { width: 100%; display: block; }
+    .card-type-label {
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .card-type-wrap.identity .card-type-label { background: var(--pink); color: white; }
+    .card-type-wrap.memory .card-type-label { background: var(--green); color: white; }
+    .card-type-wrap.event .card-type-label { background: var(--red); color: white; }
+
+    /* CHARACTERS */
+    .characters {
+      background: var(--space);
+      padding: 100px 80px;
+    }
+    .characters .section-label { color: var(--purple-lt); }
+    .characters .section-label::after { background: var(--purple-lt); }
+    .characters h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: normal;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .characters-intro {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      max-width: 600px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .character-item { border-radius: 6px; overflow: hidden; }
+    .character-item img {
+      width: 100%; display: block;
+      transition: transform 0.4s ease;
+    }
+    .character-item:hover img { transform: scale(1.04); }
+
+    /* ENCYCLOPEDIA */
+    .encyclopedia {
+      background: var(--cream);
+      padding: 100px 80px;
+    }
+    .encyclopedia h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: normal;
+      color: var(--space);
+      margin-bottom: 12px;
+    }
+    .encyclopedia-intro {
+      font-size: 15px;
+      color: var(--ink-mid);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+    .encyclopedia-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .encyclopedia-feature img {
+      width: 100%; display: block;
+      border-radius: 6px;
+      box-shadow: 0 4px 24px rgba(26,26,46,0.15);
+    }
+    .encyclopedia-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .encyclopedia-grid img {
+      width: 100%; display: block;
+      border-radius: 6px;
+      box-shadow: 0 2px 12px rgba(26,26,46,0.1);
+    }
+
+    /* PRESENTATION */
+    .presentation {
+      background: var(--warm-white);
+      padding: 100px 80px;
+    }
+    .presentation h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: normal;
+      color: var(--space);
+      margin-bottom: 12px;
+    }
+    .presentation-intro {
+      font-size: 15px;
+      color: var(--ink-mid);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+    .slide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .slide-grid img {
+      width: 100%; display: block;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* FOOTER */
+    .next-project {
+      padding: 80px 56px;
+      border-top: 1px solid rgba(91,61,138,0.2);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-light); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: normal; font-style: italic;
+      color: var(--ink);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--purple);
+      transition: transform 0.2s;
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .overview { padding: 64px 24px; grid-template-columns: 1fr; gap: 40px; }
+      .cards-section, .characters, .encyclopedia, .presentation { padding: 64px 24px; }
+      .card-types { grid-template-columns: 1fr; }
+      .character-grid { grid-template-columns: repeat(4, 1fr); }
+      .encyclopedia-feature { grid-template-columns: 1fr; }
+      .encyclopedia-grid { grid-template-columns: 1fr 1fr; }
+      .slide-grid { grid-template-columns: 1fr 1fr; }
+      .next-project { padding: 48px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-img-wrap { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#more-projects" class="nav-back">All work</a>
+    <span class="nav-project-name">Intergalactic Retirement Home</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/irh/title-slide.png" alt="Intergalactic Retirement Home title slide">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Game Design · Graphic Design · Tabletop RPG · 2025</p>
+        <h1 class="hero-title">Intergalactic Retirement Home</h1>
+        <p class="hero-sub">A social deduction tabletop RPG set in a deep-space retirement home, where retired cosmic legends with memory loss investigate a murder. I designed the cards, character sheets, encyclopedia booklet, and presentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW STRIP -->
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid rgba(91,61,138,0.2); background: #F5F0FA;">
+    <div style="padding: 32px 40px; border-right: 1px solid rgba(91,61,138,0.2);">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #9B7AB8; margin-bottom: 8px;">Role</p>
+      <p style="font-size: 15px; color: #1A1208; line-height: 1.4;">Card design · Booklet · Presentation</p>
+    </div>
+    <div style="padding: 32px 40px; border-right: 1px solid rgba(91,61,138,0.2);">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #9B7AB8; margin-bottom: 8px;">Team</p>
+      <p style="font-size: 15px; color: #1A1208; line-height: 1.4;">6-person team</p>
+    </div>
+    <div style="padding: 32px 40px; border-right: 1px solid rgba(91,61,138,0.2);">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #9B7AB8; margin-bottom: 8px;">Players</p>
+      <p style="font-size: 15px; color: #1A1208; line-height: 1.4;">7 (6 residents + 1 overseer)</p>
+    </div>
+    <div style="padding: 32px 40px;">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #9B7AB8; margin-bottom: 8px;">Structure</p>
+      <p style="font-size: 15px; color: #1A1208; line-height: 1.4;">8 rounds across 2 acts</p>
+    </div>
+  </div>
+
+  <!-- PROJECT INTRO -->
+  <section class="overview" style="grid-template-columns: 1fr; gap: 0; padding: 80px 56px;">
+    <div class="reveal">
+      <p class="section-label">Overview</p>
+      <h2>Retired cosmic legends. Memory loss. One dead roommate.</h2>
+      <p>Players take on the role of retired cosmic legends: a dementia-ridden war horse general, a 7,000-year-old tortoise archaeologist, an ex-mafia birdman, a forgetful alien genius, all stuck together in a drifting deep-space retirement facility.</p>
+      <p style="margin-top: 14px;">The mystery kicks off when their leader is found dead. Players use Identity Shift Cards, Memory Fragments, and Event Cards to investigate, deceive, and build a collective narrative where not even the players know what's true.</p>
+    </div>
+  </section>
+
+  <!-- CARD DESIGN -->
+  <section class="cards-section">
+    <p class="section-label reveal">Card system</p>
+    <h2 class="reveal">Three card types, three mechanics.</h2>
+    <p class="cards-intro reveal">Each card type has its own color and purpose. Identity Shift Cards (pink) alter a player's behavior mid-game. Memory Fragments (green) are clues that may be true, false, or delusional. Event Cards (red) introduce randomized disruptions that shift the whole table's reality.</p>
+
+    <div class="card-types reveal">
+      <div class="card-type-wrap identity">
+        <img src="images/irh/cards-identity.png" alt="Identity Shift cards" />
+        <div class="card-type-label">Identity Shift</div>
+      </div>
+      <div class="card-type-wrap memory">
+        <img src="images/irh/cards-memory.png" alt="Memory Fragment cards" />
+        <div class="card-type-label">Memory Fragment</div>
+      </div>
+      <div class="card-type-wrap event">
+        <img src="images/irh/cards-event.png" alt="Event cards" />
+        <div class="card-type-label">Event</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARACTERS -->
+  <section class="characters">
+    <p class="section-label reveal">Character cards</p>
+    <h2 class="reveal">Seven residents, seven secrets.</h2>
+    <p class="characters-intro reveal">Each character has a public-facing card with their overview and a hidden trait only they know. That asymmetry is what drives the social deduction throughout the game.</p>
+    <div class="character-grid reveal">
+      <div class="character-item"><img src="images/irh/char-gallop.png" alt="Sir Gallop IV" /></div>
+      <div class="character-item"><img src="images/irh/char-shell.png" alt="Old Shell" /></div>
+      <div class="character-item"><img src="images/irh/char-piuma.png" alt="Don Piuma" /></div>
+      <div class="character-item"><img src="images/irh/char-txz.png" alt="TXZ-79" /></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; max-width: 75%; margin-left: auto; margin-right: auto;" class="reveal">
+      <div class="character-item"><img src="images/irh/char-buzz.png" alt="Buzz" /></div>
+      <div class="character-item"><img src="images/irh/char-pearl.png" alt="Thy Pearl" /></div>
+      <div class="character-item"><img src="images/irh/char-janeter.png" alt="Janetor" /></div>
+    </div>
+  </section>
+
+  <!-- ENCYCLOPEDIA -->
+  <section class="encyclopedia">
+    <p class="section-label reveal">Encyclopedia of the Retirement Home</p>
+    <h2 class="reveal">The in-universe lore book.</h2>
+    <p class="encyclopedia-intro reveal">A companion booklet covering the retirement home's mysterious origins and each species' history. The blue hardcover and cream interior make it feel like a real reference book you might find drifting through space.</p>
+    <div class="encyclopedia-feature reveal">
+      <img src="images/irh/encyc-cover.png" alt="Encyclopedia cover and table of contents" />
+      <img src="images/irh/encyc-origin.png" alt="The Retirement Home origin entry" />
+    </div>
+    <div class="encyclopedia-grid reveal">
+      <img src="images/irh/encyc-horsemen.png" alt="The Horsemen entry" />
+      <img src="images/irh/encyc-tortoises.png" alt="The Tortoises entry" />
+      <img src="images/irh/encyc-aliens.png" alt="The Aliens entry" />
+      <img src="images/irh/encyc-birdmen.png" alt="The Mafia Birdmen entry" />
+      <img src="images/irh/encyc-oysters.png" alt="The Giant Oysters entry" />
+      <img src="images/irh/encyc-flies.png" alt="The Flies entry" />
+    </div>
+  </section>
+
+  <!-- PRESENTATION -->
+  <section class="presentation">
+    <p class="section-label reveal">Pitch presentation</p>
+    <h2 class="reveal">A pitch deck that matched the game's world.</h2>
+    <p class="presentation-intro reveal">The full pitch deck was designed to match the game's tone: clean, editorial typography with a sci-fi edge. Each section was laid out to communicate the game's world just as much as its rules.</p>
+    <div class="slide-grid reveal">
+      <img src="images/irh/slide-premise.png" alt="Premise slide" />
+      <img src="images/irh/slide-characters-1.png" alt="Characters slide 1" />
+      <img src="images/irh/slide-characters-2.png" alt="Characters slide 2" />
+      <img src="images/irh/slide-mechanics.png" alt="Core mechanics slide" />
+      <img src="images/irh/slide-voting.png" alt="Voting system slide" />
+      <img src="images/irh/slide-gameplay.png" alt="Sample gameplay slide" />
+    </div>
+  </section>
+
+  <!-- INSTRUCTION MANUAL -->
+  <section class="cards-section" style="background: var(--cream);">
+    <p class="section-label reveal">Instruction manual</p>
+    <h2 class="reveal" style="font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--space); margin-bottom: 12px;">Everything a new resident needs to know</h2>
+    <p class="cards-intro reveal">A single-page reference sheet covering the full game: the premise, all six characters, the memory system, identity shifts, voting, event cards, and materials list. Designed to be handed to players before the game starts.</p>
+    <div class="reveal">
+      <img src="images/irh/instruction-manual.png" alt="The Retirement Home instruction manual" style="width: 100%; display: block; border-radius: 6px; box-shadow: 0 4px 32px rgba(26,26,46,0.12);" />
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <a href="index.html#more-projects" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

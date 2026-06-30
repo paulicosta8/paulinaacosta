@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barkada, Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F4EE;
+      --green:     #2A4A2A;
+      --green-lt:  #4A7A4A;
+      --cream:     #F0EDDF;
+      --charcoal:  #1E1E1E;
+      --muted:     #6B6B5A;
+      --border:    #DDDCD0;
+      --dark-bg:   #1A1F1A;
+      --serif:     Georgia, 'Times New Roman', serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(245, 244, 238, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,31,26,0.75) 0%, transparent 60%);
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px;
+      left: 56px;
+      right: 56px;
+      z-index: 2;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(10, 10, 10, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 600px;
+    }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,237,223,0.65);
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(240,237,223,0.8);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .overview-value {
+      font-size: 15px;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .cs-section {
+      padding: 100px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--green);
+      opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+    .five-col { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .asymmetric { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: start; }
+
+    .img-wrap { overflow: hidden; border-radius: 4px; }
+    .img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.03); }
+    .img-sq   { aspect-ratio: 1; }
+    .img-land { aspect-ratio: 4/3; }
+    .img-wide { aspect-ratio: 16/9; }
+    .img-tall { aspect-ratio: 3/4; }
+    .img-port { aspect-ratio: 2/3; }
+
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-top: 40px;
+    }
+    .stat-item {
+      padding: 32px 36px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+
+    .merch-section {
+      background: var(--dark-bg);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .merch-section .cs-eyebrow { color: #7AB87A; }
+    .merch-section .cs-eyebrow::after { background: #7AB87A; }
+    .merch-section .cs-headline { color: #F0EDDF; }
+    .merch-section .cs-body { color: rgba(240,237,223,0.6); }
+
+    .ig-section {
+      background: var(--green);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .ig-section .cs-eyebrow { color: rgba(240,237,223,0.7); }
+    .ig-section .cs-eyebrow::after { background: rgba(240,237,223,0.4); }
+    .ig-section .cs-headline { color: var(--cream); }
+    .ig-section .cs-body { color: rgba(240,237,223,0.65); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .next-project {
+      padding: 80px 56px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px;
+      color: var(--green);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .cs-section, .merch-section, .ig-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .two-col, .three-col, .four-col, .five-col, .asymmetric { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .two-col, .three-col, .four-col, .five-col { grid-template-columns: 1fr; }
+      .hero-img-wrap { height: 70vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">Barkada</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/barkada/barkada-cover.png" alt="Barkada">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Print Design · Merchandise · Social Media Graphics · 2023–24</p>
+        <h1 class="hero-title">Barkada</h1>
+        <p class="hero-sub">A year of social content, merchandise design, and print design as Media Specialist for Northeastern University's Filipino cultural organization, Barkada, with 60+ assets across every touchpoint.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Media Specialist · 2023–24<br>Vice President · 2024–25</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Timeline</p>
+      <p class="overview-value">2023 – 2024</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Event posters, social graphics, merchandise, banners, illustrations</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Adobe Illustrator · InDesign · Photoshop · Canva</p>
+    </div>
+  </div>
+
+  <div style="border-bottom: 1px solid var(--border); padding: 0 56px; display: flex; gap: 32px;">
+    <a href="#event-branding" style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; text-decoration: none;" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='transparent'">Event Branding</a>
+    <a href="#social-media" style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; text-decoration: none;" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='transparent'">Social Media</a>
+    <a href="#merchandise" style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; text-decoration: none;" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='transparent'">Merchandise</a>
+  </div>
+
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">The work</p>
+    <div class="asymmetric">
+      <div>
+        <h2 class="cs-headline reveal">Designs created for every event.</h2>
+        <p class="cs-body reveal">As Media Specialist for NU Barkada, I was solely responsible for all visual design output during the 2023–24 academic year. Every poster, banner, social post, and piece of merch was created by me as Media Specialist. Each event got its own visual identity, while staying true to Barkada's energetic and community-driven personality.</p>
+        <p class="cs-body reveal">No two events looked the same. I had a different vision for each large event, and was able to learn and try out new graphic design skills. The result: an Instagram feed averaging 800+ impressions per post and $5,000+ in merchandise sales. The following year I moved into the Vice President role, leading event planning and a team of 12.</p>
+        <div class="stats-strip reveal">
+          <div class="stat-item">
+            <p class="stat-number">60+</p>
+            <p class="stat-label">Social assets designed</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number">800+</p>
+            <p class="stat-label">Impressions per post</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number">$5k+</p>
+            <p class="stat-label">In merchandise sales</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="img-wrap img-land">
+          <img src="images/homepage/barkada-cover.png" alt="Barkada sticker">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="event-branding" class="cs-section">
+    <p class="cs-eyebrow reveal">Event design</p>
+    <h2 class="cs-headline reveal">Three events, three distinct identities.</h2>
+    <p class="cs-body reveal">Each of Barkada's major events got its own full visual identity meant to encapsulate the event itself.</p>
+
+    <div class="three-col reveal" style="margin-top: 32px;">
+      <div class="img-wrap img-sq"><img src="images/barkada/fcc-ig.jpg" alt="Filipino Community Conference"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/hgf_ig_post2.jpg" alt="Husky Global Fair"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/bk_ig.jpg" alt="Bahay Kubo"></div>
+    </div>
+
+    <div class="reveal" style="margin-top: 56px;">
+      <p class="cs-eyebrow" style="color: var(--muted); font-size: 9px;">Filipino Community Conference</p>
+      <p class="cs-body" style="margin-top: 12px; margin-bottom: 20px;">FCC was held during Filipino American History Month as an intentional, conference-style event featuring a keynote speaker, panelists, and workshops. The goal was to create space for discussion about what it means to be Filipino, connect people across the Greater Boston Area, and inspire the younger generation through the stories of Filipinos across many different careers. I designed the full campaign, Instagram graphics, panelist and speaker cards, workshop promotions, and a printed program outlining the day's timeline.</p>
+      <div class="two-col">
+        <div class="img-wrap img-sq"><img src="images/barkada/fcc-key_food.jpg" alt="FCC keynote speaker graphic"></div>
+        <div class="img-wrap img-sq"><img src="images/barkada/fcc_panelist.jpg" alt="FCC panelist graphic"></div>
+      </div>
+    </div>
+    <div class="three-col reveal" style="margin-top: 16px;">
+      <div class="img-wrap img-sq"><img src="images/barkada/fcc_panelists2.jpg" alt="FCC panelist graphic"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/fcc_panelists3.jpg" alt="FCC panelist graphic"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/fcc-workshops7.jpg" alt="FCC workshop graphic"></div>
+    </div>
+
+    <div class="reveal" style="margin-top: 56px;">
+      <p class="cs-eyebrow" style="color: var(--muted); font-size: 9px;">Husky Global Fair</p>
+      <p class="cs-body" style="font-size: 14px; margin-bottom: 20px;">HGF is the first major event of the year, not just for Barkada but for Northeastern as a whole. It's part of welcome week, and it's where most new students get their first look at the cultural organizations on campus. Barkada leads the planning of the event every year. It's full of tabling and performances from different cultural orgs, and it's one of the most important opportunities for new students to find their community. I designed the Instagram graphics, campus posters, and a large printed banner that went at the front of the event.</p>
+      <div class="two-col" style="gap: 10px; align-items: start;">
+        <div class="img-wrap" style="aspect-ratio: 2/3;">
+          <img src="images/barkada/vert_banner.jpg" alt="Husky Global Fair vertical banner" style="width:100%;display:block;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="img-wrap img-sq"><img src="images/barkada/hgf_ig_post-updated.jpg" alt="Husky Global Fair Instagram post"></div>
+          <div class="img-wrap img-sq"><img src="images/barkada/hgf_ig_post-updated2.jpg" alt="Husky Global Fair tabling post"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 40px;">
+      <p class="cs-eyebrow" style="color: var(--muted); font-size: 9px;">Bahay Kubo</p>
+      <p class="cs-body" style="font-size: 14px; margin-bottom: 20px;">Bahay Kubo is the last major event of the year and one of the most meaningful to Barkada's members. It's a full showcase of modern and traditional Filipino dance, singing, and skits, and it's the final performance for graduating seniors every year. The show consistently sells out, with hundreds of people coming to watch. Every year the show is built around a theme that shapes all the performances and skits. The year I designed the graphics, the theme was "Bayani", the Filipino word for superhero, which is why I went with a comic book visual identity. I created the full visual identity, posters, Instagram content, and promotional graphics.</p>
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px; align-items: start;">
+        <div class="img-wrap" style="aspect-ratio: 3/4;">
+          <img src="images/barkada/bkposter.jpg" alt="Bahay Kubo vertical poster">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="img-wrap img-sq"><img src="images/barkada/bk_ig.jpg" alt="Bahay Kubo Instagram post"></div>
+          <div class="img-wrap img-sq"><img src="images/barkada/bk_ig_posts.jpg" alt="Barkada IG post"></div>
+          <div class="img-wrap img-sq"><img src="images/barkada/bk_ig_posts3.jpg" alt="Barkada IG post"></div>
+          <div class="img-wrap img-sq"><img src="images/barkada/bk_ig_posts2.jpg" alt="Barkada IG post"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="social-media" class="cs-section">
+    <p class="cs-eyebrow reveal">Social content</p>
+    <h2 class="cs-headline reveal">Keeping the feed alive between events.</h2>
+    <p class="cs-body reveal">Beyond event campaigns, I designed the full social content calendar. This included member announcements, election graphics, eboard introductions, performance promotions, and merch drops. Every post maintained Barkada's playful, community-forward energy while adapting to each moment.</p>
+
+    <div class="three-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap img-sq"><img src="images/barkada/barky_schola.jpg" alt="NU Barkada Scholarship"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/gm2.jpg" alt="General Meeting 2"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/gm4.jpg" alt="General Meeting 4"></div>
+    </div>
+    <div class="three-col reveal" style="margin-top: 16px;">
+      <div class="img-wrap img-sq"><img src="images/barkada/springgm3.jpg" alt="Spring GM 3"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/springgm5.jpg" alt="Spring GM 5"></div>
+      <div class="img-wrap img-sq"><img src="images/barkada/benefit2.jpg" alt="Benefit Concert"></div>
+    </div>
+  </section>
+
+  <section id="merchandise" class="merch-section">
+    <p class="cs-eyebrow reveal">Merchandise</p>
+    <h2 class="cs-headline reveal">8 merchandise designs. $5,000+ in sales.</h2>
+    <p class="cs-body reveal">I designed every piece of Barkada merchandise from 2023-24, while coordinating with vendors for production and maintaining high standards.</p>
+
+    <p class="cs-body reveal" style="margin-top: 32px;">The cream and green heavyweight t-shirt was influenced by Keith Haring and the iconic Filipino traditional dance, Tinikling. I first thought of the design during my very first design class at Northeastern, and thought it would make a really cool shirt a year later when I made merch as Media Specialist.</p>
+    <div class="two-col reveal" style="margin-top: 20px;">
+      <div class="img-wrap img-sq" style="background:#1E1E1E;">
+        <img src="images/barkada/barky-shirt2.png" alt="Barkada shirt front" style="object-fit:contain; padding: 20px;">
+      </div>
+      <div class="img-wrap img-sq" style="background:#1E1E1E;">
+        <img src="images/barkada/barky-shirt.png" alt="Barkada shirt back">
+      </div>
+    </div>
+
+    <p class="cs-body reveal" style="margin-top: 48px;">With the brown hoodie, I wanted a streetwear vibe, so I made a collage of easily identifiable aspects of Filipino culture that all Filipinos could relate to.</p>
+    <div class="two-col reveal" style="margin-top: 20px;">
+      <div class="img-wrap img-sq" style="background:#2A2220;">
+        <img src="images/barkada/brown-hoodie.png" alt="Barkada brown hoodie" style="object-fit:cover;">
+      </div>
+      <div class="img-wrap img-sq" style="background:#1A1008;">
+        <img src="images/barkada/bkd-merch.png" alt="Barkada merch graphic" style="object-fit:contain; padding: 16px;">
+      </div>
+    </div>
+
+    <p class="cs-body reveal" style="margin-top: 48px;">The eboard jacket features custom hand-drawn character illustrations of each board member, inspired by Smiskis, with each one reflecting their personality.</p>
+    <div class="two-col reveal" style="margin-top: 20px;">
+      <div class="img-wrap img-sq" style="background:#FFFFFF;">
+        <img src="images/barkada/jacket-front.png" alt="Barkada eboard jacket front" style="object-fit:contain; padding: 20px;">
+      </div>
+      <div class="img-wrap img-sq" style="background:#FFFFFF;">
+        <img src="images/barkada/jacket-back.png" alt="Barkada eboard jacket back" style="object-fit:contain; padding: 20px;">
+      </div>
+    </div>
+  </section>
+
+  <a href="bn.html" class="next-project">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">B&N Sandwiches</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

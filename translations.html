@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Translations — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #F4F1EA;
+      --taupe:    #6B6250;
+      --taupe-dk: #3A3428;
+      --cream:    #EDE8DC;
+      --charcoal: #1E1C18;
+      --muted:    #7A7264;
+      --border:   #D8D2C4;
+      --white:    #FFFFFF;
+      --serif:    Georgia, 'Times New Roman', serif;
+      --sans:     'Inter', system-ui, sans-serif;
+      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, video { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(244, 241, 234, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px; font-weight: 300; font-style: italic;
+      color: var(--taupe);
+    }
+
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(58,52,40,0.82) 0%, rgba(58,52,40,0.1) 60%, transparent 100%);
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px; left: 56px; right: 56px;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(30, 28, 24, 0.5);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 600px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 300; font-style: italic;
+      color: var(--white);
+      line-height: 1.0; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      max-width: 520px; line-height: 1.65;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
+
+    .cs-section { padding: 100px 56px; border-bottom: 1px solid var(--border); }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--taupe); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--taupe); opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2; letter-spacing: -0.01em;
+      margin-bottom: 24px; max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    .img-wrap { overflow: hidden; border-radius: 4px; }
+    .img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.02); }
+    .img-land { aspect-ratio: 4/3; }
+    .img-wide { aspect-ratio: 16/9; }
+
+    .video-wrap {
+      border-radius: 8px; overflow: hidden;
+      margin-top: 40px;
+      box-shadow: 0 4px 32px rgba(58,52,40,0.12);
+    }
+    .video-wrap video { width: 100%; display: block; }
+
+    .pdf-embed-wrap {
+      margin-top: 40px;
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 32px rgba(58,52,40,0.12);
+      position: relative; width: 100%;
+      padding-bottom: 65%; height: 0;
+    }
+    .pdf-embed-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none; border-radius: 8px;
+    }
+
+    .dark-section {
+      background: var(--taupe-dk);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .dark-section .cs-eyebrow { color: rgba(255,255,255,0.5); }
+    .dark-section .cs-eyebrow::after { background: rgba(255,255,255,0.3); }
+    .dark-section .cs-headline { color: var(--white); }
+    .dark-section .cs-body { color: rgba(255,255,255,0.55); }
+
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .next-project {
+      padding: 80px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border); transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--taupe);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .cs-section, .dark-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .two-col, .three-col { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .next-project { padding: 60px 24px; }
+      .pdf-embed-wrap { padding-bottom: 100%; }
+    }
+    @media (max-width: 600px) {
+      .three-col { grid-template-columns: 1fr; }
+      .hero-img-wrap { height: 70vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#more-projects" class="nav-back">All work</a>
+    <span class="nav-project-name">Translations</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/translations/mock_11.jpg" alt="Translations booklet physical mockup">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Typography · Print · 2023</p>
+        <h1 class="hero-title">Translations</h1>
+        <p class="hero-sub">A typography booklet tracing the parallel design processes of Carol Twombly and Ryoko Nishizuka, two women who translated the past into the present.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Solo designer</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Context</p>
+      <p class="overview-value">Typography 1 Class · 2023</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Printed Booklet · MP4</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Adobe InDesign · Illustrator</p>
+    </div>
+  </div>
+
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">The project</p>
+    <h2 class="cs-headline reveal">Two designers, two traditions, one shared method.</h2>
+    <p class="cs-body reveal">Translations is a printed typography booklet exploring the parallel design processes of Carol Twombly (Trajan) and Ryoko Nishizuka (Higumin). Two prominent women in typography who, despite working decades apart and in completely different traditions, share the same method: tracing historical calligraphy by hand and digitizing it into a typeface.</p>
+    <p class="cs-body reveal">Twombly drew from Roman inscriptions carved into Trajan's Column in 113 AD. Nishizuka drew from newspaper prints of the Edo period in Japan.</p>
+
+    <div class="video-wrap reveal">
+      <video autoplay muted loop playsinline aria-label="Translations booklet animated version">
+        <source src="images/translations/translations.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section class="cs-section" style="background: var(--cream);">
+    <p class="cs-eyebrow reveal">The booklet</p>
+    <h2 class="cs-headline reveal">A cover that does what the book is about.</h2>
+    <p class="cs-body reveal">The cover uses curving text set along custom paths, pulling the book's thesis in different directions at once just as translation does to language. The table of contents introduces the five chapters through vertical image strips, each one a visual teaser for what follows.</p>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap">
+        <img src="images/translations/01.jpg" alt="Translations booklet cover">
+      </div>
+      <div class="img-wrap">
+        <img src="images/translations/012.jpg" alt="Translations back cover and table of contents">
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Inside the booklet</p>
+    <h2 class="cs-headline reveal">Each chapter uses the typeface it talks about.</h2>
+    <p class="cs-body reveal">Each chapter uses the typeface it discusses as its primary design material. The Trajan chapter is set in Trajan and Krete. The Higumin chapter uses Higumin alongside Latin characters. Every spread treats letterforms as image, not just text.</p>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap">
+        <img src="images/translations/015.jpg" alt="Introduction spread">
+      </div>
+      <div class="img-wrap">
+        <img src="images/translations/016.jpg" alt="Western calligraphy chapter spread">
+      </div>
+    </div>
+    <div class="two-col reveal" style="margin-top: 16px;">
+      <div class="img-wrap">
+        <img src="images/translations/0110.jpg" alt="Trajan analysis spread">
+      </div>
+      <div class="img-wrap">
+        <img src="images/translations/0111.jpg" alt="Higumin spread">
+      </div>
+    </div>
+    <div class="img-wrap reveal" style="margin-top: 16px;">
+      <img src="images/translations/0112.jpg" alt="Eastern calligraphy reference spread" style="width:100%; display:block;">
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <p class="cs-eyebrow reveal">Read the booklet</p>
+    <h2 class="cs-headline reveal">Read the full booklet.</h2>
+    <p class="cs-body reveal">Browse the complete booklet below.</p>
+    <div class="pdf-embed-wrap reveal">
+      <iframe src="images/translations/translations_booklet.pdf" title="Translations booklet"></iframe>
+    </div>
+  </section>
+
+  <a href="index.html#more-projects" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

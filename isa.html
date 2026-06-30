@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISA — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:   #FCF5DE;
+      --crimson: #9E151C;
+      --charcoal:#424242;
+      --muted:   #7A7268;
+      --border:  #E8E0CC;
+      --white:   #FFFFFF;
+      --sans:    'Inter', system-ui, sans-serif;
+      --serif:   Georgia, 'Times New Roman', serif;
+      --ease:    cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, video { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(252, 245, 222, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--crimson);
+    }
+
+    /* ── Hero ── */
+    .hero { padding-top: 64px; position: relative; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(66,66,66,0.6) 0%, transparent 60%);
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px; left: 56px; right: 56px;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(10, 10, 10, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 600px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(252,245,222,0.7); margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 300; font-style: italic;
+      color: var(--cream);
+      line-height: 1.0; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(252,245,222,0.8);
+      max-width: 560px; line-height: 1.6;
+    }
+
+    /* ── Overview strip ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value {
+      font-size: 15px; font-weight: 400;
+      color: var(--charcoal); line-height: 1.4;
+    }
+
+    /* ── Sections ── */
+    .cs-section {
+      padding: 100px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-section:last-of-type { border-bottom: none; }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--crimson); opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2; letter-spacing: -0.01em;
+      margin-bottom: 24px; max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    /* ── Layouts ── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start;
+    }
+    .two-col-wide {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 60px; align-items: start;
+    }
+
+    /* ── Image treatments ── */
+    .img-full { width: 100%; border-radius: 4px; display: block; }
+    .img-grid-2 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 48px;
+    }
+    .img-grid-4 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px; margin-top: 48px;
+    }
+    .img-wrap { overflow: hidden; border-radius: 4px; }
+    .img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.03); }
+    .img-wrap-sq   { aspect-ratio: 1; }
+    .img-wrap-land { aspect-ratio: 4/3; }
+
+    /* ── Website screens ── */
+    .screens-hero {
+      margin-top: 48px;
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(66,66,66,0.12);
+    }
+    .screens-hero img { width: 100%; display: block; }
+
+    /* ── Figma embed ── */
+    .figma-embed-wrap {
+      margin-top: 40px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(66,66,66,0.12);
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+    .figma-embed-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    /* ── Gallery closing image ── */
+    .gallery-full {
+      width: 100%; border-radius: 4px;
+      margin-top: 48px; display: block;
+    }
+
+    /* ── Next project ── */
+    .next-project {
+      padding: 80px 56px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--crimson);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .cs-section { padding: 60px 24px; }
+      .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 40px; }
+      .img-grid-2 { grid-template-columns: 1fr 1fr; }
+      .img-grid-4 { grid-template-columns: 1fr 1fr; }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .img-grid-2, .img-grid-4 { grid-template-columns: 1fr; gap: 12px; }
+      .hero-img-wrap { height: 70vh; }
+      .figma-embed-wrap { padding-bottom: 75%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">ISA</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/isa/isa-cover.png" alt="ISA brand identity">
+      <div class="hero-img-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Brand identity · Web Design · Packaging · Senior Capstone · 2026</p>
+        <h1 class="hero-title">ISA</h1>
+        <p class="hero-sub">A full brand system for a curated Filipino-American fashion platform, connecting culture, elevating independent brands, and making discovery effortless.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Solo Designer for Senior Capstone</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Timeline</p>
+      <p class="overview-value">Spring 2026 (January - April)</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Brand guidelines, e-commerce website, packaging system</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Adobe Illustrator · InDesign · Photoshop · Figma · Procreate</p>
+    </div>
+  </div>
+
+  <!-- The Problem -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">The problem</p>
+    <div class="two-col-wide">
+      <div>
+        <h2 class="cs-headline reveal">Filipino-American fashion is thriving, but nearly impossible to find.</h2>
+        <p class="cs-body reveal">Independent Filipino-American designers are reimagining traditional clothing and motifs for everyday wear, bridging cultural heritage with contemporary design. But without a shared space, discovery depends entirely on the algorithm and word of mouth, leaving these brands underrepresented and harder to find.</p>
+        <p class="cs-body reveal">ISA exists to change that. Named after the Filipino word for "one," ISA is a curated digital platform that brings Filipino-American fashion brands into one intentional space, elevating independent designers, honoring cultural roots, and making discovery effortless.</p>
+      </div>
+      <div class="reveal">
+        <div class="img-wrap img-wrap-land">
+          <img src="images/isa/cover.png" alt="ISA brand guideline cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Identity -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Brand identity</p>
+    <div class="two-col-wide">
+      <div>
+        <h2 class="cs-headline reveal">A brand rooted in heritage.</h2>
+        <p class="cs-body reveal">The primary wordmark is hand-drawn, topped by a sun motif that references the eight-rayed sun of the Philippine flag. The secondary oval seal shows "ISA" in both Baybayin and English, which felt important because the whole platform is about holding those two things together: where we come from and where we are now.</p>
+        <p class="cs-body reveal" style="margin-top:16px;">Baybayin is a pre-colonial Filipino script that almost disappeared under colonization and is only recently making a comeback in Filipino culture. It felt right to include it here because that's exactly what the designers on the platform are doing too, taking something rooted in the past and bringing it forward.</p>
+      </div>
+      <div class="reveal">
+        <div class="img-wrap" style="border-radius:6px; overflow:hidden;">
+          <img src="images/isa/isa-mockup-cover.jpg" alt="ISA brand identity guideline booklet cover" style="width:100%;display:block;">
+        </div>
+      </div>
+    </div>
+
+    <div class="img-grid-2 reveal" style="margin-top: 40px;">
+      <div class="img-wrap" style="border-radius:6px; overflow:hidden;">
+        <img src="images/isa/isa-mockup1.jpg" alt="ISA logo system" style="width:100%;display:block;">
+      </div>
+      <div class="img-wrap" style="border-radius:6px; overflow:hidden;">
+        <img src="images/isa/isa-mockup2.jpg" alt="ISA logo usage guidelines and color palette" style="width:100%;display:block;">
+      </div>
+    </div>
+
+    <div class="img-wrap reveal" style="margin-top: 16px; border-radius:6px; overflow:hidden;">
+      <img src="images/isa/isa-mockup3.jpg" alt="ISA typography system" style="width:100%;display:block;">
+    </div>
+  </section>
+
+  <!-- Website -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Website</p>
+    <h2 class="cs-headline reveal">An e-commerce platform designed to feel like culture, not a store.</h2>
+    <p class="cs-body reveal">The ISA website isn't just a place to shop. It's a space to learn, explore, and actually connect with Filipino-American fashion.</p>
+    <p class="cs-body reveal">A lot of the site is built around being intentional about culture. There are sections dedicated to clothing inspired by the Barong Tagalog, pieces that incorporate Baybayin script, and traditional Filipino clothing alongside contemporary designers, because that's still such an important part of Filipino culture and it deserves its own space.</p>
+    <p class="cs-body reveal">Each brand on the platform gets a dedicated page where they can share their story and mission. The Abakada page, for example, talks about who they are, what they make, and what inspires them culturally. It felt important for the brands to have a voice, not just a product listing.</p>
+    <p class="cs-body reveal">There's also a page about the history of Filipino-American fashion, giving people context for the designers they're discovering and the larger movement ISA is part of.</p>
+
+    <div class="figma-embed-wrap reveal">
+      <iframe
+        src="https://embed.figma.com/proto/nRFpgfW6cPL6JCgS63DANk/Isa---ARTG4550?node-id=160-766&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=160%3A766&show-proto-sidebar=1&embed-host=share"
+        allowfullscreen
+        title="ISA Figma prototype">
+      </iframe>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 32px;">
+      <div class="img-wrap reveal" style="border-radius:8px; overflow:hidden; box-shadow: 0 4px 24px rgba(66,66,66,0.1);">
+        <img src="images/isa/login.png" alt="ISA sign in page" style="width:100%;display:block;">
+      </div>
+      <div class="img-wrap reveal" style="border-radius:8px; overflow:hidden; box-shadow: 0 4px 24px rgba(66,66,66,0.1);">
+        <img src="images/isa/sign-up.png" alt="ISA sign up page" style="width:100%;display:block;">
+      </div>
+    </div>
+
+    <div class="img-grid-2 reveal" style="margin-top: 16px; align-items: start;">
+      <div class="img-wrap" style="border-radius:8px; overflow:hidden; box-shadow: 0 4px 24px rgba(66,66,66,0.1);">
+        <img src="images/isa/Home.png" alt="ISA home page" style="width:100%;display:block;">
+      </div>
+      <div class="img-wrap" style="border-radius:8px; overflow:hidden; box-shadow: 0 4px 24px rgba(66,66,66,0.1);">
+        <img src="images/isa/abakada.png" alt="ISA Abakada brand page" style="width:100%;display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Packaging -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Packaging</p>
+    <h2 class="cs-headline reveal">Bringing the brand from screen to doorstep.</h2>
+    <p class="cs-body reveal">The packaging system includes a branded kraft mailer box with a green interior (one of ISA's accent colors), a white poly mailer with an oversized wordmark, and die-cut stickers of both logos, all designed to create a memorable unboxing experience that carries the ISA brand from screen to doorstep.</p>
+
+    <div class="img-grid-4 reveal">
+      <div class="img-wrap img-wrap-sq">
+        <img src="images/isa/54d9ee4f-9023-4ce3-b370-371058e0747b.jpg" alt="ISA kraft mailer box exterior">
+      </div>
+      <div class="img-wrap img-wrap-sq">
+        <img src="images/isa/314cce66-700d-47cf-a7c3-9eee284bc27e.jpg" alt="ISA teal box interior">
+      </div>
+      <div class="img-wrap img-wrap-sq">
+        <img src="images/isa/cdbbd96b-0e19-4c65-ac38-dc6ce468f4b0.jpg" alt="ISA poly mailer">
+      </div>
+      <div class="img-wrap img-wrap-sq">
+        <img src="images/isa/isa-stickers.jpg" alt="ISA die-cut stickers">
+      </div>
+    </div>
+
+    <p class="cs-eyebrow reveal" style="margin-top: 56px;">Thank you cards</p>
+    <p class="cs-body reveal">Each order includes a branded thank you card tucked inside the packaging, available in the red and green colorways, with the ISA wordmark on the front and a bilingual message in English and Tagalog on the back.</p>
+
+    <div class="img-wrap reveal" style="margin-top: 32px; border-radius: 6px; overflow: hidden;">
+      <img src="images/isa/thank-you-both.png" alt="ISA thank you cards" style="width:100%; display:block;">
+    </div>
+
+    <div class="img-grid-4 reveal" style="margin-top: 16px;">
+      <div class="img-wrap" style="border-radius: 6px; overflow: hidden;">
+        <img src="images/isa/thank-you-red-front.png" alt="ISA crimson thank you card front" style="width:100%; display:block;">
+      </div>
+      <div class="img-wrap" style="border-radius: 6px; overflow: hidden;">
+        <img src="images/isa/thank-you-red-back.png" alt="ISA crimson thank you card back" style="width:100%; display:block;">
+      </div>
+      <div class="img-wrap" style="border-radius: 6px; overflow: hidden;">
+        <img src="images/isa/thank-you-green-front.png" alt="ISA green thank you card front" style="width:100%; display:block;">
+      </div>
+      <div class="img-wrap" style="border-radius: 6px; overflow: hidden;">
+        <img src="images/isa/thank-you-green-back.png" alt="ISA green thank you card back" style="width:100%; display:block;">
+      </div>
+    </div>
+  </section>
+
+  <a href="barkada.html" class="next-project">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">Barkada</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

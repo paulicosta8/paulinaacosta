@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nextflix — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #F5F4F8;
+      --purple:   #5B4FCF;
+      --purple-lt:#8B7EE8;
+      --purple-dk:#2D1B69;
+      --charcoal: #1A1820;
+      --muted:    #635F78;
+      --border:   #E0DDE8;
+      --surface:  #EDEAF4;
+      --white:    #FFFFFF;
+      --serif:    Georgia, 'Times New Roman', serif;
+      --sans:     'Inter', system-ui, sans-serif;
+      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(245, 244, 248, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px; font-weight: 300; font-style: italic;
+      color: var(--purple);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding-top: 64px;
+      background: var(--purple-dk);
+      min-height: 85vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      opacity: 0.15;
+      background: radial-gradient(ellipse at 70% 50%, var(--purple-lt) 0%, transparent 70%);
+    }
+    .hero-phone {
+      position: absolute;
+      right: 5%;
+      top: 8%;
+      height: 105%;
+      object-fit: contain;
+      object-position: top center;
+      z-index: 1;
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px;
+      left: 56px;
+      right: 56px;
+      z-index: 2;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(10, 8, 30, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 560px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(56px, 9vw, 120px);
+      font-weight: 300; font-style: italic;
+      color: var(--white);
+      line-height: 0.95; letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 440px; line-height: 1.6;
+    }
+
+    /* ── Overview ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
+
+    /* ── Sections ── */
+    .cs-section { padding: 100px 56px; border-bottom: 1px solid var(--border); }
+    .cs-section-white { background: var(--white); }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--purple); opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2; letter-spacing: -0.01em;
+      margin-bottom: 24px; max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    /* ── Image treatments ── */
+    .screen-wrap {
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 32px rgba(45,27,105,0.12);
+      background: var(--white);
+    }
+    .screen-wrap img { width: 100%; display: block; }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Next project ── */
+    .next-project {
+      padding: 80px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border); transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--surface); }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--purple);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero { padding: 100px 24px 48px; }
+      .cs-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#more-projects" class="nav-back">All work</a>
+    <span class="nav-project-name">Nextflix</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <img class="hero-phone" src="images/nextflix/nextflix-no-bg.png" alt="Nextflix app — login screen on iPhone mockup">
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">UI/UX · Product Design · 2024</p>
+        <h1 class="hero-title">Nextflix</h1>
+        <p class="hero-sub">A social app that helps friend groups decide what to watch together, cutting down misalignment, complaints, and the endless scroll of indecision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">UX Designer · 4 person team</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Context</p>
+      <p class="overview-value">Human Computer Interaction · 2024</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">UX research · Wireframes · Hi-fi prototype</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Figma · User testing</p>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <section class="cs-section cs-section-white">
+    <p class="cs-eyebrow reveal">The problem</p>
+    <h2 class="cs-headline reveal">Watching movies with friends shouldn't require a group negotiation.</h2>
+    <p class="cs-body reveal">Movie nights often fall apart before they start. Everyone has different tastes, no one wants to pick, and the decision process drags on long enough to ruin the mood. Existing apps like Netflix don't address the social dynamic of watching together. They're built for individual viewing.</p>
+    <p class="cs-body reveal">Nextflix bridges that gap. It's a social layer on top of streaming where users connect with friends, get personalized recommendations based on what the group actually likes, and get guided to a decision everyone can live with.</p>
+  </section>
+
+  <!-- Onboarding screens -->
+  <section class="cs-section" style="background: var(--purple-dk);">
+    <p class="cs-eyebrow reveal" style="color: rgba(255,255,255,0.5);">Onboarding</p>
+    <h2 class="cs-headline reveal" style="color: white;">From sign-in to personalized in four screens.</h2>
+    <p class="cs-body reveal" style="color: rgba(255,255,255,0.6);">New users set up their taste profile by ranking genres and titles before seeing any recommendations, so the app knows what they actually want from day one.</p>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px;">
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+        <img src="images/nextflix/opening_screen.png" alt="Nextflix opening screen">
+      </div>
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+        <img src="images/nextflix/login.png" alt="Nextflix login screen">
+      </div>
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+        <img src="images/nextflix/genre_ranking.png" alt="Nextflix genre ranking screen">
+      </div>
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+        <img src="images/nextflix/first_title_ranking.png" alt="Nextflix title ranking screen">
+      </div>
+    </div>
+  </section>
+
+  <!-- Main app screens -->
+  <section class="cs-section" style="background: var(--surface);">
+    <p class="cs-eyebrow reveal">The app</p>
+    <h2 class="cs-headline reveal">Browse, blend, and schedule in one place.</h2>
+    <p class="cs-body reveal">The home screen surfaces movie and TV recommendations. The schedule tab lets friend groups lock in a watch night, create new events, and and invite attendees, all without leaving the app.</p>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px;">
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
+        <img src="images/nextflix/Homepage_1.png" alt="Nextflix home screen">
+      </div>
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
+        <img src="images/nextflix/Schedule.png" alt="Nextflix schedule screen">
+      </div>
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
+        <img src="images/nextflix/New_event.png" alt="Nextflix new event screen">
+      </div>
+      <div class="screen-wrap reveal" style="box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
+        <img src="images/nextflix/new_attendees.png" alt="Nextflix new event with attendees">
+      </div>
+    </div>
+  </section>
+
+  <!-- Prototype -->
+  <section class="cs-section cs-section-white">
+    <p class="cs-eyebrow reveal">Interactive prototype</p>
+    <h2 class="cs-headline reveal">Try it yourself.</h2>
+    <p class="cs-body reveal">The hi-fi prototype covers account creation, browsing recommendations, and the group decision flow. Explore it below.</p>
+    <div style="position: relative; padding-bottom: 75%; height: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 48px rgba(0,0,0,0.2); margin-top: 40px;">
+      <iframe
+        style="position: absolute; inset: 0; width: 100%; height: 100%; border: none; border-radius: 8px;"
+        src="https://embed.figma.com/proto/fAlHXMib1Nha8aq6qUzpwD/Nextflix-Prototype?node-id=6026-9&p=f&scaling=scale-down&content-scaling=fixed&page-id=6026%3A2&starting-point-node-id=6026%3A3&show-proto-sidebar=1&embed-host=share"
+        allowfullscreen
+        title="Nextflix — Figma prototype">
+      </iframe>
+    </div>
+  </section>
+
+  <a href="index.html#more-projects" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

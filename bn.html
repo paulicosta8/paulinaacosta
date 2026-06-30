@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>B&amp;N Sandwiches — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* B&N palette: orange, teal, cream */
+    :root {
+      --bg:       #FAF6F0;
+      --orange:   #E8521A;
+      --teal:     #2A706B;
+      --teal-lt:  #4A9A94;
+      --cream:    #FFF8EE;
+      --charcoal: #1E1A18;
+      --muted:    #6B6258;
+      --border:   #E0D9D0;
+      --dark-bg:  #1A1410;
+      --serif:    Georgia, 'Times New Roman', serif;
+      --sans:     'Inter', system-ui, sans-serif;
+      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, video { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(250, 246, 240, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    /* ── Hero ── */
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,20,16,0.78) 0%, transparent 55%);
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px; left: 56px; right: 56px;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(10, 10, 10, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 600px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,248,238,0.65);
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 300; font-style: italic;
+      color: var(--cream);
+      line-height: 1.0; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(255,248,238,0.8);
+      max-width: 560px; line-height: 1.6;
+    }
+
+    /* ── Overview strip ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value {
+      font-size: 15px; color: var(--charcoal); line-height: 1.4;
+    }
+
+    /* ── Sections ── */
+    .cs-section {
+      padding: 100px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--orange); opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2; letter-spacing: -0.01em;
+      margin-bottom: 24px; max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    /* ── Layouts ── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .two-col-wide {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 60px; align-items: start;
+    }
+    .three-col {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+    .four-col {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    /* ── Image treatments ── */
+    .img-wrap {
+      overflow: hidden; border-radius: 4px;
+    }
+    .img-wrap img, .img-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.03); }
+    .img-sq   { aspect-ratio: 1; }
+    .img-land { aspect-ratio: 4/3; }
+    .img-wide { aspect-ratio: 16/9; }
+    .img-tall { aspect-ratio: 3/4; }
+    .img-port { aspect-ratio: 2/3; }
+
+    /* ── Stats strip ── */
+    .stats-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border); border-radius: 4px;
+      margin-top: 40px;
+    }
+    .stat-item {
+      padding: 32px 36px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 48px; font-weight: 300; font-style: italic;
+      color: var(--orange); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px; font-weight: 300; color: var(--muted);
+    }
+
+    /* ── Logo section ── */
+    .logo-section {
+      background: var(--charcoal);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .logo-section .cs-eyebrow { color: var(--teal-lt); }
+    .logo-section .cs-eyebrow::after { background: var(--teal-lt); }
+    .logo-section .cs-headline { color: var(--cream); }
+    .logo-section .cs-body { color: rgba(255,248,238,0.6); }
+    .logo-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .logo-swatch {
+      border-radius: 4px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+    }
+    .logo-swatch img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+    }
+    .logo-swatch-orange { background: #D94E1A; }
+    .logo-swatch-teal   { background: #2D7A6F; }
+
+    /* ── Opening poster section ── */
+    .poster-section {
+      background: var(--cream);
+      padding: 100px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .poster-section .cs-eyebrow { color: var(--teal); }
+    .poster-section .cs-eyebrow::after { background: var(--teal); }
+
+    /* ── Social content section ── */
+    .social-section {
+      background: var(--teal);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .social-section .cs-eyebrow { color: rgba(255,248,238,0.7); }
+    .social-section .cs-eyebrow::after { background: rgba(255,248,238,0.4); }
+    .social-section .cs-headline { color: var(--cream); }
+    .social-section .cs-body { color: rgba(255,248,238,0.65); }
+
+    /* ── Collateral section ── */
+    .collateral-section {
+      background: var(--dark-bg);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .collateral-section .cs-eyebrow { color: var(--orange); }
+    .collateral-section .cs-eyebrow::after { background: var(--orange); }
+    .collateral-section .cs-headline { color: var(--cream); }
+    .collateral-section .cs-body { color: rgba(255,248,238,0.6); }
+
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Next project ── */
+    .next-project {
+      padding: 80px 56px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--orange);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .cs-section, .logo-section, .poster-section,
+      .social-section, .collateral-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .two-col, .two-col-wide, .three-col, .four-col { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .logo-pair { grid-template-columns: 1fr 1fr; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .two-col, .three-col, .four-col { grid-template-columns: 1fr; }
+      .hero-img-wrap { height: 70vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">B&amp;N Sandwiches</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/bn/opening-poster-english.jpg" alt="B&N Sandwiches soft opening poster — orange and pink">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Brand identity · Print · Social · Signage · 2024</p>
+        <h1 class="hero-title">B&amp;N Sandwiches</h1>
+        <p class="hero-sub">A complete bilingual brand system for a Vietnamese-American restaurant opening: logo, menus, posters, TV displays, social content, and collateral, all built from scratch for opening day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Freelance designer<br>(2-person team)</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Client</p>
+      <p class="overview-value">B&amp;N Sandwiches<br>Holland, MI</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Logo, menus, posters, social, TV displays, business cards, signage</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Adobe Illustrator · Photoshop · InDesign · Figma</p>
+    </div>
+  </div>
+
+  <!-- The work overview -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">The project</p>
+    <div class="two-col-wide">
+      <div>
+        <h2 class="cs-headline reveal">A full brand system built for opening day.</h2>
+        <p class="cs-body reveal">B&amp;N Sandwiches is a Vietnamese-American restaurant and café in Holland, Michigan serving bánh mì, phở, summer rolls, boba, and Vietnamese coffee. When a friend's family was opening the restaurant, they needed a full brand system ready for their soft opening on June 14, 2024, and everything had to work in both English and Vietnamese.</p>
+        <p class="cs-body reveal">Working alongside one other designer, I helped build every customer-facing touchpoint: the logo system, bilingual print menus, digital TV menu boards, opening day posters, social media food posts, business cards with a loyalty stamp program, and a takeout menu. The goal was to feel energetic, warm, and authentically Vietnamese-American.</p>
+        <div class="stats-strip reveal">
+          <div class="stat-item">
+            <p class="stat-number">300+</p>
+            <p class="stat-label">Customers opening weekend</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number">2</p>
+            <p class="stat-label">Languages across every piece</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number">10+</p>
+            <p class="stat-label">Distinct deliverables for launch</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="img-wrap" style="aspect-ratio: 3/4; border-radius: 4px;">
+          <img src="images/bn/opening-poster-viet.jpg" alt="B&N Khai Trương opening poster — Vietnamese version" style="object-position: center top;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo system — dark section -->
+  <section class="logo-section">
+    <p class="cs-eyebrow reveal">Logo system</p>
+    <h2 class="cs-headline reveal">A circular mark built to flex across every colorway.</h2>
+    <p class="cs-body reveal">The B&amp;N logo is a hand-lettered circular mark featuring a bánh mì, a boba drink, and wheat stalks, capturing both sides of the restaurant in one image. For the soft opening campaign, the logo shifted to match each graphic's color scheme, keeping the system cohesive without being rigid.</p>
+    <div class="logo-pair reveal" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="logo-swatch logo-swatch-teal" style="padding: 24px;">
+        <img src="images/bn/logo-teal.png" alt="B&N Sandwiches logo — teal (primary)">
+      </div>
+      <div class="logo-swatch logo-swatch-orange" style="padding: 72px;">
+        <img src="images/bn/logo-orange.png" alt="B&N Sandwiches logo — orange colorway">
+      </div>
+      <div class="logo-swatch" style="background: #F06BA0; padding: 72px;">
+        <img src="images/bn/logo-pink.png" alt="B&N Sandwiches logo — pink colorway">
+      </div>
+    </div>
+  </section>
+
+  <!-- Opening posters — cream section -->
+  <section class="poster-section">
+    <p class="cs-eyebrow reveal">Opening campaign</p>
+    <h2 class="cs-headline reveal">Soft opening posters in both languages, multiple colorways.</h2>
+    <p class="cs-body reveal">For the June 14th soft opening, I designed a poster system that worked in English and Vietnamese. It had the same bold typographic layout, food illustration collage, and bubble design, adapted for two audiences. Several colorway combinations were explored so the client could choose what felt right for their neighborhood and social channels.</p>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap img-tall">
+        <img src="images/bn/poster-eng-orange.jpg" alt="Soft Opening poster — English, orange">
+      </div>
+      <div class="img-wrap img-tall">
+        <img src="images/bn/poster-viet-teal.jpg" alt="Khai Trương poster — Vietnamese, teal">
+      </div>
+    </div>
+    <div class="img-wrap reveal" style="margin-top: 16px; border-radius: 4px;">
+      <img src="images/bn/bn-banner.jpg" alt="B&N Sandwiches soft opening event banner" style="width:100%;display:block;">
+    </div>
+  </section>
+
+  <!-- Menus section -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Menus</p>
+    <h2 class="cs-headline reveal">Bilingual from top to bottom.</h2>
+    <p class="cs-body reveal">Every menu was designed in both English and Vietnamese side by side. The 11×17 dine-in menus use a coral header stripe for Vietnamese and teal for English, both with the brand icon pattern and watercolor-style food illustrations. The TV menu boards are shown across four screens in the restaurant and use the teal palette for legibility at distance. The takeout menu folds down to a slim portable format.</p>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap img-land">
+        <img src="images/bn/menu-english.jpg" alt="B&N Sandwiches bilingual menu — English version">
+      </div>
+      <div class="img-wrap img-land">
+        <img src="images/bn/menu-viet.jpg" alt="B&N Sandwiches bilingual menu — Vietnamese version">
+      </div>
+    </div>
+
+    <div class="three-col reveal" style="margin-top: 16px;">
+      <div class="img-wrap img-wide">
+        <img src="images/bn/tv-menu-1.png" alt="TV menu board — sandwiches and noodle soup">
+      </div>
+      <div class="img-wrap img-wide">
+        <img src="images/bn/tv-menu-2.png" alt="TV menu board — rolls and rice dishes">
+      </div>
+      <div class="img-wrap img-wide">
+        <img src="images/bn/tv-menu-3.png" alt="TV menu board — drinks and milk tea">
+      </div>
+    </div>
+  </section>
+
+  <!-- Social content — teal section -->
+  <section class="social-section">
+    <p class="cs-eyebrow reveal">Social content</p>
+    <h2 class="cs-headline reveal">Eight dishes. One system.</h2>
+    <p class="cs-body reveal">To announce the menu and build appetite before opening day, I created a series of square social posts using a layered typography system: a large foreground dish name in the brand's warm colors, a watercolor food illustration breaking out of the frame, and the dish name repeated in oversized type behind it. Each post is a standalone piece but unmistakably part of the same campaign.</p>
+
+    <div class="four-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-banh-mi.png" alt="Bánh Mì social post">
+      </div>
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-ca-phe.png" alt="Cà Phê Sữa Đá social post">
+      </div>
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-bun-rieu.png" alt="Bún Riêu social post">
+      </div>
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-com-tam.png" alt="Cơm Tấm social post">
+      </div>
+    </div>
+    <div class="four-col reveal" style="margin-top: 16px;">
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-bun-bo-hue.png" alt="Bún Bò Huế social post">
+      </div>
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-pho.png" alt="Phở social post">
+      </div>
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-goi-cuon.png" alt="Gỏi Cuốn social post">
+      </div>
+      <div class="img-wrap img-sq">
+        <img src="images/bn/social-bo-kho.png" alt="Bò Khô social post">
+      </div>
+    </div>
+  </section>
+
+  <!-- Collateral — dark section -->
+  <section class="collateral-section">
+    <p class="cs-eyebrow reveal">Collateral</p>
+    <h2 class="cs-headline reveal">Pieces customers want to keep.</h2>
+    <p class="cs-body reveal">The business card doubles as a loyalty stamp card on the back, a detail that encouraged repeat visits from day one. The front uses a pink/orange wave split with the logo centered across it. The takeout menu is a bilingual portrait format printed on a slim tri-fold, giving customers everything they need to order ahead.</p>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div class="img-wrap" style="border-radius: 12px; overflow: hidden; aspect-ratio: 1.75; background: #2A2A2A;">
+        <img src="images/bn/business-card-front.png" alt="B&N Sandwiches business card — front, pink and orange wave" style="object-fit: contain; padding: 24px;">
+      </div>
+      <div class="img-wrap" style="border-radius: 12px; overflow: hidden; aspect-ratio: 1.75; background: #2A2A2A;">
+        <img src="images/bn/business-card-back.png" alt="B&N Sandwiches business card — back, loyalty stamp card" style="object-fit: contain; padding: 24px;">
+      </div>
+    </div>
+
+    <!-- Takeout menus -->
+    <div class="two-col reveal" style="margin-top: 16px;">
+      <div class="img-wrap" style="border-radius: 8px; overflow: hidden;">
+        <img src="images/bn/bn-drinks.png" alt="B&N Sandwiches takeout menu — drinks" style="width:100%; display:block;">
+      </div>
+      <div class="img-wrap" style="border-radius: 8px; overflow: hidden;">
+        <img src="images/bn/bn-food.png" alt="B&N Sandwiches takeout menu — food" style="width:100%; display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Next project -->
+  <a href="anona.html" class="next-project">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">Anona Specimen Cards</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

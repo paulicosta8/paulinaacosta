@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Mermaid Retold — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #F5F6FA;
+      --navy:     #1E2460;
+      --navy-dk:  #111440;
+      --teal:     #3AADA8;
+      --gold:     #C8A84B;
+      --cream:    #FBF8F2;
+      --charcoal: #1A1C2E;
+      --muted:    #5A5E7A;
+      --border:   #DDE0EE;
+      --surface:  #ECEEF8;
+      --white:    #FFFFFF;
+      --serif:    Georgia, 'Times New Roman', serif;
+      --sans:     'Inter', system-ui, sans-serif;
+      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(245, 246, 250, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px; font-weight: 300; font-style: italic;
+      color: var(--navy);
+    }
+
+    /* ── Hero ── */
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(17,20,64,0.85) 0%, rgba(17,20,64,0.2) 60%, transparent 100%);
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px; left: 56px; right: 56px;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(10, 12, 40, 0.5);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 600px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.85;
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(44px, 6vw, 80px);
+      font-weight: 300; font-style: italic;
+      color: var(--white);
+      line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px; line-height: 1.65;
+    }
+
+    /* ── Overview ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
+
+    /* ── Sections ── */
+    .cs-section { padding: 100px 56px; border-bottom: 1px solid var(--border); }
+    .cs-section-white { background: var(--white); }
+    .cs-section-cream { background: var(--cream); }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--navy); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--navy); opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2; letter-spacing: -0.01em;
+      margin-bottom: 24px; max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    /* ── Layouts ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    /* ── Image treatments ── */
+    .img-wrap { overflow: hidden; border-radius: 4px; }
+    .img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.02); }
+    .img-tall  { aspect-ratio: 3/4; }
+    .img-port  { aspect-ratio: 2/3; }
+    .img-land  { aspect-ratio: 4/3; }
+
+    /* ── PDF embed ── */
+    .pdf-embed-wrap {
+      margin-top: 40px;
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 32px rgba(30,36,96,0.12);
+      position: relative; width: 100%;
+      padding-bottom: 65%; height: 0;
+    }
+    .pdf-embed-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none; border-radius: 8px;
+    }
+
+    /* ── Embed section ── */
+    .embed-section {
+      background: var(--navy);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .embed-section .cs-eyebrow { color: var(--gold); opacity: 0.85; }
+    .embed-section .cs-eyebrow::after { background: var(--gold); opacity: 0.3; }
+    .embed-section .cs-headline { color: var(--white); }
+    .embed-section .cs-body { color: rgba(255,255,255,0.55); }
+    .figma-embed-wrap {
+      margin-top: 48px;
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.3);
+      background: var(--navy-dk);
+      position: relative; width: 100%;
+      padding-bottom: 56.25%; height: 0;
+    }
+    .figma-embed-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none; border-radius: 8px;
+    }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Next ── */
+    .next-project {
+      padding: 80px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border); transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--surface); }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--navy);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .cs-section, .embed-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .two-col, .three-col { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .two-col, .three-col { grid-template-columns: 1fr; }
+      .hero-img-wrap { height: 70vh; }
+      .figma-embed-wrap { padding-bottom: 75%; }
+      .pdf-embed-wrap { padding-bottom: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#more-projects" class="nav-back">All work</a>
+    <span class="nav-project-name">Little Mermaid Retold</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/mermaid/mermaid-cover.jpg" alt="The Little Mermaid — booklet cover">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Typography · Web Design · 2023</p>
+        <h1 class="hero-title">Little Mermaid<br>Retold</h1>
+        <p class="hero-sub">A typographic retelling of The Little Mermaid using two texts: Hans Christian Andersen's original story and the Disney screenplay, placed side by side to show what gets remembered and what gets lost.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Solo designer</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Context</p>
+      <p class="overview-value">Typography 2 Class · 2023</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Print booklet · Web prototype</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Adobe InDesign · Figma</p>
+    </div>
+  </div>
+
+  <!-- The project -->
+  <section class="cs-section cs-section-white">
+    <p class="cs-eyebrow reveal">The project</p>
+    <h2 class="cs-headline reveal">Two versions of the same story, and what gets lost between them.</h2>
+    <p class="cs-body reveal">Little Mermaid Retold is a class project that pairs two texts: Hans Christian Andersen's original 1837 story and the Disney screenplay. The concept came from thinking about how easy it is to know the newest version of something while completely forgetting where it came from. Most people know the Disney movie. Far fewer know that Andersen's version is darker, more violent, and ends very differently.</p>
+    <p class="cs-body reveal">The goal was to use typography to make that tension visible. Throughout the booklet, both texts appear together so the reader can see the similarities and differences between them at the same time. The typefaces, spacing, and layout were all chosen to reflect the mood of each version and highlight where they diverge.</p>
+
+    <div class="pdf-embed-wrap reveal">
+      <iframe src="little-mermaid-retold.pdf" title="Little Mermaid Retold booklet"></iframe>
+    </div>
+  </section>
+
+  <!-- Figma prototype embed -->
+  <section class="embed-section">
+    <p class="cs-eyebrow reveal">Web prototype</p>
+    <h2 class="cs-headline reveal">The Disney version is right there. You have to find the other one.</h2>
+    <p class="cs-body reveal">The website takes the same concept and adds an extra layer of interaction. The Disney version is immediately visible and easy to read. The Andersen text is hidden, and you have to hover to reveal it, almost like unearthing something that was always there but wasn't shown to you. It's a small interaction, but it's the whole point of the project.</p>
+    <div class="figma-embed-wrap reveal">
+      <iframe
+        src="https://embed.figma.com/proto/LwtghhBqgzc0MCmEY5uQV4/The-Little-Mermaid?node-id=28-3&p=f&scaling=scale-down&content-scaling=fixed&page-id=28%3A2&embed-host=share"
+        allowfullscreen
+        title="Little Mermaid Retold Figma prototype">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Back -->
+  <a href="index.html#more-projects" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

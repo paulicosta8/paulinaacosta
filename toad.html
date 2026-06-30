@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toad's Survival Guide — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Georgia&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brown:      #8B5A2B;
+      --brown-dark: #5C3A1A;
+      --brown-light:#C49A6C;
+      --cream:      #F5EED8;
+      --warm-white: #FAF7F0;
+      --ink:        #1A1208;
+      --ink-mid:    #4A3828;
+      --ink-light:  #8A7060;
+      --serif:      Georgia, serif;
+      --sans:       'DM Sans', sans-serif;
+      --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--warm-white); color: var(--ink); font-size: 16px; line-height: 1.6; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 48px; height: 64px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(250,247,240,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: rgba(139,90,43,0.2); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--ink-light); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name { font-family: var(--serif); font-size: 17px; font-weight: normal; font-style: italic; color: var(--brown); }
+    .hero { padding-top: 64px; }
+    .hero-img-wrap { position: relative; width: 100%; height: 85vh; overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(92,58,26,0.85) 0%, rgba(92,58,26,0.15) 60%, transparent 100%); }
+    .hero-text { position: absolute; bottom: 56px; left: 56px; right: 56px; }
+    .hero-text-inner {
+      display: inline-block; background: rgba(30, 18, 8, 0.5);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px; padding: 24px 28px; max-width: 600px;
+    }
+    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown-light); margin-bottom: 14px; }
+    .hero-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 72px); font-weight: normal; font-style: italic; color: white; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.75); max-width: 480px; line-height: 1.65; }
+    .overview { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid rgba(196,154,108,0.3); background: var(--cream); }
+    .overview-item { padding: 32px 40px; border-right: 1px solid rgba(196,154,108,0.3); }
+    .overview-item:last-child { border-right: none; }
+    .overview-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
+    .overview-value { font-size: 15px; color: var(--ink); line-height: 1.4; }
+    .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .section-label::after { content: ''; display: block; height: 1px; width: 40px; background: var(--brown-light); }
+    .posters { padding: 100px 80px; background: var(--warm-white); }
+    .posters h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px; }
+    .posters-intro { font-size: 15px; color: var(--ink-mid); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
+    .poster-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .poster-item { overflow: hidden; border-radius: 4px; }
+    .poster-item img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .poster-item:hover img { transform: scale(1.03); }
+    .postcards { background: var(--brown-dark); padding: 100px 80px; }
+    .postcards .section-label { color: var(--brown-light); }
+    .postcards .section-label::after { background: var(--brown-light); }
+    .postcards h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: white; margin-bottom: 12px; }
+    .postcards-intro { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
+    .postcard-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .postcard-item { overflow: hidden; border-radius: 4px; }
+    .postcard-item img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .postcard-item:hover img { transform: scale(1.03); }
+    .brochure { background: var(--cream); padding: 100px 80px; }
+    .brochure h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px; }
+    .brochure-intro { font-size: 15px; color: var(--ink-mid); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
+    .brochure-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .brochure-spread img { width: 100%; display: block; border-radius: 4px; box-shadow: 0 4px 24px rgba(92,58,26,0.15); }
+    .booklet { background: var(--warm-white); padding: 100px 80px; }
+    .booklet h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px; }
+    .booklet-intro { font-size: 15px; color: var(--ink-mid); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
+    .booklet-feature { display: grid; gap: 12px; margin-bottom: 12px; }
+    .booklet-feature img { width: 100%; display: block; border-radius: 4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1); }
+    .next-project { padding: 80px 56px; border-top: 1px solid rgba(196,154,108,0.3); display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+    .next-project:hover { background: var(--cream); }
+    .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
+    .next-title { font-family: var(--serif); font-size: 28px; font-weight: normal; font-style: italic; color: var(--ink); }
+    .next-arrow { font-size: 28px; color: var(--brown); transition: transform 0.2s; }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .posters, .postcards, .brochure, .booklet { padding: 64px 24px; }
+      .poster-grid, .postcard-grid { grid-template-columns: repeat(3, 1fr); }
+      .brochure-spread { grid-template-columns: 1fr; }
+      .booklet-feature { grid-template-columns: 1fr; }
+      .next-project { padding: 48px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-img-wrap { height: 70vh; }
+      .poster-grid, .postcard-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#more-projects" class="nav-back">All work</a>
+    <span class="nav-project-name">Toad's Survival Guide</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/toad/cover.png" alt="Toad's Survival Guide cover">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Print · Typography</p>
+        <h1 class="hero-title">Toad's Survival Guide</h1>
+        <p class="hero-sub">A travel guide, poster series, postcard set, and trifold brochure for the Mushroom World Travel Agency, a fictional travel brand built for a game development class.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Brochure designer · Copywriter · 6-person team</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Context</p>
+      <p class="overview-value">Game Development Class · 2025</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Travel posters · Postcards · Brochure · Booklet</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Adobe InDesign · Figma</p>
+    </div>
+  </div>
+
+  <section class="posters" style="border-bottom: 1px solid rgba(196,154,108,0.3);">
+    <p class="section-label reveal">The project</p>
+    <h2 class="reveal" style="font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px;">A travel agency for the Mushroom World.</h2>
+    <p class="posters-intro reveal">The Mushroom World Travel Agency needed a complete brand kit to market five Nintendo game-world destinations to would-be tourists. Each location got its own poster, postcard, and booklet entry written from Toad's firsthand perspective, with star reviews, field notes, and local creature warnings included.</p>
+  </section>
+
+  <section class="posters">
+    <p class="section-label reveal">Travel posters</p>
+    <h2 class="reveal">Five destinations, five moods.</h2>
+    <p class="posters-intro reveal">Each location got a cinematic travel poster. All of the art was created by one of my teammates on Procreate, and we then overlaid it with bold display type. The Mushroom World Travel Agency badge appears in the corner of each.</p>
+    <div class="poster-grid reveal">
+      <div class="poster-item"><img src="images/toad/poster-koopa.png" alt="Koopa Kingdom travel poster" /></div>
+      <div class="poster-item"><img src="images/toad/poster-luigi.png" alt="Luigi's Mansion travel poster" /></div>
+      <div class="poster-item"><img src="images/toad/poster-whomp.png" alt="Whomp's Fortress travel poster" /></div>
+      <div class="poster-item"><img src="images/toad/poster-croc.png" alt="Crocodile Isle travel poster" /></div>
+      <div class="poster-item"><img src="images/toad/poster-bobomb.png" alt="Bob-omb Battlefield travel poster" /></div>
+    </div>
+  </section>
+
+  <section class="postcards">
+    <p class="section-label reveal">Postcards</p>
+    <h2 class="reveal">Greetings from the Mushroom World.</h2>
+    <p class="postcards-intro reveal">A matching postcard for each destination, using the classic "Greetings from…" large-letter style with location photography masked inside the letterforms.</p>
+    <div class="postcard-grid reveal">
+      <div class="postcard-item"><img src="images/toad/postcard-koopa.png" alt="Koopa Kingdom postcard" /></div>
+      <div class="postcard-item"><img src="images/toad/postcard-luigi.png" alt="Luigi's Mansion postcard" /></div>
+      <div class="postcard-item"><img src="images/toad/postcard-whomp.png" alt="Whomp's Fortress postcard" /></div>
+      <div class="postcard-item"><img src="images/toad/postcard-croc.png" alt="Crocodile Isle postcard" /></div>
+      <div class="postcard-item"><img src="images/toad/postcard-bobomb.png" alt="Bob-omb Battlefield postcard" /></div>
+    </div>
+  </section>
+
+  <section class="brochure">
+    <p class="section-label reveal">Trifold brochure</p>
+    <h2 class="reveal">The official visitor's guide.</h2>
+    <p class="brochure-intro reveal">I designed the trifold brochure, which showcases all five destinations with highlights, descriptions, and the travel agency's branding. The goal was for it to feel like something you'd actually grab at a tourism kiosk.</p>
+    <div class="brochure-spread reveal">
+      <img src="images/toad/brochure-front.png" alt="Trifold brochure front" />
+      <img src="images/toad/brochure-back.png" alt="Trifold brochure back" />
+    </div>
+  </section>
+
+  <section class="booklet">
+    <p class="section-label reveal">Survival guide booklet</p>
+    <h2 class="reveal">A guidebook written by Toad himself.</h2>
+    <p class="booklet-intro reveal">The survival guide is the heart of the project: a full travel booklet written from Toad's perspective, complete with star reviews, field notes about local creatures, and "Two Cents" quotes from Nintendo characters. I contributed the copywriting for several entries.</p>
+
+    <div class="booklet-feature reveal" style="grid-template-columns: 1fr 1fr;">
+      <img src="images/toad/cover.png" alt="Toad's Survival Guide book cover" />
+      <img src="images/toad/booklet-back.png" alt="Toad's Survival Guide back cover" />
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="reveal">
+      <img src="images/toad/page-koopa-1.png" alt="Koopa Kingdom entry" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-koopa-2.png" alt="Koopa Kingdom field notes" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-luigi-1.png" alt="Luigi's Mansion entry" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-luigi-2.png" alt="Luigi's Mansion field notes" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-whomp-1.png" alt="Whomp's Fortress entry" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-whomp-2.png" alt="Whomp's Fortress field notes" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-croc-1.png" alt="Crocodile Isle entry" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-croc-2.png" alt="Crocodile Isle field notes" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-bobomb-1.png" alt="Bob-omb Battlefield entry" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+      <img src="images/toad/page-bobomb-2.png" alt="Bob-omb Battlefield field notes" style="width:100%; display:block; border-radius:4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1);">
+    </div>
+  </section>
+
+  <a href="index.html#more-projects" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

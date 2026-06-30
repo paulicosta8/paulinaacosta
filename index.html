@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paulina Acosta — Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F6F6F4;
+      --surface:   #EEEEEC;
+      --border:    #DCDCDA;
+      --text:      #1A1A1A;
+      --muted:     #646464;
+      --accent:    #1A6FBF;
+      --accent-lt: #2B7FD4;
+      --accent-wash: #D4E6F4;
+      --dark-navy: #0F1B2D;
+      --white:     #FFFFFF;
+      --serif:     Georgia, 'Times New Roman', serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(246, 246, 244, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 120px 0 0 48px;
+      position: relative;
+      overflow: hidden;
+      gap: 0;
+    }
+    .hero-content {
+      padding-right: 48px;
+      padding-bottom: 80px;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      align-self: flex-end;
+      width: clamp(280px, 32vw, 480px);
+      flex-shrink: 0;
+    }
+    .hero-photo-blob {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      aspect-ratio: 1;
+      background: var(--accent);
+      opacity: 0.12;
+      border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+      z-index: 0;
+    }
+    .hero-photo {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+    }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 88px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.9s var(--ease) 0.4s forwards;
+    }
+    .hero-headline em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.9s var(--ease) 0.65s forwards;
+    }
+
+    /* ── Section wrapper ── */
+    .section { padding: 100px 48px; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    /* ── Work grid ── */
+    #work {
+      padding-top: 80px;
+      background: var(--accent-wash);
+    }
+    #work .section-label { color: var(--accent); }
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .card-link:nth-child(1) { grid-column: span 7; }
+    .card-link:nth-child(2) { grid-column: span 5; }
+    .card-link:nth-child(3) { grid-column: span 4; }
+    .card-link:nth-child(4) { grid-column: span 4; }
+    .card-link:nth-child(5) { grid-column: span 4; }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--surface);
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .card-link:nth-child(1) .card-inner { padding-bottom: 68%; }
+    .card-link:nth-child(2) .card-inner { padding-bottom: 75%; }
+    .card-link:nth-child(3) .card-inner { padding-bottom: 129%; }
+    .card-link:nth-child(4) .card-inner { padding-bottom: 129%; }
+    .card-link:nth-child(5) .card-inner { padding-bottom: 129%; }
+
+    .card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s var(--ease), opacity 0.4s var(--ease);
+      opacity: 0;
+    }
+    .card-img.active { opacity: 1; }
+    .card-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--border);
+      letter-spacing: 0.05em;
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(14,10,8,0.75) 0%,
+        rgba(14,10,8,0.15) 45%,
+        transparent 100%
+      );
+      opacity: 0.25;
+      transition: opacity 0.4s var(--ease);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .card:hover .card-overlay { opacity: 1; }
+    .card:hover .card-img.active { transform: scale(1.04); }
+
+    /* ── Arrow nav buttons ── */
+    .card-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(14, 10, 8, 0.52);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #F6F6F4;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.25s var(--ease), background 0.2s, transform 0.2s;
+      pointer-events: auto;
+    }
+    .card-arrow-prev { left: 10px; }
+    .card-arrow-next { right: 10px; }
+    .card-arrow:hover {
+      background: rgba(26, 111, 191, 0.85);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .card:hover .card-arrow { opacity: 1; }
+    .card[data-single="true"] .card-arrow { display: none; }
+
+    /* ── Frosted text panel ── */
+    .card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 16px 16px 14px;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+      z-index: 2;
+    }
+    .card-info-inner {
+      background: rgba(14, 10, 8, 0.58);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 12px 14px 10px;
+    }
+    .card:hover .card-info { opacity: 1; transform: translateY(0); }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-lt);
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      color: #F6F6F4;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .card-desc {
+      font-size: 11.5px;
+      font-weight: 300;
+      color: rgba(246,246,244,0.78);
+      line-height: 1.5;
+    }
+    .card-dots {
+      display: flex;
+      gap: 5px;
+      margin-top: 9px;
+    }
+    .card-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(250,247,242,0.35);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .card-dot.active {
+      background: #F6F6F4;
+      transform: scale(1.3);
+    }
+    .card-dots:has(.card-dot:only-child) { display: none; }
+
+    .card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+    .card-link .card-info-inner::after {
+      content: 'View project →';
+      display: block;
+      margin-top: 10px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(246,246,244,0.5);
+    }
+
+    /* ── More Projects ── */
+    #more-projects {
+      border-top: 1px solid var(--border);
+      padding: 100px 48px;
+    }
+
+    /* Row 1: Translations (wide) + 3 portrait cards — all same height */
+    .archive-grid-row1 {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .archive-grid-row1 > .archive-card-link:first-child .archive-card-inner {
+      padding-bottom: 87%;
+    }
+
+    /* Row 2: 3 landscape cards equal width */
+    .archive-grid-row2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .archive-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--surface);
+    }
+
+    /* Landscape cards: 16/9 ratio */
+    .archive-card-inner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding-bottom: 65%;
+    }
+
+    /* Portrait cards: taller ratio */
+    .archive-card-inner.portrait {
+      padding-bottom: 130%;
+    }
+
+    .archive-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transition: transform 0.5s var(--ease);
+    }
+
+    .archive-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,10,8,0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s var(--ease);
+      pointer-events: none;
+    }
+    .archive-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 14px 16px;
+      transform: translateY(6px);
+      opacity: 0;
+      transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+    }
+    .archive-label-cat {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-lt);
+      margin-bottom: 3px;
+    }
+    .archive-label-title {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 300;
+      color: #F6F6F4;
+      line-height: 1.2;
+    }
+    .archive-card:hover .archive-img { transform: scale(1.04); }
+    .archive-card:hover .archive-overlay { opacity: 1; }
+    .archive-card:hover .archive-label { opacity: 1; transform: translateY(0); }
+
+    /* ── About ── */
+    #about {
+      background: var(--dark-navy);
+      border-top: none;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-headline {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      font-weight: 300;
+      font-style: normal;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    .about-headline em {
+      font-style: normal;
+      color: var(--white);
+    }
+    .about-headline em.blue {
+      color: var(--accent-lt);
+    }
+    .about-body {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .about-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent-lt);
+      border: 1px solid var(--accent-lt);
+      padding: 10px 20px;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .about-resume:hover { background: var(--accent-lt); color: var(--dark-navy); }
+    .skills-block { padding-top: 8px; }
+    .skills-group { margin-bottom: 32px; }
+    .skills-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 12px;
+    }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-chip {
+      font-size: 12px;
+      color: var(--white);
+      background: rgba(26, 111, 191, 0.4);
+      border: 1px solid rgba(43, 127, 212, 0.4);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+    #about .section-label {
+      color: rgba(255,255,255,0.4);
+    }
+    #about .section-label::after {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      margin-top: 72px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 48px;
+    }
+    .timeline-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 64px;
+      text-align: center;
+    }
+    .timeline-track-wrap {
+      position: relative;
+      height: 280px;
+      margin: 0 24px;
+    }
+    /* Horizontal line */
+    .timeline-track-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+    .timeline-node {
+      position: absolute;
+      top: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .timeline-node:nth-child(1) { left: 12.5%; }
+    .timeline-node:nth-child(2) { left: 37.5%; }
+    .timeline-node:nth-child(3) { left: 62.5%; }
+    .timeline-node:nth-child(4) { left: 87.5%; }
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-lt);
+      border: 2px solid var(--dark-navy);
+      box-shadow: 0 0 0 1px var(--accent-lt);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      margin-top: -5px;
+    }
+    .timeline-connector {
+      width: 1px;
+      border-left: 1px dashed rgba(255,255,255,0.2);
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .timeline-content {
+      text-align: center;
+      width: 150px;
+    }
+
+    /* Above: content + connector above dot */
+    .timeline-node.above {
+      flex-direction: column-reverse;
+      transform: translateX(-50%) translateY(-100%);
+    }
+    .timeline-node.above .timeline-dot { margin-top: 0; margin-bottom: -5px; }
+    .timeline-node.above .timeline-content { margin-bottom: 8px; }
+
+    /* Below: dot first, connector, then content */
+    .timeline-node.below {
+      flex-direction: column;
+      transform: translateX(-50%);
+    }
+    .timeline-node.below .timeline-content { margin-top: 8px; }
+    .timeline-date {
+      font-size: 10px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+    }
+    .timeline-role {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.35;
+      margin-bottom: 3px;
+    }
+    .timeline-org {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--accent-lt);
+    }
+
+    /* ── Contact ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      padding: 100px 48px;
+    }
+    .contact-inner { max-width: 680px; }
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 68px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+    .contact-headline em { font-style: italic; color: var(--accent); }
+    .contact-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+    .contact-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .contact-link {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+
+
+    /* ── Animations ── */
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero { grid-template-columns: 1fr; padding: 120px 24px 0; }
+      .hero-content { padding-right: 0; padding-bottom: 40px; }
+      .hero-photo-wrap { width: 240px; margin: 0 auto; }
+      .hero, .section, #contact, #more-projects { padding-left: 24px; padding-right: 24px; }
+      .work-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .card-link:nth-child(1) { grid-column: span 2; }
+      .card-link:nth-child(2) { grid-column: span 2; }
+      .card-link:nth-child(3) { grid-column: span 1; }
+      .card-link:nth-child(4) { grid-column: span 1; }
+      .card-link:nth-child(5) { grid-column: span 2; }
+      .card-link:nth-child(1) .card-inner,
+      .card-link:nth-child(2) .card-inner { padding-bottom: 68%; }
+      .card-link:nth-child(3) .card-inner,
+      .card-link:nth-child(4) .card-inner,
+      .card-link:nth-child(5) .card-inner { padding-bottom: 129%; }
+      /* More projects: 2 cols on tablet */
+      .archive-grid { grid-template-columns: 1fr 1fr; }
+      .archive-card-link:nth-child(n) { grid-column: span 1; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .card .card-arrow { opacity: 0.7; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 100px 20px 0; grid-template-columns: 1fr; }
+      .hero-photo-wrap { width: 180px; }
+      .section, #contact, #more-projects { padding-left: 20px; padding-right: 20px; }
+      .work-grid { grid-template-columns: 1fr; }
+      .card-link:nth-child(n) { grid-column: span 1; }
+      .card-link:nth-child(n) .card-inner { padding-bottom: 100%; }
+      .archive-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .archive-card-link:nth-child(n) { grid-column: span 1; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="#" class="nav-name">paulina acosta</a>
+    <ul class="nav-links">
+      <li><a href="#work">Selected Work</a></li>
+      <li><a href="#more-projects">More projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="hero-eyebrow">graphic design · brand · digital</p>
+      <h1 class="hero-headline"><em>paulina acosta</em> <span style="color: var(--accent); font-style: normal;">♡</span></h1>
+      <p class="hero-sub">
+        a graphic designer based in nj/ny who loves making things that bring joy. from brand systems and print to ui/ux, i make work that connects with the people it's meant for.
+      </p>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-blob"></div>
+      <img class="hero-photo" src="images/homepage/paulina-loopy.png" alt="Paulina holding a pink plushie">
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <p class="section-label reveal">Selected work</p>
+    <div class="work-grid">
+
+      <!-- 1. ISA -->
+      <a href="isa.html" class="card-link reveal reveal-delay-1">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
+          <img class="card-img" src="images/homepage/isa-website.png" alt="ISA website">
+          <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging">
+        </div>
+        <div class="card-overlay"></div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-info">
+          <div class="card-info-inner">
+            <p class="card-tag">Brand identity · Packaging Design · Website Design · 2026</p>
+            <h2 class="card-title">ISA</h2>
+            <p class="card-desc">Full brand system for a Filipino-American fashion platform: logo, brand guidelines, e-commerce website, and packaging rooted in Filipino culture and craft.</p>
+            <div class="card-dots">
+              <button class="card-dot active" aria-label="Image 1"></button>
+              <button class="card-dot" aria-label="Image 2"></button>
+              <button class="card-dot" aria-label="Image 3"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+      </a>
+
+      <!-- 2. Barkada -->
+      <a href="barkada.html" class="card-link reveal reveal-delay-2">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
+          <img class="card-img" src="images/homepage/barkada-cover.png" alt="Barkada sticker" style="object-position: center center;">
+          <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch">
+        </div>
+        <div class="card-overlay"></div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-info">
+          <div class="card-info-inner">
+            <p class="card-tag">Brand · Event design · Social · 2023–24</p>
+            <h2 class="card-title">Barkada</h2>
+            <p class="card-desc">Three distinct event identities, a full merchandise line, and 60+ social assets for Northeastern's Filipino cultural organization.</p>
+            <div class="card-dots">
+              <button class="card-dot active" aria-label="Image 1"></button>
+              <button class="card-dot" aria-label="Image 2"></button>
+              <button class="card-dot" aria-label="Image 3"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+      </a>
+
+      <!-- 3. B&N Sandwiches -->
+      <a href="bn.html" class="card-link reveal reveal-delay-1">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese">
+          <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster">
+        </div>
+        <div class="card-overlay"></div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-info">
+          <div class="card-info-inner">
+            <p class="card-tag">Brand identity · Print · Social · 2024</p>
+            <h2 class="card-title">B&amp;N Sandwiches</h2>
+            <p class="card-desc">Complete bilingual brand system for a Vietnamese-American restaurant opening: logo, menus, posters, TV displays, social content, and collateral.</p>
+            <div class="card-dots">
+              <button class="card-dot active" aria-label="Image 1"></button>
+              <button class="card-dot" aria-label="Image 2"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+      </a>
+
+      <!-- 4. NOAA -->
+      <a href="noaa.html" class="card-link reveal reveal-delay-2">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign">
+        </div>
+        <div class="card-overlay"></div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-info">
+          <div class="card-info-inner">
+            <p class="card-tag">UI Redesign · Print · 2024</p>
+            <h2 class="card-title">NOAA Redesign</h2>
+            <p class="card-desc">Redesign of NOAA's climate data exploration tool, making 100+ environmental datasets actually navigable, paired with a printed how-to guide.</p>
+            <div class="card-dots">
+              <button class="card-dot active" aria-label="Image 1"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+      </a>
+
+      <!-- 5. MBTA -->
+      <a href="mbta.html" class="card-link reveal reveal-delay-3">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="MBTA app redesign">
+        </div>
+        <div class="card-overlay"></div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-info">
+          <div class="card-info-inner">
+            <p class="card-tag">UI/UX · App design · 2024</p>
+            <h2 class="card-title">MBTA app</h2>
+            <p class="card-desc">A redesigned mobile experience for Boston's MBTA, combining real-time trip planning, virtual CharlieCard reloading, and a safety reporting system in one accessible app.</p>
+            <div class="card-dots">
+              <button class="card-dot active" aria-label="Image 1"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- More Projects -->
+  <section id="more-projects">
+    <p class="section-label reveal">More projects</p>
+
+    <!-- Row 1: Translations (landscape wide) + 3 portrait cards -->
+    <div class="archive-grid-row1">
+
+      <!-- 1. Translations — landscape -->
+      <a href="translations.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal">
+        <div class="archive-card-inner">
+          <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">Typography · Print · 2023</p>
+          <p class="archive-label-title">Translations</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- 2. Little Mermaid — portrait -->
+      <a href="mermaid.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal">
+        <div class="archive-card-inner portrait">
+          <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">Typography · Web Design · 2023</p>
+          <p class="archive-label-title">Little Mermaid Retold</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- 3. Anona — portrait -->
+      <a href="anona.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal">
+        <div class="archive-card-inner portrait">
+          <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">Typography · Motion Design · 2024</p>
+          <p class="archive-label-title">Anona Specimen Cards</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- 4. Toad — portrait -->
+      <a href="toad.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal">
+        <div class="archive-card-inner portrait">
+          <img class="archive-img" src="images/homepage/toad-cover.png" alt="Toad's Survival Guide">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">Print · Editorial · 2024</p>
+          <p class="archive-label-title">Toad's Survival Guide</p>
+        </div>
+      </article>
+      </a>
+
+    </div>
+
+    <!-- Row 2: 3 landscape cards -->
+    <div class="archive-grid-row2">
+
+      <!-- 5. Nextflix -->
+      <a href="nextflix.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal">
+        <div class="archive-card-inner">
+          <img class="archive-img" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="transform: scale(1.2);">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">UI/UX · Product Design · 2024</p>
+          <p class="archive-label-title">Nextflix</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- 6. Curl In / Curl Out -->
+      <a href="curl.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal" style="background: none;">
+        <div class="archive-card-inner">
+          <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">Print · Interaction Design · 2024</p>
+          <p class="archive-label-title">Curl In / Curl Out</p>
+        </div>
+      </article>
+      </a>
+
+      <!-- 7. Intergalactic Retirement Home -->
+      <a href="irh.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
+      <article class="archive-card reveal">
+        <div class="archive-card-inner">
+          <img class="archive-img" src="images/homepage/irh-cover.png" alt="Intergalactic Retirement Home">
+        </div>
+        <div class="archive-overlay"></div>
+        <div class="archive-label">
+          <p class="archive-label-cat">Game Design · Graphic Design · 2025</p>
+          <p class="archive-label-title">Intergalactic Retirement Home</p>
+        </div>
+      </article>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <p class="section-label reveal">About</p>
+    <div class="about-grid">
+      <div class="reveal">
+        <h2 class="about-headline">
+          I'm a <em class="blue">graphic</em> and <em class="blue">UI/UX designer</em> based in <em>NJ/NY</em>, with a BS in <em>Computer Science</em> and <em>Design</em> from <em>Northeastern University</em>.
+        </h2>
+        <p class="about-body">
+          I've designed brand systems, event identities, merchandise, packaging, social content, and digital products, often multiple at once.
+        </p>
+        <a href="#" class="about-resume" style="display:none;">Download resume ↓</a>
+      </div>
+      <div class="skills-block reveal">
+        <div class="skills-group">
+          <p class="skills-group-label">Design tools</p>
+          <div class="skills-list">
+            <span class="skill-chip">Adobe Illustrator</span>
+            <span class="skill-chip">Adobe InDesign</span>
+            <span class="skill-chip">Adobe Photoshop</span>
+            <span class="skill-chip">Figma</span>
+            <span class="skill-chip">Canva</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <p class="skills-group-label">Marketing</p>
+          <div class="skills-list">
+            <span class="skill-chip">MailChimp</span>
+            <span class="skill-chip">Instagram Analytics</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <p class="skills-group-label">Development</p>
+          <div class="skills-list">
+            <span class="skill-chip">HTML / CSS</span>
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal Timeline -->
+    <div class="timeline reveal">
+      <p class="timeline-label">Relevant Experience</p>
+      <div class="timeline-track-wrap">
+
+        <!-- 1. Harvard — above -->
+        <div class="timeline-node above">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Jul–Dec 2023</p>
+            <p class="timeline-role">Instructional Technology Assistant</p>
+            <p class="timeline-org">Harvard T.H. Chan</p>
+          </div>
+        </div>
+
+        <!-- 2. B&N — below -->
+        <div class="timeline-node below">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Apr–Jul 2024</p>
+            <p class="timeline-role">Freelance Brand Designer</p>
+            <p class="timeline-org">B&N Sandwiches</p>
+          </div>
+        </div>
+
+        <!-- 3. Paul Lukez — above -->
+        <div class="timeline-node above">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Jul–Dec 2024</p>
+            <p class="timeline-role">Graphic Designer & Marketing Intern</p>
+            <p class="timeline-org">Paul Lukez Architecture</p>
+          </div>
+        </div>
+
+        <!-- 4. Sandbox — below -->
+        <div class="timeline-node below">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Sep–Dec 2024</p>
+            <p class="timeline-role">Brand Designer</p>
+            <p class="timeline-org">Sandbox at Northeastern</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-top: 1px solid rgba(15,27,45,0.15);">
+    <div class="contact-inner">
+      <p class="section-label reveal">Get in touch</p>
+      <h2 class="contact-headline reveal" style="color: var(--accent);">Let's work together!</h2>
+      <div class="contact-links reveal reveal-delay-1">
+        <a href="mailto:paulinaacosta1002@gmail.com" class="contact-link">paulinaacosta1002@gmail.com</a>
+        <a href="tel:8622424295" class="contact-link">(862) 242-4295</a>
+        <a href="https://www.linkedin.com/in/paulinacosta/" target="_blank" rel="noopener" class="contact-link">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typeface credits -->
+  <div style="border-top: 1px solid var(--border); padding: 28px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; background: var(--white);">
+    <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.3);">Typefaces</p>
+    <div style="display: flex; gap: 48px; align-items: baseline;">
+      <div style="text-align: center;">
+        <p style="font-family: Georgia, serif; font-style: italic; font-size: 20px; font-weight: normal; color: rgba(15,27,45,0.45); letter-spacing: -0.01em; margin-bottom: 4px;">Georgia</p>
+        <p style="font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.25);">Display · Serif</p>
+      </div>
+      <div style="text-align: center;">
+        <p style="font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 300; color: rgba(15,27,45,0.45); letter-spacing: 0.01em; margin-bottom: 4px;">Inter</p>
+        <p style="font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.25);">Body · Sans-serif</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.card-link').forEach(link => {
+      const card   = link.querySelector('.card');
+      const images = card.querySelectorAll('.card-img');
+      const dots   = card.querySelectorAll('.card-dot');
+      const prev   = card.querySelector('.card-arrow-prev');
+      const next   = card.querySelector('.card-arrow-next');
+
+      if (images.length <= 1) card.setAttribute('data-single', 'true');
+
+      let current = 0;
+
+      function goTo(index) {
+        current = (index + images.length) % images.length;
+        images.forEach(img => img.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        images[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
+      }
+
+      function stopNav(e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+
+      if (prev) prev.addEventListener('click', (e) => { stopNav(e); goTo(current - 1); });
+      if (next) next.addEventListener('click', (e) => { stopNav(e); goTo(current + 1); });
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', (e) => { stopNav(e); goTo(i); });
+      });
+
+      // Only navigate to the project page when clicking the card body itself (not arrows/dots)
+      link.addEventListener('click', (e) => {
+        if (e.target.closest('.card-arrow') || e.target.closest('.card-dot')) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

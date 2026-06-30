@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curl In / Curl Out — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Georgia&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #E05A1A;
+      --cobalt: #2B5BE8;
+      --amber:  #F0A320;
+      --dark:   #1A1A1A;
+      --cream:  #F7F3EE;
+      --border: #E0DADA;
+      --muted:  #7A7268;
+      --ink:    #1A1A1A;
+      --ease:   cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;
+      height: 64px;
+      background: rgba(247,243,238,0.93);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: rgba(26,26,26,0.1); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(26,26,26,0.55); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--dark); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: Georgia, serif;
+      font-weight: normal; font-style: italic;
+      font-size: 15px; letter-spacing: -0.01em;
+      color: var(--orange);
+    }
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%; height: 85vh;
+      overflow: hidden;
+    }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,26,26,0.75) 0%, rgba(26,26,26,0.1) 60%, transparent 100%);
+    }
+    .hero-text { position: absolute; bottom: 56px; left: 56px; right: 56px; }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(15, 15, 15, 0.5);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px; padding: 24px 28px; max-width: 580px;
+    }
+    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+    .hero-title { font-family: Georgia, serif; font-weight: normal; font-style: italic; font-size: clamp(48px, 7vw, 96px); line-height: 1.0; letter-spacing: -0.02em; color: #fff; margin-bottom: 16px; }
+    .hero-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.75); max-width: 460px; line-height: 1.65; }
+
+    section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 500; margin-bottom: 1rem; }
+    .section-heading { font-family: Georgia, serif; font-weight: normal; font-style: italic; font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 1.5rem; }
+    .body-text { font-size: 1rem; line-height: 1.75; color: rgba(26,26,26,0.75); max-width: 60ch; }
+
+    .science-band { background: var(--cobalt); color: #fff; padding: 5rem 3rem; }
+    .science-band-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .science-band .section-label { color: rgba(255,255,255,0.6); }
+    .science-band .section-heading { color: #fff; }
+    .science-band .body-text { color: rgba(255,255,255,0.75); }
+    .science-diagram { display: flex; flex-direction: column; gap: 1rem; }
+    .diagram-row { display: flex; align-items: center; gap: 1.5rem; background: rgba(255,255,255,0.08); border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .diagram-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .diagram-row p { font-size: 0.875rem; line-height: 1.5; color: rgba(255,255,255,0.8); }
+    .diagram-row strong { color: #fff; }
+
+    .full-img-container { width: 100%; overflow: hidden; }
+    .full-img-container img { width: 100%; display: block; }
+    .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+    .img-wrap { overflow: hidden; border-radius: 12px; background: #e0dbd4; }
+    .img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .img-wrap:hover img { transform: scale(1.02); }
+    .img-caption { font-size: 0.75rem; color: rgba(26,26,26,0.45); margin-top: 0.6rem; letter-spacing: 0.03em; }
+
+    .colorways-section { background: var(--dark); padding: 6rem 3rem; }
+    .colorways-inner { max-width: 1200px; margin: 0 auto; }
+    .colorways-inner .section-label { color: var(--amber); }
+    .colorways-inner .section-heading { color: var(--cream); }
+    .colorways-inner .body-text { color: rgba(247,243,238,0.6); }
+    .colorways-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem; }
+    .colorway-item { border-radius: 12px; overflow: hidden; }
+    .colorway-item img { width: 100%; display: block; }
+
+    .box-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+    .dieline-section { background: linear-gradient(135deg, var(--amber) 0%, var(--orange) 100%); padding: 6rem 3rem; }
+    .dieline-inner { max-width: 1200px; margin: 0 auto; }
+    .dieline-inner .section-label { color: rgba(255,255,255,0.65); }
+    .dieline-inner .section-heading { color: #fff; }
+    .dieline-inner .body-text { color: rgba(255,255,255,0.75); max-width: 50ch; }
+    .dieline-img { margin-top: 3rem; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.25); }
+    .dieline-img img { width: 100%; display: block; }
+
+    .reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .reflection-item h3 { font-family: Georgia, serif; font-weight: normal; font-style: italic; font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--dark); }
+    .reflection-item p { font-size: 0.9375rem; line-height: 1.7; color: rgba(26,26,26,0.65); }
+
+    .next-project {
+      padding: 80px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .next-project:hover { background: #F0EDE6; }
+    .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .next-title { font-family: Georgia, serif; font-size: 28px; font-weight: normal; font-style: italic; color: var(--dark); }
+    .next-arrow { font-size: 28px; color: var(--orange); transition: transform 0.2s var(--ease); }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      section { padding: 4rem 1.5rem; }
+      .science-band-inner, .box-grid, .reflection-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .science-band, .colorways-section, .dieline-section { padding: 4rem 1.5rem; }
+      .colorways-grid { grid-template-columns: repeat(2, 1fr); }
+      .img-grid-3 { grid-template-columns: 1fr 1fr; }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-img-wrap { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#more-projects" class="nav-back">All work</a>
+    <span class="nav-project-name">Curl In / Curl Out</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/curl/curl-cover.png" alt="Curl In / Curl Out cover">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Touching Grass · Interaction Design 2 Class · 2024</p>
+        <h1 class="hero-title">Curl In / Curl Out</h1>
+        <p class="hero-sub">Humidity-sensing cards made from mylar bonded to bristol paper, they physically curl in different directions depending on how humid the environment is.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); background: #F8F5EE;">
+    <div style="padding: 32px 40px; border-right: 1px solid var(--border);">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Role</p>
+      <p style="font-size: 15px; color: var(--ink); line-height: 1.4;">Solo designer</p>
+    </div>
+    <div style="padding: 32px 40px; border-right: 1px solid var(--border);">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Context</p>
+      <p style="font-size: 15px; color: var(--ink); line-height: 1.4;">Interaction Design 2 · 2024</p>
+    </div>
+    <div style="padding: 32px 40px; border-right: 1px solid var(--border);">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Materials</p>
+      <p style="font-size: 15px; color: var(--ink); line-height: 1.4;">Mylar · 100lb Bristol</p>
+    </div>
+    <div style="padding: 32px 40px;">
+      <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Deliverables</p>
+      <p style="font-size: 15px; color: var(--ink); line-height: 1.4;">Pack of Cards · Physical Packaging</p>
+    </div>
+  </div>
+
+  <section class="reveal">
+    <p class="section-label">Overview</p>
+    <h2 class="section-heading">Cards that sense their environment.</h2>
+    <p class="body-text">Curl In / Curl Out is a set of 8 humidity-sensing cards made from mylar bonded to bristol paper. Because mylar doesn't expand or contract with moisture while bristol paper does, the card physically curls in different directions depending on how humid the environment is.</p>
+    <p class="body-text" style="margin-top: 1rem;">The project started from a curiosity about the holographic finish on trading cards like Magic: The Gathering, that same phenomenon applied as a functional sensor with a playful, branded identity.</p>
+  </section>
+
+  <div class="science-band">
+    <div class="science-band-inner reveal">
+      <div>
+        <p class="section-label">The Science</p>
+        <h2 class="section-heading">Why it works.</h2>
+        <p class="body-text">Mylar is a polyester film that doesn't absorb moisture. It stays dimensionally stable no matter the humidity. Bristol paper, on the other hand, absorbs and releases moisture from the air, causing it to expand or contract. When the two are bonded together, the differential response creates a curl.</p>
+        <p class="body-text" style="margin-top: 1rem;">The direction of the curl tells you about the environment. This same principle is at work in holographic playing cards, the metallic mylar layer on one face causes the card to curve depending on conditions.</p>
+      </div>
+      <div class="science-diagram">
+        <div class="diagram-row">
+          <div class="diagram-icon" style="font-family: Georgia, serif; font-style: italic; font-size: 1.5rem; color: rgba(255,255,255,0.9); min-width: 32px;">H</div>
+          <p><strong>High humidity:</strong> Bristol paper absorbs moisture and expands, curling the card toward the mylar side, <em>curl in</em>.</p>
+        </div>
+        <div class="diagram-row">
+          <div class="diagram-icon" style="font-family: Georgia, serif; font-style: italic; font-size: 1.5rem; color: rgba(255,255,255,0.9); min-width: 32px;">D</div>
+          <p><strong>Dry air:</strong> Bristol paper contracts as it releases moisture, pulling the card toward the paper side, <em>curl out</em>.</p>
+        </div>
+        <div class="diagram-row">
+          <div class="diagram-icon" style="font-family: Georgia, serif; font-style: italic; font-size: 1.5rem; color: rgba(255,255,255,0.9); min-width: 32px;">↻</div>
+          <p><strong>The reference:</strong> Magic: The Gathering cards with holographic finishes show this same effect, which is what inspired the project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="reveal">
+    <p class="section-label">The Cards</p>
+    <h2 class="section-heading">Front, back, and in between.</h2>
+    <p class="body-text" style="margin-bottom: 2.5rem;">Each card has a printed face with the "curl in / curl out" S-wave motif and humidity instructions, and a plain mylar back. The curving typography literally echoes the curl of the card itself.</p>
+    <div class="img-grid-2" style="margin-bottom: 1.25rem;">
+      <div class="img-wrap" style="aspect-ratio: 3/4;">
+        <img src="images/curl/card-front.jpg" alt="Card front blue and amber colorway" />
+      </div>
+      <div class="img-wrap" style="aspect-ratio: 3/4;">
+        <img src="images/curl/card-front-back.jpg" alt="Card front and mylar back side by side" />
+      </div>
+    </div>
+    <div class="img-grid-3">
+      <div class="img-wrap" style="aspect-ratio: 4/3;">
+        <img src="images/curl/cards-dark-spread.jpg" alt="Cards spread on dark surface" />
+      </div>
+      <div class="img-wrap" style="aspect-ratio: 4/3;">
+        <img src="images/curl/cards-printed-rows.jpg" alt="Card variants in rows" />
+      </div>
+      <div class="img-wrap" style="aspect-ratio: 4/3;">
+        <img src="images/curl/card-window.jpg" alt="Card and mylar on windowsill" />
+      </div>
+    </div>
+  </section>
+
+  <div class="colorways-section">
+    <div class="colorways-inner reveal">
+      <p class="section-label">Card Colorways</p>
+      <h2 class="section-heading">Four color variants</h2>
+      <p class="body-text">The S-wave motif was designed in four colorways, each a different warm/cool pairing that maintains the bold, graphic quality of the card face.</p>
+      <div class="colorways-grid">
+        <div class="colorway-item"><img src="images/curl/mockup-blue-orange.png" alt="Blue and orange colorway" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-pink-purple.png" alt="Pink and purple colorway" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-gold-purple.png" alt="Gold and purple colorway" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-pink-orange.png" alt="Pink and orange colorway" /></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="reveal">
+    <div class="box-grid">
+      <div>
+        <p class="section-label">Packaging</p>
+        <h2 class="section-heading">A box that explains itself</h2>
+        <p class="body-text">The card box extends the brand system with the same S-curve and "curl in / curl out" wordmark on the front. The back panel serves as a built-in how-to guide, explaining the mylar science so anyone can use the cards immediately after opening.</p>
+        <p class="body-text" style="margin-top: 1rem;">The box itself is hand-constructed from bristol paper and glue, a nice echo of the card material.</p>
+      </div>
+      <div>
+        <div class="img-grid-2" style="margin-bottom: 1.25rem;">
+          <div class="img-wrap" style="aspect-ratio: 3/4;">
+            <img src="images/curl/box-front.jpg" alt="Box front" />
+          </div>
+          <div class="img-wrap" style="aspect-ratio: 3/4;">
+            <img src="images/curl/box-back-light.jpg" alt="Box back with How To Curl guide" />
+          </div>
+        </div>
+        <p class="img-caption">Front and back of the printed card box</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="dieline-section">
+    <div class="dieline-inner reveal">
+      <p class="section-label">Production</p>
+      <h2 class="section-heading">Box dieline</h2>
+      <p class="body-text">The packaging was designed as a flat dieline before being printed and assembled. The S-curve graphic wraps across panels, so the assembled box reads as one continuous design.</p>
+      <div class="dieline-img">
+        <img src="images/curl/dieline.png" alt="Box packaging dieline flat" />
+      </div>
+    </div>
+  </div>
+
+  <section class="reveal">
+    <p class="section-label">Reflection</p>
+    <h2 class="section-heading">What I took away.</h2>
+    <div class="reflection-grid" style="margin-top: 2.5rem;">
+      <div class="reflection-item">
+        <h3>Material as medium</h3>
+        <p>Mylar is the same material used in emergency blankets and chip bags. Discovering that while researching made the project feel connected to a much larger material ecosystem. The "sensor" is really just material properties doing what they naturally do.</p>
+      </div>
+      <div class="reflection-item">
+        <h3>A question to pursue</h3>
+        <p>Magic: The Gathering uses a hot press to meld mylar onto cards while letting the design show through. I'd like to find a way to recreate that process. Having the print visible through the mylar side would make the cards feel even more intentional.</p>
+      </div>
+    </div>
+  </section>
+
+  <a href="index.html#more-projects" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

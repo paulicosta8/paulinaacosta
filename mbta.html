@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlie's Card — Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F6F8;
+      --blue:      #003DA5;
+      --blue-lt:   #4F89F0;
+      --blue-dark: #183B75;
+      --charcoal:  #080B10;
+      --muted:     #5A6070;
+      --border:    #DCDFE6;
+      --surface:   #ECEEF2;
+      --white:     #FFFFFF;
+      --serif:     Georgia, 'Times New Roman', serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(245, 246, 248, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px; font-weight: 300; font-style: italic;
+      color: var(--blue);
+    }
+
+    /* ── Hero ── */
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 85vh;
+      overflow: hidden;
+      background: var(--blue-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-img {
+      height: 80%;
+      width: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(24,59,117,0.85) 0%, transparent 50%);
+      z-index: 2;
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 56px; left: 56px; right: 56px;
+      z-index: 3;
+    }
+    .hero-text-inner {
+      display: inline-block;
+      background: rgba(24, 59, 117, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 8px;
+      padding: 24px 28px;
+      max-width: 600px;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 300; font-style: italic;
+      color: var(--white);
+      line-height: 1.0; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      max-width: 520px; line-height: 1.65;
+    }
+
+    /* ── Overview strip ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
+
+    /* ── Sections ── */
+    .cs-section { padding: 100px 56px; border-bottom: 1px solid var(--border); }
+    .cs-section-white { background: var(--white); }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--blue); opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.2; letter-spacing: -0.01em;
+      margin-bottom: 24px; max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); line-height: 1.85; max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    /* ── Layouts ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .two-col-wide { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: start; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    /* ── Image treatments ── */
+    .img-wrap { overflow: hidden; border-radius: 4px; }
+    .img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.02); }
+    .img-land { aspect-ratio: 4/3; }
+    .screen-wrap {
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      background: var(--white);
+    }
+    .screen-wrap img { width: 100%; display: block; }
+
+    /* ── Feature cards ── */
+    .features-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px; margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 6px; padding: 28px 24px;
+    }
+    .feature-number {
+      font-family: var(--serif);
+      font-size: 40px; font-weight: 300; font-style: italic;
+      color: var(--blue-lt); line-height: 1; margin-bottom: 12px;
+    }
+    .feature-title { font-size: 15px; font-weight: 500; color: var(--charcoal); margin-bottom: 8px; }
+    .feature-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+    /* ── Blue section ── */
+    .blue-section {
+      background: var(--blue);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .blue-section .cs-eyebrow { color: rgba(255,255,255,0.55); }
+    .blue-section .cs-eyebrow::after { background: rgba(255,255,255,0.3); }
+    .blue-section .cs-headline { color: var(--white); }
+    .blue-section .cs-body { color: rgba(255,255,255,0.6); }
+
+    /* ── Figma embed ── */
+    .figma-embed-wrap {
+      margin-top: 40px;
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+      position: relative; width: 100%;
+      padding-bottom: 56.25%; height: 0;
+    }
+    .figma-embed-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none; border-radius: 8px;
+    }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Next project ── */
+    .next-project {
+      padding: 80px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--surface); }
+    .next-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 300; font-style: italic;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px; color: var(--blue);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .cs-section, .blue-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .two-col, .two-col-wide, .three-col, .features-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .two-col, .three-col, .features-grid { grid-template-columns: 1fr; }
+      .hero-img-wrap { height: 70vh; }
+      .figma-embed-wrap { padding-bottom: 75%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">Charlie's Card</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/mbta/charlie-card.png" alt="CharlieCard — Massachusetts Bay Transportation Authority">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">UI/UX · App Design · Interaction Design · 2024</p>
+        <h1 class="hero-title">Charlie's Card</h1>
+        <p class="hero-sub">A redesigned mobile experience for Boston's MBTA, combining real-time trip planning, virtual CharlieCard reloading, and a safety reporting system in one accessible app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">UX Designer</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Team</p>
+      <p class="overview-value">4-person team</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Context</p>
+      <p class="overview-value">Interaction Design 1 Class · 2024</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Figma · Field Research · User Testing</p>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <section class="cs-section cs-section-white">
+    <p class="cs-eyebrow reveal">The problem</p>
+    <div class="two-col-wide">
+      <div>
+        <h2 class="cs-headline reveal">Boston commuters juggle too many apps to do one thing.</h2>
+        <p class="cs-body reveal">Reloading a CharlieCard required a separate kiosk or website. Checking delays meant switching to Google Maps or Transit. Reporting unsafe activity had no clear channel at all. None of the existing apps solved all three, and none were designed with accessibility in mind for elderly or mobility-impaired riders.</p>
+        <p class="cs-body reveal">Before opening Figma, our team spent time on the MBTA observing how real riders actually used the system. What we found shaped every decision: overcrowding and delays were the biggest stressors, CharlieCard reloading was more complicated than it needed to be, and riders with mobility challenges had no reliable way to get assistance.</p>
+      </div>
+      <div class="reveal">
+        <div class="img-wrap img-land">
+          <img src="images/mbta/research-field.jpg" alt="Field research on the MBTA — overcrowding, delays, rider behavior">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Research</p>
+    <h2 class="cs-headline reveal">Starting with research.</h2>
+    <p class="cs-body reveal">We evaluated three existing apps: ProximiT, Google Maps, and Transit, to understand what worked and what didn't. None of them handled CharlieCard reloading or safety reporting which are things we really wanted to focus on with our app</p>
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div class="screen-wrap">
+        <img src="images/mbta/research-contextual.jpg" alt="Contextual research — competitor analysis">
+      </div>
+      <div class="screen-wrap">
+        <img src="images/mbta/research-personas.jpg" alt="User personas — Sarah and Emily">
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="cs-section cs-section-white">
+    <p class="cs-eyebrow reveal">Process</p>
+    <h2 class="cs-headline reveal">From sketches to a working style guide.</h2>
+    <p class="cs-body reveal">We mapped every possible solution before narrowing down to a mobile app. Before designing any screens, we built out a style guide: MBTA blue, Inter, and custom icons, so everything would feel cohesive from the start.</p>
+    <div class="screen-wrap reveal" style="margin-top: 40px;">
+      <img src="images/mbta/process-workflow.jpg" alt="App workflow diagram">
+    </div>
+  </section>
+
+  <!-- What we built -->
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">What we built</p>
+    <h2 class="cs-headline reveal">Three problems, one app.</h2>
+    <div class="features-grid reveal">
+      <div class="feature-card">
+        <p class="feature-number">01</p>
+        <p class="feature-title">Real-time trip planning</p>
+        <p class="feature-desc">Live delay information, route options, and estimated arrival times, all in one view instead of across three different apps.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-number">02</p>
+        <p class="feature-title">Virtual CharlieCard</p>
+        <p class="feature-desc">Add funds, purchase passes, and manage your card directly from your phone. No kiosk required.</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-number">03</p>
+        <p class="feature-title">Safety & accessibility</p>
+        <p class="feature-desc">Report unsafe activity, add emergency contacts, and set mobility accommodations to get the right support when you need it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final designs — blue section with embed -->
+  <section class="blue-section">
+    <p class="cs-eyebrow reveal">Final designs</p>
+    <h2 class="cs-headline reveal">Explore the prototype.</h2>
+    <p class="cs-body reveal">The hi-fi prototype covers all three flows: trip planning with live delay alerts, CharlieCard reloading, and the accessibility and safety reporting system.</p>
+    <div class="figma-embed-wrap reveal">
+      <iframe
+        style="border: 1px solid rgba(0, 0, 0, 0.1);"
+        src="https://embed.figma.com/proto/0f4BNwMH1QxqWwporOeHIC/mbta-app?node-id=1-990&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share"
+        allowfullscreen
+        title="Charlie's Card — Figma prototype">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Hi-fi screens — collapsed into one section -->
+  <section class="cs-section cs-section-white">
+    <p class="cs-eyebrow reveal">Hi-fi screens</p>
+    <h2 class="cs-headline reveal">Navigation, CharlieCard, and accessibility.</h2>
+    <p class="cs-body reveal">The final screens cover the full app: real-time route selection, virtual card reloading, mobility accommodations, and safety reporting.</p>
+
+    <div class="screen-wrap reveal" style="margin-top: 48px;">
+      <img src="images/mbta/hifi-navigation.jpg" alt="Hi-fi screens — navigation and trip planning flow">
+    </div>
+    <div class="screen-wrap reveal" style="margin-top: 16px;">
+      <img src="images/mbta/hifi-charliecard.jpg" alt="Hi-fi screens — virtual CharlieCard reload flow">
+    </div>
+    <div class="screen-wrap reveal" style="margin-top: 16px;">
+      <img src="images/mbta/hifi-account.jpg" alt="Hi-fi screens — account, accessibility accommodations, and safety reporting">
+    </div>
+  </section>
+
+  <a href="index.html#work" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
