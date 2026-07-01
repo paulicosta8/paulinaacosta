@@ -36,8 +36,6 @@
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
-
-    /* ── Nav ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -67,8 +65,6 @@
       font-size: 17px; font-weight: 300; font-style: italic;
       color: var(--navy);
     }
-
-    /* ── Hero ── */
     .hero { padding-top: 64px; }
     .hero-img-wrap {
       position: relative;
@@ -117,8 +113,6 @@
       color: rgba(255,255,255,0.7);
       max-width: 520px; line-height: 1.65;
     }
-
-    /* ── Overview ── */
     .overview {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -136,8 +130,6 @@
       color: var(--muted); margin-bottom: 8px;
     }
     .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
-
-    /* ── Sections ── */
     .cs-section { padding: 100px 56px; border-bottom: 1px solid var(--border); }
     .cs-section-white { background: var(--white); }
     .cs-section-cream { background: var(--cream); }
@@ -165,12 +157,8 @@
       color: var(--muted); line-height: 1.85; max-width: 680px;
     }
     .cs-body + .cs-body { margin-top: 16px; }
-
-    /* ── Layouts ── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-
-    /* ── Image treatments ── */
     .img-wrap { overflow: hidden; border-radius: 4px; }
     .img-wrap img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -180,8 +168,6 @@
     .img-tall  { aspect-ratio: 3/4; }
     .img-port  { aspect-ratio: 2/3; }
     .img-land  { aspect-ratio: 4/3; }
-
-    /* ── PDF embed ── */
     .pdf-embed-wrap {
       margin-top: 40px;
       border-radius: 8px; overflow: hidden;
@@ -194,8 +180,6 @@
       width: 100%; height: 100%;
       border: none; border-radius: 8px;
     }
-
-    /* ── Embed section ── */
     .embed-section {
       background: var(--navy);
       padding: 100px 56px;
@@ -218,15 +202,11 @@
       width: 100%; height: 100%;
       border: none; border-radius: 8px;
     }
-
-    /* ── Reveal ── */
     .reveal {
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── Next ── */
     .next-project {
       padding: 80px 56px;
       display: flex; align-items: center; justify-content: space-between;
@@ -248,8 +228,6 @@
       transition: transform 0.2s var(--ease);
     }
     .next-project:hover .next-arrow { transform: translateX(8px); }
-
-    /* ── Responsive ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
       .hero-text { left: 24px; right: 24px; bottom: 32px; }
@@ -277,10 +255,9 @@
     <span class="nav-project-name">Little Mermaid Retold</span>
   </nav>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-img-wrap">
-      <img class="hero-img" src="images/mermaid/mermaid-cover.jpg" alt="The Little Mermaid — booklet cover">
+      <img class="hero-img" src="images/mermaid/mermaid-cover.jpg" alt="The Little Mermaid booklet cover">
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
@@ -292,7 +269,6 @@
     </div>
   </section>
 
-  <!-- Overview -->
   <div class="overview">
     <div class="overview-item">
       <p class="overview-label">Role</p>
@@ -312,7 +288,6 @@
     </div>
   </div>
 
-  <!-- The project -->
   <section class="cs-section cs-section-white">
     <p class="cs-eyebrow reveal">The project</p>
     <h2 class="cs-headline reveal">Two versions of the same story, and what gets lost between them.</h2>
@@ -324,7 +299,6 @@
     </div>
   </section>
 
-  <!-- Figma prototype embed -->
   <section class="embed-section">
     <p class="cs-eyebrow reveal">Web prototype</p>
     <h2 class="cs-headline reveal">The Disney version is right there. You have to find the other one.</h2>
@@ -338,11 +312,10 @@
     </div>
   </section>
 
-  <!-- Back -->
-  <a href="index.html#more-projects" class="next-project">
+  <a href="anona.html" class="next-project">
     <div>
-      <p class="next-label">Back to</p>
-      <p class="next-title">All work</p>
+      <p class="next-label">Next project</p>
+      <p class="next-title">Anona Specimen Cards</p>
     </div>
     <span class="next-arrow">→</span>
   </a>

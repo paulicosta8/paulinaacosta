@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* B&N palette: orange, teal, cream */
     :root {
       --bg:       #FAF6F0;
       --orange:   #E8521A;
@@ -35,8 +34,6 @@
     }
     img, video { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
-
-    /* ── Nav ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -73,8 +70,6 @@
       font-style: italic;
       color: var(--orange);
     }
-
-    /* ── Hero ── */
     .hero { padding-top: 64px; }
     .hero-img-wrap {
       position: relative;
@@ -123,8 +118,6 @@
       color: rgba(255,248,238,0.8);
       max-width: 560px; line-height: 1.6;
     }
-
-    /* ── Overview strip ── */
     .overview {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -143,8 +136,6 @@
     .overview-value {
       font-size: 15px; color: var(--charcoal); line-height: 1.4;
     }
-
-    /* ── Sections ── */
     .cs-section {
       padding: 100px 56px;
       border-bottom: 1px solid var(--border);
@@ -173,29 +164,11 @@
       color: var(--muted); line-height: 1.85; max-width: 680px;
     }
     .cs-body + .cs-body { margin-top: 16px; }
-
-    /* ── Layouts ── */
-    .two-col {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .two-col-wide {
-      display: grid; grid-template-columns: 1.4fr 1fr;
-      gap: 60px; align-items: start;
-    }
-    .three-col {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-    }
-    .four-col {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    /* ── Image treatments ── */
-    .img-wrap {
-      overflow: hidden; border-radius: 4px;
-    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .two-col-wide { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: start; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .img-wrap { overflow: hidden; border-radius: 4px; }
     .img-wrap img, .img-wrap video {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
@@ -207,28 +180,19 @@
     .img-wide { aspect-ratio: 16/9; }
     .img-tall { aspect-ratio: 3/4; }
     .img-port { aspect-ratio: 2/3; }
-
-    /* ── Stats strip ── */
     .stats-strip {
       display: grid; grid-template-columns: repeat(3, 1fr);
       border: 1px solid var(--border); border-radius: 4px;
       margin-top: 40px;
     }
-    .stat-item {
-      padding: 32px 36px;
-      border-right: 1px solid var(--border);
-    }
+    .stat-item { padding: 32px 36px; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
     .stat-number {
       font-family: var(--serif);
       font-size: 48px; font-weight: 300; font-style: italic;
       color: var(--orange); line-height: 1; margin-bottom: 6px;
     }
-    .stat-label {
-      font-size: 13px; font-weight: 300; color: var(--muted);
-    }
-
-    /* ── Logo section ── */
+    .stat-label { font-size: 13px; font-weight: 300; color: var(--muted); }
     .logo-section {
       background: var(--charcoal);
       padding: 100px 56px;
@@ -238,29 +202,14 @@
     .logo-section .cs-eyebrow::after { background: var(--teal-lt); }
     .logo-section .cs-headline { color: var(--cream); }
     .logo-section .cs-body { color: rgba(255,248,238,0.6); }
-    .logo-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 40px;
-    }
+    .logo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
     .logo-swatch {
-      border-radius: 4px;
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px;
+      border-radius: 4px; aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center; padding: 48px;
     }
-    .logo-swatch img {
-      width: 80%;
-      height: 80%;
-      object-fit: contain;
-    }
+    .logo-swatch img { width: 80%; height: 80%; object-fit: contain; }
     .logo-swatch-orange { background: #D94E1A; }
     .logo-swatch-teal   { background: #2D7A6F; }
-
-    /* ── Opening poster section ── */
     .poster-section {
       background: var(--cream);
       padding: 100px 56px;
@@ -268,8 +217,6 @@
     }
     .poster-section .cs-eyebrow { color: var(--teal); }
     .poster-section .cs-eyebrow::after { background: var(--teal); }
-
-    /* ── Social content section ── */
     .social-section {
       background: var(--teal);
       padding: 100px 56px;
@@ -279,8 +226,6 @@
     .social-section .cs-eyebrow::after { background: rgba(255,248,238,0.4); }
     .social-section .cs-headline { color: var(--cream); }
     .social-section .cs-body { color: rgba(255,248,238,0.65); }
-
-    /* ── Collateral section ── */
     .collateral-section {
       background: var(--dark-bg);
       padding: 100px 56px;
@@ -290,15 +235,11 @@
     .collateral-section .cs-eyebrow::after { background: var(--orange); }
     .collateral-section .cs-headline { color: var(--cream); }
     .collateral-section .cs-body { color: rgba(255,248,238,0.6); }
-
-    /* ── Reveal animations ── */
     .reveal {
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── Next project ── */
     .next-project {
       padding: 80px 56px;
       border-top: 1px solid var(--border);
@@ -306,28 +247,14 @@
       transition: background 0.2s;
     }
     .next-project:hover { background: var(--cream); }
-    .next-label {
-      font-size: 10px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 8px;
-    }
-    .next-title {
-      font-family: var(--serif);
-      font-size: 28px; font-weight: 300; font-style: italic;
-      color: var(--charcoal);
-    }
-    .next-arrow {
-      font-size: 28px; color: var(--orange);
-      transition: transform 0.2s var(--ease);
-    }
+    .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .next-title { font-family: var(--serif); font-size: 28px; font-weight: 300; font-style: italic; color: var(--charcoal); }
+    .next-arrow { font-size: 28px; color: var(--orange); transition: transform 0.2s var(--ease); }
     .next-project:hover .next-arrow { transform: translateX(8px); }
-
-    /* ── Responsive ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
       .hero-text { left: 24px; right: 24px; bottom: 32px; }
-      .cs-section, .logo-section, .poster-section,
-      .social-section, .collateral-section { padding: 60px 24px; }
+      .cs-section, .logo-section, .poster-section, .social-section, .collateral-section { padding: 60px 24px; }
       .overview { grid-template-columns: 1fr 1fr; }
       .overview-item:nth-child(2) { border-right: none; }
       .two-col, .two-col-wide, .three-col, .four-col { grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -352,10 +279,9 @@
     <span class="nav-project-name">B&amp;N Sandwiches</span>
   </nav>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-img-wrap">
-      <img class="hero-img" src="images/bn/opening-poster-english.jpg" alt="B&N Sandwiches soft opening poster — orange and pink">
+      <img class="hero-img" src="images/bn/opening-poster-english.jpg" alt="B&N Sandwiches soft opening poster">
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
@@ -367,7 +293,6 @@
     </div>
   </section>
 
-  <!-- Overview -->
   <div class="overview">
     <div class="overview-item">
       <p class="overview-label">Role</p>
@@ -387,7 +312,6 @@
     </div>
   </div>
 
-  <!-- The work overview -->
   <section class="cs-section">
     <p class="cs-eyebrow reveal">The project</p>
     <div class="two-col-wide">
@@ -412,31 +336,29 @@
       </div>
       <div class="reveal">
         <div class="img-wrap" style="aspect-ratio: 3/4; border-radius: 4px;">
-          <img src="images/bn/opening-poster-viet.jpg" alt="B&N Khai Trương opening poster — Vietnamese version" style="object-position: center top;">
+          <img src="images/bn/opening-poster-viet.jpg" alt="B&N Khai Truong opening poster" style="object-position: center top;">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Logo system — dark section -->
   <section class="logo-section">
     <p class="cs-eyebrow reveal">Logo system</p>
     <h2 class="cs-headline reveal">A circular mark built to flex across every colorway.</h2>
     <p class="cs-body reveal">The B&amp;N logo is a hand-lettered circular mark featuring a bánh mì, a boba drink, and wheat stalks, capturing both sides of the restaurant in one image. For the soft opening campaign, the logo shifted to match each graphic's color scheme, keeping the system cohesive without being rigid.</p>
     <div class="logo-pair reveal" style="grid-template-columns: 1fr 1fr 1fr;">
       <div class="logo-swatch logo-swatch-teal" style="padding: 24px;">
-        <img src="images/bn/logo-teal.png" alt="B&N Sandwiches logo — teal (primary)">
+        <img src="images/bn/logo-teal.png" alt="B&N logo teal">
       </div>
       <div class="logo-swatch logo-swatch-orange" style="padding: 72px;">
-        <img src="images/bn/logo-orange.png" alt="B&N Sandwiches logo — orange colorway">
+        <img src="images/bn/logo-orange.png" alt="B&N logo orange">
       </div>
       <div class="logo-swatch" style="background: #F06BA0; padding: 72px;">
-        <img src="images/bn/logo-pink.png" alt="B&N Sandwiches logo — pink colorway">
+        <img src="images/bn/logo-pink.png" alt="B&N logo pink">
       </div>
     </div>
   </section>
 
-  <!-- Opening posters — cream section -->
   <section class="poster-section">
     <p class="cs-eyebrow reveal">Opening campaign</p>
     <h2 class="cs-headline reveal">Soft opening posters in both languages, multiple colorways.</h2>
@@ -444,18 +366,17 @@
 
     <div class="two-col reveal" style="margin-top: 40px;">
       <div class="img-wrap img-tall">
-        <img src="images/bn/poster-eng-orange.jpg" alt="Soft Opening poster — English, orange">
+        <img src="images/bn/poster-eng-orange.jpg" alt="Soft Opening poster English orange">
       </div>
       <div class="img-wrap img-tall">
-        <img src="images/bn/poster-viet-teal.jpg" alt="Khai Trương poster — Vietnamese, teal">
+        <img src="images/bn/poster-viet-teal.jpg" alt="Khai Truong poster Vietnamese teal">
       </div>
     </div>
     <div class="img-wrap reveal" style="margin-top: 16px; border-radius: 4px;">
-      <img src="images/bn/bn-banner.jpg" alt="B&N Sandwiches soft opening event banner" style="width:100%;display:block;">
+      <img src="images/bn/bn-banner.jpg" alt="B&N soft opening banner" style="width:100%;display:block;">
     </div>
   </section>
 
-  <!-- Menus section -->
   <section class="cs-section">
     <p class="cs-eyebrow reveal">Menus</p>
     <h2 class="cs-headline reveal">Bilingual from top to bottom.</h2>
@@ -463,63 +384,44 @@
 
     <div class="two-col reveal" style="margin-top: 40px;">
       <div class="img-wrap img-land">
-        <img src="images/bn/menu-english.jpg" alt="B&N Sandwiches bilingual menu — English version">
+        <img src="images/bn/menu-english.jpg" alt="B&N menu English">
       </div>
       <div class="img-wrap img-land">
-        <img src="images/bn/menu-viet.jpg" alt="B&N Sandwiches bilingual menu — Vietnamese version">
+        <img src="images/bn/menu-viet.jpg" alt="B&N menu Vietnamese">
       </div>
     </div>
-
     <div class="three-col reveal" style="margin-top: 16px;">
       <div class="img-wrap img-wide">
-        <img src="images/bn/tv-menu-1.png" alt="TV menu board — sandwiches and noodle soup">
+        <img src="images/bn/tv-menu-1.png" alt="TV menu board 1">
       </div>
       <div class="img-wrap img-wide">
-        <img src="images/bn/tv-menu-2.png" alt="TV menu board — rolls and rice dishes">
+        <img src="images/bn/tv-menu-2.png" alt="TV menu board 2">
       </div>
       <div class="img-wrap img-wide">
-        <img src="images/bn/tv-menu-3.png" alt="TV menu board — drinks and milk tea">
+        <img src="images/bn/tv-menu-3.png" alt="TV menu board 3">
       </div>
     </div>
   </section>
 
-  <!-- Social content — teal section -->
   <section class="social-section">
     <p class="cs-eyebrow reveal">Social content</p>
     <h2 class="cs-headline reveal">Eight dishes. One system.</h2>
     <p class="cs-body reveal">To announce the menu and build appetite before opening day, I created a series of square social posts using a layered typography system: a large foreground dish name in the brand's warm colors, a watercolor food illustration breaking out of the frame, and the dish name repeated in oversized type behind it. Each post is a standalone piece but unmistakably part of the same campaign.</p>
 
     <div class="four-col reveal" style="margin-top: 40px;">
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-banh-mi.png" alt="Bánh Mì social post">
-      </div>
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-ca-phe.png" alt="Cà Phê Sữa Đá social post">
-      </div>
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-bun-rieu.png" alt="Bún Riêu social post">
-      </div>
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-com-tam.png" alt="Cơm Tấm social post">
-      </div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-banh-mi.png" alt="Banh Mi post"></div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-ca-phe.png" alt="Ca Phe post"></div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-bun-rieu.png" alt="Bun Rieu post"></div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-com-tam.png" alt="Com Tam post"></div>
     </div>
     <div class="four-col reveal" style="margin-top: 16px;">
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-bun-bo-hue.png" alt="Bún Bò Huế social post">
-      </div>
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-pho.png" alt="Phở social post">
-      </div>
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-goi-cuon.png" alt="Gỏi Cuốn social post">
-      </div>
-      <div class="img-wrap img-sq">
-        <img src="images/bn/social-bo-kho.png" alt="Bò Khô social post">
-      </div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-bun-bo-hue.png" alt="Bun Bo Hue post"></div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-pho.png" alt="Pho post"></div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-goi-cuon.png" alt="Goi Cuon post"></div>
+      <div class="img-wrap img-sq"><img src="images/bn/social-bo-kho.png" alt="Bo Kho post"></div>
     </div>
   </section>
 
-  <!-- Collateral — dark section -->
   <section class="collateral-section">
     <p class="cs-eyebrow reveal">Collateral</p>
     <h2 class="cs-headline reveal">Pieces customers want to keep.</h2>
@@ -527,29 +429,26 @@
 
     <div class="two-col reveal" style="margin-top: 40px;">
       <div class="img-wrap" style="border-radius: 12px; overflow: hidden; aspect-ratio: 1.75; background: #2A2A2A;">
-        <img src="images/bn/business-card-front.png" alt="B&N Sandwiches business card — front, pink and orange wave" style="object-fit: contain; padding: 24px;">
+        <img src="images/bn/business-card-front.png" alt="B&N business card front" style="object-fit: contain; padding: 24px;">
       </div>
       <div class="img-wrap" style="border-radius: 12px; overflow: hidden; aspect-ratio: 1.75; background: #2A2A2A;">
-        <img src="images/bn/business-card-back.png" alt="B&N Sandwiches business card — back, loyalty stamp card" style="object-fit: contain; padding: 24px;">
+        <img src="images/bn/business-card-back.png" alt="B&N business card back" style="object-fit: contain; padding: 24px;">
       </div>
     </div>
-
-    <!-- Takeout menus -->
     <div class="two-col reveal" style="margin-top: 16px;">
       <div class="img-wrap" style="border-radius: 8px; overflow: hidden;">
-        <img src="images/bn/bn-drinks.png" alt="B&N Sandwiches takeout menu — drinks" style="width:100%; display:block;">
+        <img src="images/bn/bn-drinks.png" alt="B&N takeout menu drinks" style="width:100%; display:block;">
       </div>
       <div class="img-wrap" style="border-radius: 8px; overflow: hidden;">
-        <img src="images/bn/bn-food.png" alt="B&N Sandwiches takeout menu — food" style="width:100%; display:block;">
+        <img src="images/bn/bn-food.png" alt="B&N takeout menu food" style="width:100%; display:block;">
       </div>
     </div>
   </section>
 
-  <!-- Next project -->
-  <a href="anona.html" class="next-project">
+  <a href="noaa.html" class="next-project">
     <div>
       <p class="next-label">Next project</p>
-      <p class="next-title">Anona Specimen Cards</p>
+      <p class="next-title">NOAA Redesign</p>
     </div>
     <span class="next-arrow">→</span>
   </a>
