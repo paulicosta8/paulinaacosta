@@ -281,6 +281,18 @@
       opacity: 0;
     }
     .card-img.active { opacity: 1; }
+    .card-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--border);
+      letter-spacing: 0.05em;
+    }
     .card-overlay {
       position: absolute;
       inset: 0;
@@ -416,6 +428,7 @@
       padding: 100px 48px;
     }
 
+    /* Row 1: Translations (wide) + 3 portrait cards — all same height */
     .archive-grid-row1 {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -426,6 +439,7 @@
       padding-bottom: 87%;
     }
 
+    /* Row 2: 3 landscape cards equal width */
     .archive-grid-row2 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -441,6 +455,7 @@
       background: var(--surface);
     }
 
+    /* Landscape cards: 16/9 ratio */
     .archive-card-inner {
       position: relative;
       width: 100%;
@@ -448,6 +463,7 @@
       padding-bottom: 65%;
     }
 
+    /* Portrait cards: taller ratio */
     .archive-card-inner.portrait {
       padding-bottom: 130%;
     }
@@ -465,7 +481,7 @@
     .archive-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(14,10,8,0.92) 0%, rgba(14,10,8,0.4) 50%, transparent 100%);
+      background: linear-gradient(to top, rgba(14,10,8,0.7) 0%, transparent 60%);
       opacity: 0;
       transition: opacity 0.35s var(--ease);
       pointer-events: none;
@@ -499,7 +515,7 @@
 
     /* ── About ── */
     #about {
-      background: var(--dark-navy);
+      background: #E3EDF8;
       border-top: none;
     }
     .about-grid {
@@ -516,14 +532,19 @@
       font-weight: 300;
       font-style: normal;
       margin-bottom: 24px;
-      color: var(--white);
+      color: var(--text);
     }
-    .about-headline em { font-style: normal; color: var(--white); }
-    .about-headline em.blue { color: var(--accent-lt); }
+    .about-headline em {
+      font-style: normal;
+      color: var(--text);
+    }
+    .about-headline em.blue {
+      color: var(--accent-lt);
+    }
     .about-body {
       font-size: 16px;
       font-weight: 300;
-      color: rgba(255,255,255,0.6);
+      color: rgba(15,27,45,0.65);
       line-height: 1.8;
       margin-bottom: 18px;
     }
@@ -549,25 +570,29 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(15,27,45,0.4);
       margin-bottom: 12px;
     }
     .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-chip {
       font-size: 12px;
-      color: var(--white);
-      background: rgba(26, 111, 191, 0.4);
-      border: 1px solid rgba(43, 127, 212, 0.4);
+      color: var(--accent);
+      background: rgba(26, 111, 191, 0.12);
+      border: 1px solid rgba(26, 111, 191, 0.25);
       padding: 5px 12px;
       border-radius: 100px;
     }
-    #about .section-label { color: rgba(255,255,255,0.4); }
-    #about .section-label::after { background: rgba(255,255,255,0.2); }
+    #about .section-label {
+      color: var(--accent);
+    }
+    #about .section-label::after {
+      background: var(--accent);
+    }
 
     /* ── Timeline ── */
     .timeline {
       margin-top: 72px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(15,27,45,0.1);
       padding-top: 48px;
     }
     .timeline-label {
@@ -575,7 +600,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: rgba(15,27,45,0.4);
       margin-bottom: 64px;
       text-align: center;
     }
@@ -584,13 +609,14 @@
       height: 280px;
       margin: 0 24px;
     }
+    /* Horizontal line */
     .timeline-track-wrap::before {
       content: '';
       position: absolute;
       left: 0; right: 0;
       top: 50%;
       height: 1px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(15,27,45,0.15);
     }
     .timeline-node {
       position: absolute;
@@ -600,20 +626,16 @@
       flex-direction: column;
       align-items: center;
     }
-
-    /* 5-node positions: 10%, 27.5%, 50%, 72.5%, 90% */
-    .timeline-node:nth-child(1) { left: 10%; }
-    .timeline-node:nth-child(2) { left: 27.5%; }
-    .timeline-node:nth-child(3) { left: 50%; }
-    .timeline-node:nth-child(4) { left: 72.5%; }
-    .timeline-node:nth-child(5) { left: 90%; }
-
+    .timeline-node:nth-child(1) { left: 12.5%; }
+    .timeline-node:nth-child(2) { left: 37.5%; }
+    .timeline-node:nth-child(3) { left: 62.5%; }
+    .timeline-node:nth-child(4) { left: 87.5%; }
     .timeline-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
       background: var(--accent-lt);
-      border: 2px solid var(--dark-navy);
+      border: 2px solid #E3EDF8;
       box-shadow: 0 0 0 1px var(--accent-lt);
       flex-shrink: 0;
       position: relative;
@@ -622,15 +644,16 @@
     }
     .timeline-connector {
       width: 1px;
-      border-left: 1px dashed rgba(255,255,255,0.2);
+      border-left: 1px dashed rgba(15,27,45,0.2);
       height: 36px;
       flex-shrink: 0;
     }
     .timeline-content {
       text-align: center;
-      width: 130px;
+      width: 150px;
     }
 
+    /* Above: content + connector above dot */
     .timeline-node.above {
       flex-direction: column-reverse;
       transform: translateX(-50%) translateY(-100%);
@@ -638,23 +661,23 @@
     .timeline-node.above .timeline-dot { margin-top: 0; margin-bottom: -5px; }
     .timeline-node.above .timeline-content { margin-bottom: 8px; }
 
+    /* Below: dot first, connector, then content */
     .timeline-node.below {
       flex-direction: column;
       transform: translateX(-50%);
     }
     .timeline-node.below .timeline-content { margin-top: 8px; }
-
     .timeline-date {
       font-size: 10px;
       font-weight: 400;
-      color: rgba(255,255,255,0.4);
+      color: rgba(15,27,45,0.4);
       margin-bottom: 4px;
       letter-spacing: 0.02em;
     }
     .timeline-role {
       font-size: 12px;
       font-weight: 500;
-      color: rgba(255,255,255,0.9);
+      color: rgba(15,27,45,0.85);
       line-height: 1.35;
       margin-bottom: 3px;
     }
@@ -679,6 +702,13 @@
       margin-bottom: 20px;
     }
     .contact-headline em { font-style: italic; color: var(--accent); }
+    .contact-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
     .contact-links { display: flex; gap: 24px; flex-wrap: wrap; }
     .contact-link {
       font-size: 14px;
@@ -693,6 +723,8 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+
 
     /* ── Animations ── */
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -726,6 +758,7 @@
       .card-link:nth-child(3) .card-inner,
       .card-link:nth-child(4) .card-inner,
       .card-link:nth-child(5) .card-inner { padding-bottom: 129%; }
+      /* More projects: 2 cols on tablet */
       .archive-grid { grid-template-columns: 1fr 1fr; }
       .archive-card-link:nth-child(n) { grid-column: span 1; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -890,7 +923,7 @@
       <a href="mbta.html" class="card-link reveal reveal-delay-3">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
+          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="MBTA app redesign">
         </div>
         <div class="card-overlay"></div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
@@ -898,8 +931,8 @@
         <div class="card-info">
           <div class="card-info-inner">
             <p class="card-tag">UI/UX · App design · 2024</p>
-            <h2 class="card-title">Charlie's Card</h2>
-            <p class="card-desc">A mobile app designed for Boston's MBTA, combining real-time trip planning, virtual CharlieCard reloading, and a safety reporting system in one accessible experience.</p>
+            <h2 class="card-title">MBTA app</h2>
+            <p class="card-desc">A redesigned mobile experience for Boston's MBTA, combining real-time trip planning, virtual CharlieCard reloading, and a safety reporting system in one accessible app.</p>
             <div class="card-dots">
               <button class="card-dot active" aria-label="Image 1"></button>
             </div>
@@ -915,8 +948,10 @@
   <section id="more-projects">
     <p class="section-label reveal">More projects</p>
 
+    <!-- Row 1: Translations (landscape wide) + 3 portrait cards -->
     <div class="archive-grid-row1">
 
+      <!-- 1. Translations — landscape -->
       <a href="translations.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner">
@@ -930,6 +965,7 @@
       </article>
       </a>
 
+      <!-- 2. Little Mermaid — portrait -->
       <a href="mermaid.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner portrait">
@@ -943,6 +979,7 @@
       </article>
       </a>
 
+      <!-- 3. Anona — portrait -->
       <a href="anona.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner portrait">
@@ -956,6 +993,7 @@
       </article>
       </a>
 
+      <!-- 4. Toad — portrait -->
       <a href="toad.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner portrait">
@@ -971,8 +1009,10 @@
 
     </div>
 
+    <!-- Row 2: 3 landscape cards -->
     <div class="archive-grid-row2">
 
+      <!-- 5. Nextflix -->
       <a href="nextflix.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner">
@@ -986,6 +1026,7 @@
       </article>
       </a>
 
+      <!-- 6. Curl In / Curl Out -->
       <a href="curl.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal" style="background: none;">
         <div class="archive-card-inner">
@@ -999,6 +1040,7 @@
       </article>
       </a>
 
+      <!-- 7. Intergalactic Retirement Home -->
       <a href="irh.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner">
@@ -1021,10 +1063,16 @@
     <div class="about-grid">
       <div class="reveal">
         <h2 class="about-headline">
-          I'm a <em class="blue">graphic</em> and <em class="blue">UI/UX designer</em> based in <em>NJ/NY</em>, with a BS in <em>Computer Science</em> and <em>Design</em> from <em>Northeastern University</em>.
+          I'm a <em class="blue">graphic</em> and <em class="blue">UI/UX designer</em> based in <em>NJ/NY</em>.
         </h2>
         <p class="about-body">
-          I've designed brand systems, event identities, merchandise, packaging, social content, and digital products, often multiple at once.
+          I recently graduated from Northeastern University with a B.S. in Computer Science and Design, with a concentration in Interaction Design. I fell in love with designing cool things while keeping users in mind. Throughout my past experiences, I've designed brand systems, event identities, merchandise, packaging, social content, and digital products, often multitasking but never cutting corners on quality.
+        </p>
+        <p class="about-body" style="margin-top: 16px;">
+          Outside of work, I'm passionate about my Filipino culture. I served on the e-board of Barkada, Northeastern's Filipino student organization, for two years and as a mentor for four years. I started as their Media Specialist in 2023, connecting my love for design and my culture through graphics and merchandise. That intersection continued this past semester when I developed my senior capstone project, ISA, an e-commerce site spotlighting Filipino-American fashion brands. Through it, I realized how design can be used to connect and support people and their communities.
+        </p>
+        <p class="about-body" style="margin-top: 16px;">
+          Also, I love travelling, collecting trinkets and blind boxes, and fashion!
         </p>
         <a href="#" class="about-resume" style="display:none;">Download resume ↓</a>
       </div>
@@ -1058,7 +1106,7 @@
       </div>
     </div>
 
-    <!-- Horizontal Timeline — 5 nodes -->
+    <!-- Horizontal Timeline -->
     <div class="timeline reveal">
       <p class="timeline-label">Relevant Experience</p>
       <div class="timeline-track-wrap">
@@ -1107,17 +1155,6 @@
           </div>
         </div>
 
-        <!-- 5. ISA Capstone — above -->
-        <div class="timeline-node above">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Jan–Apr 2026</p>
-            <p class="timeline-role">Senior Capstone</p>
-            <p class="timeline-org">ISA Brand System</p>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -1148,10 +1185,8 @@
       </div>
     </div>
   </div>
-  <!-- Coded by -->
-  <div style="border-top: 1px solid var(--border); padding: 16px 56px; background: var(--white); text-align: center;">
-    <p style="font-size: 10px; font-weight: 400; letter-spacing: 0.04em; color: rgba(15,27,45,0.3);">Designed and coded in HTML, CSS, and JavaScript.</p>
-  </div>
+
+
 
   <script>
     const nav = document.getElementById('nav');
@@ -1163,6 +1198,7 @@
       mobileMenu.classList.toggle('open');
     });
 
+    // Close menu when a link is clicked
     document.querySelectorAll('.mobile-link').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
@@ -1214,6 +1250,7 @@
         dot.addEventListener('click', (e) => { stopNav(e); goTo(i); });
       });
 
+      // Only navigate to the project page when clicking the card body itself (not arrows/dots)
       link.addEventListener('click', (e) => {
         if (e.target.closest('.card-arrow') || e.target.closest('.card-dot')) {
           e.preventDefault();
