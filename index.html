@@ -428,7 +428,6 @@
       padding: 100px 48px;
     }
 
-    /* Row 1: Translations (wide) + 3 portrait cards — all same height */
     .archive-grid-row1 {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -439,7 +438,6 @@
       padding-bottom: 87%;
     }
 
-    /* Row 2: 3 landscape cards equal width */
     .archive-grid-row2 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -455,7 +453,6 @@
       background: var(--surface);
     }
 
-    /* Landscape cards: 16/9 ratio */
     .archive-card-inner {
       position: relative;
       width: 100%;
@@ -463,7 +460,6 @@
       padding-bottom: 65%;
     }
 
-    /* Portrait cards: taller ratio */
     .archive-card-inner.portrait {
       padding-bottom: 130%;
     }
@@ -481,7 +477,7 @@
     .archive-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(14,10,8,0.7) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(14,10,8,0.92) 0%, rgba(14,10,8,0.4) 50%, transparent 100%);
       opacity: 0;
       transition: opacity 0.35s var(--ease);
       pointer-events: none;
@@ -534,13 +530,8 @@
       margin-bottom: 24px;
       color: var(--text);
     }
-    .about-headline em {
-      font-style: normal;
-      color: var(--text);
-    }
-    .about-headline em.blue {
-      color: var(--accent-lt);
-    }
+    .about-headline em { font-style: normal; color: var(--text); }
+    .about-headline em.blue { color: var(--accent-lt); }
     .about-body {
       font-size: 16px;
       font-weight: 300;
@@ -582,12 +573,8 @@
       padding: 5px 12px;
       border-radius: 100px;
     }
-    #about .section-label {
-      color: var(--accent);
-    }
-    #about .section-label::after {
-      background: var(--accent);
-    }
+    #about .section-label { color: var(--accent); }
+    #about .section-label::after { background: var(--accent); }
 
     /* ── Timeline ── */
     .timeline {
@@ -609,7 +596,6 @@
       height: 280px;
       margin: 0 24px;
     }
-    /* Horizontal line */
     .timeline-track-wrap::before {
       content: '';
       position: absolute;
@@ -652,16 +638,12 @@
       text-align: center;
       width: 150px;
     }
-
-    /* Above: content + connector above dot */
     .timeline-node.above {
       flex-direction: column-reverse;
       transform: translateX(-50%) translateY(-100%);
     }
     .timeline-node.above .timeline-dot { margin-top: 0; margin-bottom: -5px; }
     .timeline-node.above .timeline-content { margin-bottom: 8px; }
-
-    /* Below: dot first, connector, then content */
     .timeline-node.below {
       flex-direction: column;
       transform: translateX(-50%);
@@ -702,13 +684,6 @@
       margin-bottom: 20px;
     }
     .contact-headline em { font-style: italic; color: var(--accent); }
-    .contact-sub {
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--muted);
-      margin-bottom: 44px;
-      line-height: 1.7;
-    }
     .contact-links { display: flex; gap: 24px; flex-wrap: wrap; }
     .contact-link {
       font-size: 14px;
@@ -723,8 +698,6 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .contact-link:hover { color: var(--accent); border-color: var(--accent); }
-
-
 
     /* ── Animations ── */
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -758,7 +731,6 @@
       .card-link:nth-child(3) .card-inner,
       .card-link:nth-child(4) .card-inner,
       .card-link:nth-child(5) .card-inner { padding-bottom: 129%; }
-      /* More projects: 2 cols on tablet */
       .archive-grid { grid-template-columns: 1fr 1fr; }
       .archive-card-link:nth-child(n) { grid-column: span 1; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -805,10 +777,10 @@
 
   <section class="hero" id="home">
     <div class="hero-content">
-      <p class="hero-eyebrow">graphic design · brand · digital</p>
+      <p class="hero-eyebrow">brand · digital · interaction design</p>
       <h1 class="hero-headline"><em>paulina acosta</em> <span style="color: var(--accent); font-style: normal;">♡</span></h1>
       <p class="hero-sub">
-        a graphic designer based in nj/ny who loves making things that bring joy. from brand systems and print to ui/ux, i make work that connects with the people it's meant for.
+        a multidisciplinary designer based in nj/ny working across brand, print, and interaction design. i make work that connects with the people it's meant for.
       </p>
     </div>
     <div class="hero-photo-wrap">
@@ -919,11 +891,11 @@
       </article>
       </a>
 
-      <!-- 5. MBTA -->
+      <!-- 5. Charlie's Card -->
       <a href="mbta.html" class="card-link reveal reveal-delay-3">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="MBTA app redesign">
+          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
         </div>
         <div class="card-overlay"></div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
@@ -931,8 +903,8 @@
         <div class="card-info">
           <div class="card-info-inner">
             <p class="card-tag">UI/UX · App design · 2024</p>
-            <h2 class="card-title">MBTA app</h2>
-            <p class="card-desc">A redesigned mobile experience for Boston's MBTA, combining real-time trip planning, virtual CharlieCard reloading, and a safety reporting system in one accessible app.</p>
+            <h2 class="card-title">Charlie's Card</h2>
+            <p class="card-desc">A mobile app designed for Boston's MBTA, combining real-time trip planning, virtual CharlieCard reloading, and a safety reporting system into one accessible experience.</p>
             <div class="card-dots">
               <button class="card-dot active" aria-label="Image 1"></button>
             </div>
@@ -948,10 +920,8 @@
   <section id="more-projects">
     <p class="section-label reveal">More projects</p>
 
-    <!-- Row 1: Translations (landscape wide) + 3 portrait cards -->
     <div class="archive-grid-row1">
 
-      <!-- 1. Translations — landscape -->
       <a href="translations.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner">
@@ -965,7 +935,6 @@
       </article>
       </a>
 
-      <!-- 2. Little Mermaid — portrait -->
       <a href="mermaid.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner portrait">
@@ -979,7 +948,6 @@
       </article>
       </a>
 
-      <!-- 3. Anona — portrait -->
       <a href="anona.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner portrait">
@@ -993,7 +961,6 @@
       </article>
       </a>
 
-      <!-- 4. Toad — portrait -->
       <a href="toad.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner portrait">
@@ -1009,10 +976,8 @@
 
     </div>
 
-    <!-- Row 2: 3 landscape cards -->
     <div class="archive-grid-row2">
 
-      <!-- 5. Nextflix -->
       <a href="nextflix.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner">
@@ -1026,7 +991,6 @@
       </article>
       </a>
 
-      <!-- 6. Curl In / Curl Out -->
       <a href="curl.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal" style="background: none;">
         <div class="archive-card-inner">
@@ -1040,7 +1004,6 @@
       </article>
       </a>
 
-      <!-- 7. Intergalactic Retirement Home -->
       <a href="irh.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
       <article class="archive-card reveal">
         <div class="archive-card-inner">
@@ -1063,7 +1026,7 @@
     <div class="about-grid">
       <div class="reveal">
         <h2 class="about-headline">
-          I'm a <em class="blue">graphic</em> and <em class="blue">UI/UX designer</em> based in <em>NJ/NY</em>.
+          I'm a <em class="blue">multidisciplinary designer</em> based in <em>NJ/NY</em>.
         </h2>
         <p class="about-body">
           I recently graduated from Northeastern University with a B.S. in Computer Science and Design, with a concentration in Interaction Design. I fell in love with designing cool things while keeping users in mind. Throughout my past experiences, I've designed brand systems, event identities, merchandise, packaging, social content, and digital products, often multitasking but never cutting corners on quality.
@@ -1185,8 +1148,10 @@
       </div>
     </div>
   </div>
-
-
+  <!-- Coded by -->
+  <div style="border-top: 1px solid var(--border); padding: 16px 56px; background: var(--white); text-align: center;">
+    <p style="font-size: 10px; font-weight: 400; letter-spacing: 0.04em; color: rgba(15,27,45,0.3);">Designed and coded in HTML, CSS, and JavaScript.</p>
+  </div>
 
   <script>
     const nav = document.getElementById('nav');
@@ -1198,7 +1163,6 @@
       mobileMenu.classList.toggle('open');
     });
 
-    // Close menu when a link is clicked
     document.querySelectorAll('.mobile-link').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
@@ -1250,7 +1214,6 @@
         dot.addEventListener('click', (e) => { stopNav(e); goTo(i); });
       });
 
-      // Only navigate to the project page when clicking the card body itself (not arrows/dots)
       link.addEventListener('click', (e) => {
         if (e.target.closest('.card-arrow') || e.target.closest('.card-dot')) {
           e.preventDefault();
