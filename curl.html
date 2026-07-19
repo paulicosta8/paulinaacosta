@@ -68,20 +68,11 @@
       overflow: hidden;
     }
     .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,26,26,0.75) 0%, rgba(26,26,26,0.1) 60%, transparent 100%);
-    }
-    .hero-text { position: absolute; bottom: 56px; left: 56px; right: 56px; }
-    .hero-text-inner {
-      display: inline-block;
-      background: rgba(15, 15, 15, 0.5);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px; padding: 24px 28px; max-width: 580px;
-    }
-    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
-    .hero-title { font-family: Georgia, serif; font-weight: normal; font-style: italic; font-size: clamp(48px, 7vw, 96px); line-height: 1.0; letter-spacing: -0.02em; color: #fff; margin-bottom: 16px; }
-    .hero-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.75); max-width: 460px; line-height: 1.65; }
+    .hero-text { padding: 48px 48px 44px; border-bottom: 1px solid var(--border); }
+    .hero-text-inner { max-width: 760px; }
+    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+    .hero-title { font-family: Georgia, serif; font-weight: normal; font-style: italic; font-size: clamp(44px, 6vw, 84px); line-height: 1.0; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 16px; }
+    .hero-sub { font-size: 17px; font-weight: 300; color: rgba(26,26,26,0.75); max-width: 460px; line-height: 1.65; }
 
     section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
     .section-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 500; margin-bottom: 1rem; }
@@ -148,7 +139,7 @@
 
     @media (max-width: 900px) {
       nav { padding: 0 1.5rem; }
-      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .hero-text { padding: 40px 24px 36px; }
       section { padding: 4rem 1.5rem; }
       .science-band-inner, .box-grid, .reflection-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .science-band, .colorways-section, .dieline-section { padding: 4rem 1.5rem; }
@@ -171,7 +162,6 @@
   <section class="hero">
     <div class="hero-img-wrap">
       <img class="hero-img" src="images/curl/curl-cover.png" alt="Curl In / Curl Out cover">
-      <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
       <div class="hero-text-inner">

@@ -93,37 +93,28 @@
       z-index: 1;
     }
     .hero-text {
-      position: absolute;
-      bottom: 56px;
-      left: 56px;
-      right: 56px;
-      z-index: 2;
+      padding: 48px 56px 44px;
+      border-bottom: 1px solid var(--border);
     }
     .hero-text-inner {
-      display: inline-block;
-      background: rgba(10, 8, 30, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px;
-      padding: 24px 28px;
       max-width: 560px;
     }
     .hero-tag {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.45); margin-bottom: 14px;
+      color: var(--purple); margin-bottom: 14px;
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(56px, 9vw, 120px);
+      font-size: clamp(44px, 6vw, 84px);
       font-weight: 300; font-style: italic;
-      color: var(--white);
+      color: var(--charcoal);
       line-height: 0.95; letter-spacing: -0.03em;
       margin-bottom: 20px;
     }
     .hero-sub {
       font-size: 17px; font-weight: 300;
-      color: rgba(255,255,255,0.7);
+      color: var(--muted);
       max-width: 440px; line-height: 1.6;
     }
 
@@ -217,6 +208,7 @@
       nav { padding: 0 24px; }
       .hero { padding: 100px 24px 48px; }
       .cs-section { padding: 60px 24px; }
+      .hero-text { padding: 40px 24px 36px; }
       .overview { grid-template-columns: 1fr 1fr; }
       .overview-item:nth-child(2) { border-right: none; }
       .next-project { padding: 60px 24px; }
@@ -237,14 +229,16 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <img class="hero-phone" src="images/nextflix/nextflix-no-bg.png" alt="Nextflix app — login screen on iPhone mockup">
-    <div class="hero-text">
-      <div class="hero-text-inner">
-        <p class="hero-tag">UI/UX · Product Design · 2024</p>
-        <h1 class="hero-title">Nextflix</h1>
-        <p class="hero-sub">A social app that helps friend groups decide what to watch together, cutting down misalignment, complaints, and the endless scroll of indecision.</p>
-      </div>
-    </div>
   </section>
+
+  <!-- Hero text -->
+  <div class="hero-text">
+    <div class="hero-text-inner">
+      <p class="hero-tag">UI/UX · Product Design · 2024</p>
+      <h1 class="hero-title">Nextflix</h1>
+      <p class="hero-sub">A social app that helps friend groups decide what to watch together, cutting down misalignment, complaints, and the endless scroll of indecision.</p>
+    </div>
+  </div>
 
   <!-- Overview -->
   <div class="overview">

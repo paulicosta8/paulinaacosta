@@ -85,40 +85,30 @@
       object-fit: cover;
       object-position: center top;
     }
-    .hero-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(66,66,66,0.6) 0%, transparent 60%);
-    }
     .hero-text {
-      position: absolute;
-      bottom: 56px; left: 56px; right: 56px;
+      padding: 48px 56px 44px;
+      border-bottom: 1px solid var(--border);
     }
     .hero-text-inner {
-      display: inline-block;
-      background: rgba(10, 10, 10, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px;
-      padding: 24px 28px;
-      max-width: 600px;
+      max-width: 760px;
     }
     .hero-tag {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(252,245,222,0.7); margin-bottom: 14px;
+      color: var(--crimson); margin-bottom: 16px;
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(48px, 7vw, 96px);
+      font-size: clamp(44px, 6vw, 84px);
       font-weight: 300; font-style: italic;
-      color: var(--cream);
-      line-height: 1.0; letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      color: var(--charcoal);
+      line-height: 1.02; letter-spacing: -0.02em;
+      margin-bottom: 18px;
     }
     .hero-sub {
       font-size: 17px; font-weight: 300;
-      color: rgba(252,245,222,0.8);
-      max-width: 560px; line-height: 1.6;
+      color: var(--muted);
+      max-width: 640px; line-height: 1.7;
     }
 
     /* ── Overview strip ── */
@@ -269,7 +259,7 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
-      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .hero-text { padding: 40px 24px 36px; }
       .overview { grid-template-columns: 1fr 1fr; }
       .overview-item:nth-child(2) { border-right: none; }
       .cs-section { padding: 60px 24px; }
@@ -299,7 +289,6 @@
   <section class="hero">
     <div class="hero-img-wrap">
       <img class="hero-img" src="images/isa/isa-cover.png" alt="ISA brand identity">
-      <div class="hero-img-overlay"></div>
     </div>
     <div class="hero-text">
       <div class="hero-text-inner">

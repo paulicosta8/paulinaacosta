@@ -84,10 +84,6 @@
       object-fit: cover;
       object-position: center center;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,26,46,0.9) 0%, rgba(26,26,46,0.3) 60%, transparent 100%);
-    }
     /* Stars */
     .hero-img-wrap::before {
       content: '';
@@ -103,35 +99,28 @@
       z-index: 1;
     }
     .hero-text {
-      position: absolute;
-      bottom: 56px; left: 56px; right: 56px;
-      z-index: 2;
+      padding: 48px 80px 44px;
+      border-bottom: 1px solid rgba(91,61,138,0.15);
     }
     .hero-text-inner {
-      display: inline-block;
-      background: rgba(15, 15, 35, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px;
-      padding: 24px 28px;
-      max-width: 620px;
+      max-width: 760px;
     }
     .hero-tag {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--purple-lt); margin-bottom: 14px;
+      color: var(--purple); margin-bottom: 14px;
     }
     .hero-title {
       font-family: var(--serif);
       font-size: clamp(36px, 5vw, 68px);
       font-weight: normal; font-style: italic;
-      color: white;
+      color: var(--space);
       line-height: 1.05; letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
     .hero-sub {
       font-size: 16px; font-weight: 300;
-      color: rgba(255,255,255,0.75);
+      color: var(--ink-mid);
       max-width: 500px; line-height: 1.65;
     }
 
@@ -382,7 +371,7 @@
 
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
-      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .hero-text { padding: 40px 24px 36px; }
       .overview { padding: 64px 24px; grid-template-columns: 1fr; gap: 40px; }
       .cards-section, .characters, .encyclopedia, .presentation { padding: 64px 24px; }
       .card-types { grid-template-columns: 1fr; }
@@ -408,7 +397,6 @@
   <section class="hero">
     <div class="hero-img-wrap">
       <img class="hero-img" src="images/irh/title-slide.png" alt="Intergalactic Retirement Home title slide">
-      <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
       <div class="hero-text-inner">

@@ -78,40 +78,30 @@
       object-fit: cover;
       object-position: center center;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(27,42,74,0.85) 0%, rgba(27,42,74,0.2) 60%, transparent 100%);
-    }
     .hero-text {
-      position: absolute;
-      bottom: 56px; left: 56px; right: 56px;
+      padding: 48px 80px 44px;
+      border-bottom: 1px solid var(--sage-muted);
     }
     .hero-text-inner {
-      display: inline-block;
-      background: rgba(10, 15, 30, 0.5);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px;
-      padding: 24px 28px;
       max-width: 640px;
     }
     .hero-tag {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--sage-muted);
+      color: var(--sage);
       margin-bottom: 14px;
     }
     .hero-title {
       font-family: Georgia, serif;
       font-size: clamp(36px, 5vw, 72px);
       font-weight: normal; font-style: italic;
-      color: #fff;
+      color: var(--navy);
       line-height: 1.05; letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
     .hero-sub {
       font-size: 16px; font-weight: 300;
-      color: rgba(255,255,255,0.75);
+      color: var(--ink-mid);
       max-width: 520px; line-height: 1.65;
     }
 
@@ -334,7 +324,7 @@
 
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
-      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .hero-text { padding: 40px 24px 36px; }
       .overview { grid-template-columns: 1fr 1fr; }
       .overview-item:nth-child(2) { border-right: none; }
       .problem { padding: 64px 24px; }
@@ -359,7 +349,6 @@
   <section class="hero">
     <div class="hero-img-wrap">
       <img class="hero-img" src="images/noaa/guide-front.png" alt="NOAA how-to guide — front panel">
-      <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
       <div class="hero-text-inner">

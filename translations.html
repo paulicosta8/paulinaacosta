@@ -78,39 +78,29 @@
       object-fit: cover;
       object-position: center center;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(58,52,40,0.82) 0%, rgba(58,52,40,0.1) 60%, transparent 100%);
-    }
     .hero-text {
-      position: absolute;
-      bottom: 56px; left: 56px; right: 56px;
+      padding: 48px 56px 44px;
+      border-bottom: 1px solid var(--border);
     }
     .hero-text-inner {
-      display: inline-block;
-      background: rgba(30, 28, 24, 0.5);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px;
-      padding: 24px 28px;
-      max-width: 600px;
+      max-width: 760px;
     }
     .hero-tag {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.5); margin-bottom: 14px;
+      color: var(--taupe); margin-bottom: 14px;
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(48px, 7vw, 96px);
+      font-size: clamp(44px, 6vw, 84px);
       font-weight: 300; font-style: italic;
-      color: var(--white);
+      color: var(--charcoal);
       line-height: 1.0; letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
     .hero-sub {
       font-size: 17px; font-weight: 300;
-      color: rgba(255,255,255,0.75);
+      color: var(--muted);
       max-width: 520px; line-height: 1.65;
     }
 
@@ -230,7 +220,7 @@
 
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
-      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .hero-text { padding: 40px 24px 36px; }
       .cs-section, .dark-section { padding: 60px 24px; }
       .overview { grid-template-columns: 1fr 1fr; }
       .overview-item:nth-child(2) { border-right: none; }
@@ -257,7 +247,6 @@
   <section class="hero">
     <div class="hero-img-wrap">
       <img class="hero-img" src="images/translations/mock_11.jpg" alt="Translations booklet physical mockup">
-      <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
       <div class="hero-text-inner">
@@ -290,8 +279,8 @@
   <section class="cs-section">
     <p class="cs-eyebrow reveal">The project</p>
     <h2 class="cs-headline reveal">Two designers, two traditions, one shared method.</h2>
-    <p class="cs-body reveal">Translations is a printed typography booklet exploring the parallel design processes of Carol Twombly (Trajan) and Ryoko Nishizuka (Higumin). Two prominent women in typography who, despite working decades apart and in completely different traditions, share the same method: tracing historical calligraphy by hand and digitizing it into a typeface.</p>
-    <p class="cs-body reveal">Twombly drew from Roman inscriptions carved into Trajan's Column in 113 AD. Nishizuka drew from newspaper prints of the Edo period in Japan.</p>
+    <p class="cs-body reveal">The assignment was to choose two typefaces and compare and contrast them in a booklet. I chose Carol Twombly's Trajan and Ryoko Nishizuka's Higumin — two prominent women in type who, working decades apart and in completely different traditions, arrived at the same method: tracing historical calligraphy by hand and digitizing it into a typeface.</p>
+    <p class="cs-body reveal">Twombly drew from Roman inscriptions carved into Trajan's Column in 113 AD; Nishizuka drew from newspaper prints of the Edo period in Japan. As the solo designer, I owned the whole project — concept, research, layout, typesetting, and the animated version — and used it to make one argument: that both designers were really doing the same thing, translating the past so it could be used in the present.</p>
 
     <div class="video-wrap reveal">
       <video autoplay muted loop playsinline aria-label="Translations booklet animated version">
@@ -303,7 +292,7 @@
   <section class="cs-section" style="background: var(--cream);">
     <p class="cs-eyebrow reveal">The booklet</p>
     <h2 class="cs-headline reveal">A cover that does what the book is about.</h2>
-    <p class="cs-body reveal">The cover uses curving text set along custom paths, pulling the book's thesis in different directions at once just as translation does to language. The table of contents introduces the five chapters through vertical image strips, each one a visual teaser for what follows.</p>
+    <p class="cs-body reveal">I set the cover in curving, custom-path text because I wanted the form itself to carry the argument. Trajan and Higumin come from different cultures, time periods, and languages, so the lines curve away from each other — parallel processes — but they bend back and meet, because both typefaces ultimately do the same thing: translate the past into type that reads in English today. The table of contents then introduces the five chapters through vertical image strips, each a visual teaser for what follows.</p>
 
     <div class="two-col reveal" style="margin-top: 40px;">
       <div class="img-wrap">
@@ -318,7 +307,7 @@
   <section class="cs-section">
     <p class="cs-eyebrow reveal">Inside the booklet</p>
     <h2 class="cs-headline reveal">Each chapter uses the typeface it talks about.</h2>
-    <p class="cs-body reveal">Each chapter uses the typeface it discusses as its primary design material. The Trajan chapter is set in Trajan and Krete. The Higumin chapter uses Higumin alongside Latin characters. Every spread treats letterforms as image, not just text.</p>
+    <p class="cs-body reveal">I set each chapter in the typeface it discusses so the reader could see the typeface in use, not just read about it. The Trajan chapter is set in Trajan and Krete; the Higumin chapter pairs Higumin with Latin characters. Even though each typeface's history is rooted in a different culture, it stays readable and usable in English while still carrying the small nuances of the tradition it came from. I paired every chapter with examples of the source material each designer drew from, so the lineage from carving or print to letterform stays visible on the page.</p>
 
     <div class="two-col reveal" style="margin-top: 40px;">
       <div class="img-wrap">
@@ -348,6 +337,12 @@
     <div class="pdf-embed-wrap reveal">
       <iframe src="images/translations/translations_booklet.pdf" title="Translations booklet"></iframe>
     </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">Outcome</p>
+    <h2 class="cs-headline reveal">The form carried the argument.</h2>
+    <p class="cs-body reveal">This was one of my first design projects in school, so I was learning as I went — playing with paths, layouts, and typesetting until the booklet matched the vision I had for it. In critique, my professor and classmates responded most to the curving, moving text: they felt it genuinely captured the art of translating from one culture to another. They also pointed to how the booklet was laid out and how clearly it represented each typeface.</p>
   </section>
 
   <a href="mermaid.html" class="next-project">

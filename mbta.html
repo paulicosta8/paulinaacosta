@@ -87,41 +87,29 @@
       position: relative;
       z-index: 1;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(24,59,117,0.85) 0%, transparent 50%);
-      z-index: 2;
-    }
     .hero-text {
-      position: absolute;
-      bottom: 56px; left: 56px; right: 56px;
-      z-index: 3;
+      padding: 48px 56px 44px;
+      border-bottom: 1px solid var(--border);
     }
     .hero-text-inner {
-      display: inline-block;
-      background: rgba(24, 59, 117, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 8px;
-      padding: 24px 28px;
-      max-width: 600px;
+      max-width: 760px;
     }
     .hero-tag {
       font-size: 11px; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.5); margin-bottom: 14px;
+      color: var(--blue); margin-bottom: 14px;
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(48px, 7vw, 96px);
+      font-size: clamp(44px, 6vw, 84px);
       font-weight: 300; font-style: italic;
-      color: var(--white);
+      color: var(--charcoal);
       line-height: 1.0; letter-spacing: -0.02em;
       margin-bottom: 16px;
     }
     .hero-sub {
       font-size: 17px; font-weight: 300;
-      color: rgba(255,255,255,0.75);
+      color: var(--muted);
       max-width: 520px; line-height: 1.65;
     }
 
@@ -268,7 +256,7 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
-      .hero-text { left: 24px; right: 24px; bottom: 32px; }
+      .hero-text { padding: 40px 24px 36px; }
       .cs-section, .blue-section { padding: 60px 24px; }
       .overview { grid-template-columns: 1fr 1fr; }
       .overview-item:nth-child(2) { border-right: none; }
@@ -296,7 +284,6 @@
   <section class="hero">
     <div class="hero-img-wrap">
       <img class="hero-img" src="images/mbta/charlie-card.png" alt="CharlieCard — Massachusetts Bay Transportation Authority">
-      <div class="hero-overlay"></div>
     </div>
     <div class="hero-text">
       <div class="hero-text-inner">
