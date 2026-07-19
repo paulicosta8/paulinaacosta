@@ -15,7 +15,7 @@
   <title>Paulina Acosta — Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:        #F6F6F4;
@@ -28,7 +28,7 @@
       --accent-wash: #D4E6F4;
       --dark-navy: #0F1B2D;
       --white:     #FFFFFF;
-      --serif:     Georgia, 'Times New Roman', serif;
+      --serif:     'Fraunces', Georgia, 'Times New Roman', serif;
       --sans:      'Inter', system-ui, sans-serif;
       --ease:      cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -67,11 +67,11 @@
       font-size: 18px;
       font-weight: 300;
       letter-spacing: 0.01em;
-      color: var(--text);
+      color: var(--accent);
     }
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 28px;
       list-style: none;
     }
     .nav-links a {
@@ -142,42 +142,14 @@
     /* ── Hero ── */
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr auto;
+      display: flex;
       align-items: center;
-      padding: 120px 0 0 48px;
+      padding: 120px 48px 80px;
       position: relative;
       overflow: hidden;
-      gap: 0;
     }
     .hero-content {
-      padding-right: 48px;
-      padding-bottom: 80px;
-    }
-    .hero-photo-wrap {
-      position: relative;
-      align-self: flex-end;
-      width: clamp(280px, 32vw, 480px);
-      flex-shrink: 0;
-    }
-    .hero-photo-blob {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      aspect-ratio: 1;
-      background: var(--accent);
-      opacity: 0.12;
-      border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-      z-index: 0;
-    }
-    .hero-photo {
-      position: relative;
-      z-index: 1;
-      display: block;
-      width: 100%;
-      height: auto;
+      max-width: 640px;
     }
     .hero-eyebrow {
       font-size: 12px;
@@ -236,23 +208,68 @@
       opacity: 0.4;
     }
 
+    /* ── Filter bar ── */
+    .filter-bar { margin-bottom: 48px; }
+    .filter-label {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(22px, 2.4vw, 30px);
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .filter-pill {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+      background: var(--bg);
+      border: 1.5px solid var(--accent);
+      border-radius: 999px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.15s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .filter-pill:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26,111,191,0.15); }
+    .filter-pill.active {
+      background: var(--accent);
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(26,111,191,0.25);
+    }
+    .filter-pill[data-filter="branding"]   { color: #C2542B; border-color: #C2542B; }
+    .filter-pill[data-filter="ui-ux"]      { color: #1E8A8A; border-color: #1E8A8A; }
+    .filter-pill[data-filter="print"]      { color: #B8860B; border-color: #B8860B; }
+    .filter-pill[data-filter="marketing"]  { color: #A6326B; border-color: #A6326B; }
+    .filter-pill[data-filter="sidequests"] { color: #6B4FA0; border-color: #6B4FA0; }
+    .filter-pill[data-filter="branding"].active   { background: #C2542B; box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
+    .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
+    .filter-pill[data-filter="print"].active      { background: #B8860B; box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
+    .filter-pill[data-filter="marketing"].active  { background: #A6326B; box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
+    .filter-pill[data-filter="sidequests"].active { background: #6B4FA0; box-shadow: 0 4px 14px rgba(107,79,160,0.3); }
+
     /* ── Work grid ── */
     #work {
       padding-top: 80px;
-      background: var(--accent-wash);
     }
     #work .section-label { color: var(--accent); }
     .work-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      display: flex;
       gap: 20px;
-      align-items: start;
+      align-items: flex-start;
     }
-    .card-link:nth-child(1) { grid-column: span 7; }
-    .card-link:nth-child(2) { grid-column: span 5; }
-    .card-link:nth-child(3) { grid-column: span 4; }
-    .card-link:nth-child(4) { grid-column: span 4; }
-    .card-link:nth-child(5) { grid-column: span 4; }
+    .work-col {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      flex: 1 1 0;
+      min-width: 0;
+    }
 
     .card {
       position: relative;
@@ -266,11 +283,12 @@
       width: 100%;
       overflow: hidden;
     }
-    .card-link:nth-child(1) .card-inner { padding-bottom: 68%; }
-    .card-link:nth-child(2) .card-inner { padding-bottom: 95.2%; }
-    .card-link:nth-child(3) .card-inner { padding-bottom: 129%; }
-    .card-link:nth-child(4) .card-inner { padding-bottom: 129%; }
-    .card-link:nth-child(5) .card-inner { padding-bottom: 129%; }
+    .card-isa .card-inner       { padding-bottom: 92%; }   /* ISA — emphasized */
+    .card-barkada .card-inner   { padding-bottom: 138%; }  /* Barkada — emphasized */
+    .card-nextflix .card-inner  { padding-bottom: 62%; }   /* Nextflix — landscape */
+    .card-bn .card-inner        { padding-bottom: 129%; }  /* B&N — portrait */
+    .card-noaa .card-inner      { padding-bottom: 129%; }  /* NOAA — portrait */
+    .card-mbta .card-inner      { padding-bottom: 129%; }  /* Charlie's — portrait */
 
     .card-img {
       position: absolute;
@@ -379,29 +397,18 @@
       color: var(--accent);
     }
 
-    /* ── More Projects ── */
-    #more-projects {
-      border-top: 1px solid var(--border);
-      padding: 100px 48px;
+    .archive-grid {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
     }
-
-    .archive-grid-row1 {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 16px;
-      align-items: start;
+    .archive-col {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      flex: 1 1 0;
+      min-width: 0;
     }
-    .archive-grid-row1 > .archive-card-link:first-child .archive-card-inner {
-      padding-bottom: 87%;
-    }
-
-    .archive-grid-row2 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 16px;
-    }
-
     .archive-card {
       position: relative;
       overflow: hidden;
@@ -487,6 +494,30 @@
       gap: 80px;
       align-items: start;
     }
+    .about-photo-row {
+      --photo-step: 144px;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .about-photo-tile {
+      width: 130px;
+      height: 170px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.9s var(--ease);
+    }
+    .about-photo-tile img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-photo-row .about-photo-tile:nth-child(2) { transform: translateX(calc(var(--photo-step) * -1)); transition-delay: 0.08s; }
+    .about-photo-row .about-photo-tile:nth-child(3) { transform: translateX(calc(var(--photo-step) * -2)); transition-delay: 0.16s; }
+    .about-photo-row .about-photo-tile:nth-child(4) { transform: translateX(calc(var(--photo-step) * -3)); transition-delay: 0.24s; }
+    .about-photo-row.visible .about-photo-tile { transform: translateX(0); }
     .about-headline {
       font-family: var(--serif);
       font-size: clamp(18px, 2vw, 24px);
@@ -506,6 +537,7 @@
       line-height: 1.8;
       margin-bottom: 18px;
     }
+    .about-body strong { font-weight: 500; color: var(--text); }
     .skills-block { padding-top: 8px; }
     .skills-group { margin-bottom: 32px; }
     .skills-group-label {
@@ -533,6 +565,7 @@
       margin-top: 72px;
       border-top: 1px solid rgba(15,27,45,0.1);
       padding-top: 48px;
+      overflow-x: auto;
     }
     .timeline-label {
       font-size: 11px;
@@ -547,6 +580,7 @@
       position: relative;
       height: 280px;
       margin: 0 24px;
+      min-width: 820px;
     }
     .timeline-track-wrap::before {
       content: '';
@@ -564,10 +598,12 @@
       flex-direction: column;
       align-items: center;
     }
-    .timeline-node:nth-child(1) { left: 12.5%; }
-    .timeline-node:nth-child(2) { left: 37.5%; }
-    .timeline-node:nth-child(3) { left: 62.5%; }
-    .timeline-node:nth-child(4) { left: 87.5%; }
+    .timeline-node:nth-child(1) { left: 8.33%; }
+    .timeline-node:nth-child(2) { left: 25%; }
+    .timeline-node:nth-child(3) { left: 41.67%; }
+    .timeline-node:nth-child(4) { left: 58.33%; }
+    .timeline-node:nth-child(5) { left: 75%; }
+    .timeline-node:nth-child(6) { left: 91.67%; }
     .timeline-dot {
       width: 10px;
       height: 10px;
@@ -650,6 +686,21 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-radius: 999px;
+      transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+    }
+    .resume-btn:hover { background: var(--accent-lt); transform: translateY(-2px); }
 
     /* ── Animations ── */
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -668,35 +719,25 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
-      .hero { grid-template-columns: 1fr; padding: 120px 24px 0; }
-      .hero-content { padding-right: 0; padding-bottom: 40px; }
-      .hero-photo-wrap { width: 240px; margin: 0 auto; }
-      .hero, .section, #contact, #more-projects { padding-left: 24px; padding-right: 24px; }
-      .work-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-      .card-link:nth-child(1) { grid-column: span 2; }
-      .card-link:nth-child(2) { grid-column: span 2; }
-      .card-link:nth-child(3) { grid-column: span 1; }
-      .card-link:nth-child(4) { grid-column: span 1; }
-      .card-link:nth-child(5) { grid-column: span 2; }
-      .card-link:nth-child(1) .card-inner,
-      .card-link:nth-child(2) .card-inner { padding-bottom: 68%; }
-      .card-link:nth-child(3) .card-inner,
-      .card-link:nth-child(4) .card-inner,
-      .card-link:nth-child(5) .card-inner { padding-bottom: 129%; }
-      .archive-grid { grid-template-columns: 1fr 1fr; }
-      .archive-card-link:nth-child(n) { grid-column: span 1; }
+      .hero { padding: 120px 24px 60px; }
+      .hero, .section, #contact { padding-left: 24px; padding-right: 24px; }
+      .work-grid { flex-wrap: wrap; gap: 18px; }
+      .work-col { flex: 1 1 45%; }
+      .archive-grid { flex-wrap: wrap; }
+      .archive-col { flex: 1 1 45%; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .card .card-arrow { opacity: 0.7; }
     }
     @media (max-width: 600px) {
-      .hero { padding: 100px 20px 0; grid-template-columns: 1fr; }
-      .hero-photo-wrap { width: 180px; }
-      .section, #contact, #more-projects { padding-left: 20px; padding-right: 20px; }
-      .work-grid { grid-template-columns: 1fr; }
-      .card-link:nth-child(n) { grid-column: span 1; }
-      .card-link:nth-child(n) .card-inner { padding-bottom: 100%; }
-      .archive-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .archive-card-link:nth-child(n) { grid-column: span 1; }
+      .hero { padding: 100px 20px 48px; }
+      .section, #contact { padding-left: 20px; padding-right: 20px; }
+      .work-col { flex: 1 1 100%; }
+      .card-link:nth-child(n) .card-inner { padding-bottom: 75%; }
+      .archive-grid { gap: 12px; }
+      .archive-col { flex: 1 1 100%; }
+      .archive-card-inner, .archive-card-inner.portrait { padding-bottom: 75%; }
+      .about-photo-row { --photo-step: 78px; gap: 8px; }
+      .about-photo-tile { width: 70px; height: 92px; }
       .nav-links { display: none; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -709,10 +750,9 @@
 <body>
 
   <nav id="nav">
-    <a href="#" class="nav-name">Paulina Acosta</a>
+    <a href="#" class="nav-name">paulina acosta</a>
     <ul class="nav-links">
-      <li><a href="#work">Selected Work</a></li>
-      <li><a href="#more-projects">More projects</a></li>
+      <li><a href="#work">Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -721,226 +761,243 @@
     </button>
   </nav>
   <div class="nav-mobile-menu" id="mobile-menu">
-    <a href="#work" class="mobile-link">Selected Work</a>
-    <a href="#more-projects" class="mobile-link">More projects</a>
+    <a href="#work" class="mobile-link">Projects</a>
     <a href="#about" class="mobile-link">About</a>
     <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
   <section class="hero" id="home">
     <div class="hero-content">
-      <p class="hero-eyebrow">Brand · Digital · Interaction Design</p>
+      <p class="hero-eyebrow">Brand · UI/UX · Experiential</p>
       <h1 class="hero-headline"><em>paulina acosta</em> <span style="color: var(--accent); font-style: normal;">♡</span></h1>
       <p class="hero-sub">
         A multidisciplinary designer based in NJ/NY working across brand, print, and interaction design. I make work that connects with the people it's meant for.
       </p>
     </div>
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-blob"></div>
-      <img class="hero-photo" src="images/homepage/paulina-loopy.png" alt="Paulina holding a pink plushie">
-    </div>
   </section>
 
   <section class="section" id="work">
-    <p class="section-label reveal">Selected work</p>
+    <p class="section-label reveal">Projects</p>
+
+    <div class="filter-bar reveal">
+      <p class="filter-label">What do you want to see?</p>
+      <div class="filter-pills">
+        <button class="filter-pill active" data-filter="all">Everything</button>
+        <button class="filter-pill" data-filter="branding">Branding</button>
+        <button class="filter-pill" data-filter="ui-ux">UI/UX</button>
+        <button class="filter-pill" data-filter="print">Print</button>
+        <button class="filter-pill" data-filter="marketing">Marketing</button>
+        <button class="filter-pill" data-filter="sidequests">Sidequests</button>
+      </div>
+    </div>
+
     <div class="work-grid">
 
-      <!-- 1. ISA -->
-      <a href="isa.html" class="card-link reveal reveal-delay-1">
-      <article class="card">
-        <div class="card-inner">
-          <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
-          <img class="card-img" src="images/homepage/isa-website.png" alt="ISA website">
-          <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging">
+      <div class="work-col">
+        <!-- 1. ISA -->
+        <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding print ui-ux" data-h="92">
+        <article class="card">
+          <div class="card-inner">
+            <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
+            <img class="card-img" src="images/homepage/isa-website.png" alt="ISA website">
+            <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging">
+          </div>
+          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+          <div class="card-dots">
+            <button class="card-dot active" aria-label="Image 1"></button>
+            <button class="card-dot" aria-label="Image 2"></button>
+            <button class="card-dot" aria-label="Image 3"></button>
+          </div>
+        </article>
+        <div class="card-caption">
+          <h2 class="card-title">ISA</h2>
+          <p class="card-type">Brand Identity · Packaging · Website</p>
         </div>
-        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-        <div class="card-dots">
-          <button class="card-dot active" aria-label="Image 1"></button>
-          <button class="card-dot" aria-label="Image 2"></button>
-          <button class="card-dot" aria-label="Image 3"></button>
+        </a>
+
+        <!-- 4. B&N Sandwiches -->
+        <a href="bn.html" class="card-link card-bn reveal reveal-delay-1" data-cats="branding print marketing" data-h="129">
+        <article class="card">
+          <div class="card-inner">
+            <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese">
+            <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster">
+          </div>
+          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+          <div class="card-dots">
+            <button class="card-dot active" aria-label="Image 1"></button>
+            <button class="card-dot" aria-label="Image 2"></button>
+          </div>
+        </article>
+        <div class="card-caption">
+          <h2 class="card-title">B&amp;N Sandwiches</h2>
+          <p class="card-type">Brand Identity · Print · Social</p>
         </div>
-      </article>
-      <div class="card-caption">
-        <h2 class="card-title">ISA</h2>
-        <p class="card-type">Brand Identity · Packaging · Website</p>
+        </a>
       </div>
-      </a>
 
-      <!-- 2. Barkada -->
-      <a href="barkada.html" class="card-link reveal reveal-delay-2">
-      <article class="card">
-        <div class="card-inner">
-          <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
-          <img class="card-img" src="images/homepage/barkada-cover.png" alt="Barkada sticker" style="object-position: center center;">
-          <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch">
+      <div class="work-col">
+        <!-- 2. Barkada -->
+        <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding marketing" data-h="138">
+        <article class="card">
+          <div class="card-inner">
+            <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
+            <img class="card-img" src="images/homepage/barkada-cover.png" alt="Barkada sticker" style="object-position: center center;">
+            <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch">
+          </div>
+          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+          <div class="card-dots">
+            <button class="card-dot active" aria-label="Image 1"></button>
+            <button class="card-dot" aria-label="Image 2"></button>
+            <button class="card-dot" aria-label="Image 3"></button>
+          </div>
+        </article>
+        <div class="card-caption">
+          <h2 class="card-title">Barkada</h2>
+          <p class="card-type">Brand · Event Design · Social</p>
         </div>
-        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-        <div class="card-dots">
-          <button class="card-dot active" aria-label="Image 1"></button>
-          <button class="card-dot" aria-label="Image 2"></button>
-          <button class="card-dot" aria-label="Image 3"></button>
+        </a>
+
+        <!-- 5. NOAA -->
+        <a href="noaa.html" class="card-link card-noaa reveal reveal-delay-2" data-cats="ui-ux print" data-h="129">
+        <article class="card">
+          <div class="card-inner">
+            <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign">
+          </div>
+          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+          <div class="card-dots">
+            <button class="card-dot active" aria-label="Image 1"></button>
+          </div>
+        </article>
+        <div class="card-caption">
+          <h2 class="card-title">NOAA Redesign</h2>
+          <p class="card-type">UI Redesign · Print</p>
         </div>
-      </article>
-      <div class="card-caption">
-        <h2 class="card-title">Barkada</h2>
-        <p class="card-type">Brand · Event Design · Social</p>
+        </a>
       </div>
-      </a>
 
-      <!-- 3. B&N Sandwiches -->
-      <a href="bn.html" class="card-link reveal reveal-delay-1">
-      <article class="card">
-        <div class="card-inner">
-          <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese">
-          <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster">
+      <div class="work-col">
+        <!-- 3. Nextflix -->
+        <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux" data-h="62">
+        <article class="card">
+          <div class="card-inner">
+            <img class="card-img active" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="object-position: center;">
+          </div>
+          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+          <div class="card-dots">
+            <button class="card-dot active" aria-label="Image 1"></button>
+          </div>
+        </article>
+        <div class="card-caption">
+          <h2 class="card-title">Nextflix</h2>
+          <p class="card-type">UI/UX · Product Design</p>
         </div>
-        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-        <div class="card-dots">
-          <button class="card-dot active" aria-label="Image 1"></button>
-          <button class="card-dot" aria-label="Image 2"></button>
+        </a>
+
+        <!-- 6. Charlie's Card -->
+        <a href="mbta.html" class="card-link card-mbta reveal reveal-delay-3" data-cats="ui-ux" data-h="129">
+        <article class="card">
+          <div class="card-inner">
+            <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
+          </div>
+          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+          <div class="card-dots">
+            <button class="card-dot active" aria-label="Image 1"></button>
+          </div>
+        </article>
+        <div class="card-caption">
+          <h2 class="card-title">Charlie's Card</h2>
+          <p class="card-type">UI/UX · App Design</p>
         </div>
-      </article>
-      <div class="card-caption">
-        <h2 class="card-title">B&amp;N Sandwiches</h2>
-        <p class="card-type">Brand Identity · Print · Social</p>
+        </a>
       </div>
-      </a>
-
-      <!-- 4. NOAA -->
-      <a href="noaa.html" class="card-link reveal reveal-delay-2">
-      <article class="card">
-        <div class="card-inner">
-          <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign">
-        </div>
-        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-        <div class="card-dots">
-          <button class="card-dot active" aria-label="Image 1"></button>
-        </div>
-      </article>
-      <div class="card-caption">
-        <h2 class="card-title">NOAA Redesign</h2>
-        <p class="card-type">UI Redesign · Print</p>
-      </div>
-      </a>
-
-      <!-- 5. Charlie's Card -->
-      <a href="mbta.html" class="card-link reveal reveal-delay-3">
-      <article class="card">
-        <div class="card-inner">
-          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
-        </div>
-        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-        <div class="card-dots">
-          <button class="card-dot active" aria-label="Image 1"></button>
-        </div>
-      </article>
-      <div class="card-caption">
-        <h2 class="card-title">Charlie's Card</h2>
-        <p class="card-type">UI/UX · App Design</p>
-      </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- More Projects -->
-  <section id="more-projects">
-    <p class="section-label reveal">More projects</p>
-
-    <div class="archive-grid-row1">
-
-      <a href="translations.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal">
-        <div class="archive-card-inner">
-          <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet">
-        </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Translations</p>
-        <p class="archive-caption-type">Typography · Print</p>
-      </div>
-      </a>
-
-      <a href="mermaid.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal">
-        <div class="archive-card-inner portrait">
-          <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet" style="object-position: top;">
-        </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Little Mermaid Retold</p>
-        <p class="archive-caption-type">Typography · Web Design</p>
-      </div>
-      </a>
-
-      <a href="anona.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal">
-        <div class="archive-card-inner portrait">
-          <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards">
-        </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Anona Specimen Cards</p>
-        <p class="archive-caption-type">Typography · Motion Design</p>
-      </div>
-      </a>
-
-      <a href="toad.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal">
-        <div class="archive-card-inner portrait">
-          <img class="archive-img" src="images/homepage/toad-cover.png" alt="Toad's Survival Guide">
-        </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Toad's Survival Guide</p>
-        <p class="archive-caption-type">Print · Editorial</p>
-      </div>
-      </a>
 
     </div>
 
-    <div class="archive-grid-row2">
+    <div class="archive-grid" style="margin-top: 56px;">
 
-      <a href="nextflix.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal">
-        <div class="archive-card-inner">
-          <img class="archive-img" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="transform: scale(1.2);">
+      <div class="archive-col">
+        <a href="mermaid.html" class="archive-card-link" data-cats="print ui-ux" data-h="130" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal">
+          <div class="archive-card-inner portrait">
+            <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet" style="object-position: top;">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Little Mermaid Retold</p>
+          <p class="archive-caption-type">Typography · Web Design</p>
         </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Nextflix</p>
-        <p class="archive-caption-type">UI/UX · Product Design</p>
-      </div>
-      </a>
+        </a>
 
-      <a href="curl.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal" style="background: none;">
-        <div class="archive-card-inner">
-          <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards" style="object-position: left;">
+        <a href="translations.html" class="archive-card-link" data-cats="print" data-h="65" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal">
+          <div class="archive-card-inner">
+            <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Translations</p>
+          <p class="archive-caption-type">Typography · Print</p>
         </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Curl In / Curl Out</p>
-        <p class="archive-caption-type">Print · Interaction Design</p>
+        </a>
       </div>
-      </a>
 
-      <a href="irh.html" class="archive-card-link" style="display:block; text-decoration:none; color:inherit;">
-      <article class="archive-card reveal">
-        <div class="archive-card-inner">
-          <img class="archive-img" src="images/homepage/irh-cover.png" alt="Intergalactic Retirement Home">
+      <div class="archive-col">
+        <a href="anona.html" class="archive-card-link" data-cats="print" data-h="130" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal">
+          <div class="archive-card-inner portrait">
+            <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Anona Specimen Cards</p>
+          <p class="archive-caption-type">Typography · Motion Design</p>
         </div>
-      </article>
-      <div class="archive-caption">
-        <p class="archive-caption-title">Intergalactic Retirement Home</p>
-        <p class="archive-caption-type">Game Design · Graphic Design</p>
+        </a>
+
+        <a href="irh.html" class="archive-card-link" data-cats="sidequests" data-h="65" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal">
+          <div class="archive-card-inner">
+            <img class="archive-img" src="images/homepage/irh-cover.png" alt="Intergalactic Retirement Home">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Intergalactic Retirement Home</p>
+          <p class="archive-caption-type">Game Design · Graphic Design</p>
+        </div>
+        </a>
       </div>
-      </a>
+
+      <div class="archive-col">
+        <a href="toad.html" class="archive-card-link" data-cats="print sidequests" data-h="130" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal">
+          <div class="archive-card-inner portrait">
+            <img class="archive-img" src="images/homepage/toad-cover.png" alt="Toad's Survival Guide">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Toad's Survival Guide</p>
+          <p class="archive-caption-type">Print · Editorial</p>
+        </div>
+        </a>
+
+        <a href="curl.html" class="archive-card-link" data-cats="print ui-ux sidequests" data-h="65" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal" style="background: none;">
+          <div class="archive-card-inner">
+            <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards" style="object-position: left;">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Curl In / Curl Out</p>
+          <p class="archive-caption-type">Print · Interaction Design</p>
+        </div>
+        </a>
+      </div>
 
     </div>
   </section>
@@ -948,16 +1005,30 @@
   <!-- About -->
   <section class="section" id="about">
     <p class="section-label reveal">About</p>
+
+    <div class="about-photo-row reveal">
+      <div class="about-photo-tile"><img src="images/homepage/pao1.JPG" alt="Paulina Acosta"></div>
+      <div class="about-photo-tile"><img src="images/homepage/pao2.JPG" alt="Paulina Acosta"></div>
+      <div class="about-photo-tile"><img src="images/homepage/pao3.JPG" alt="Paulina Acosta"></div>
+      <div class="about-photo-tile"><img src="images/homepage/pao4.JPG" alt="Paulina Acosta"></div>
+    </div>
+
     <div class="about-grid">
       <div class="reveal">
         <h2 class="about-headline">
           I'm a <em class="blue">multidisciplinary designer</em> based in <em>NJ/NY</em>.
         </h2>
         <p class="about-body">
-          I recently graduated from Northeastern University with a B.S. in Computer Science and Design, with a concentration in Interaction Design. I fell in love with designing cool things while keeping users in mind. Throughout my past experiences, I've designed brand systems, event identities, merchandise, packaging, social content, and digital products, often multitasking but never cutting corners on quality.
+          I recently graduated from Northeastern University with a B.S. in Computer Science and Design, concentrating in Interaction Design — I fell in love with designing cool things while keeping the people using them in mind.
         </p>
         <p class="about-body" style="margin-top: 16px;">
-          Outside of work, I'm passionate about my Filipino culture. I served on the e-board of Barkada, Northeastern's Filipino student organization, for two years and as a mentor for four years. I started as their Media Specialist in 2023, connecting my love for design and my culture through graphics and merchandise. That intersection continued this past semester when I developed my senior capstone project, ISA, an e-commerce site spotlighting Filipino-American fashion brands. Through it, I realized how design can be used to connect and support people and their communities.
+          Since then, I've designed <strong>brand systems, event identities, merchandise, packaging, social content, and digital products</strong> — often multitasking, never cutting corners on quality.
+        </p>
+        <p class="about-body" style="margin-top: 16px;">
+          Outside of work, I'm passionate about my Filipino culture. I served on the e-board of Barkada, Northeastern's Filipino student organization, for two years and as a mentor for four years, starting as their Media Specialist in 2023 — connecting my love for design and my culture through graphics and merchandise.
+        </p>
+        <p class="about-body" style="margin-top: 16px;">
+          That intersection continued this past semester in my senior capstone, ISA, an e-commerce site spotlighting Filipino-American fashion brands. Through it, I realized how design can be used to connect and support people and their communities.
         </p>
         <p class="about-body" style="margin-top: 16px;">
           Also, I love travelling, collecting trinkets and blind boxes, and fashion!
@@ -970,6 +1041,7 @@
             <span class="skill-chip">Adobe Illustrator</span>
             <span class="skill-chip">Adobe InDesign</span>
             <span class="skill-chip">Adobe Photoshop</span>
+            <span class="skill-chip">Adobe Premiere Pro</span>
             <span class="skill-chip">Figma</span>
             <span class="skill-chip">Canva</span>
           </div>
@@ -998,8 +1070,19 @@
       <p class="timeline-label">Relevant Experience</p>
       <div class="timeline-track-wrap">
 
-        <!-- 1. Harvard — above -->
+        <!-- 1. Media Specialist — above -->
         <div class="timeline-node above">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Apr 2023–Apr 2024</p>
+            <p class="timeline-role">Media Specialist</p>
+            <p class="timeline-org">NU Barkada</p>
+          </div>
+        </div>
+
+        <!-- 2. Harvard — below -->
+        <div class="timeline-node below">
           <div class="timeline-dot"></div>
           <div class="timeline-connector"></div>
           <div class="timeline-content">
@@ -1009,8 +1092,8 @@
           </div>
         </div>
 
-        <!-- 2. B&N — below -->
-        <div class="timeline-node below">
+        <!-- 3. B&N — above -->
+        <div class="timeline-node above">
           <div class="timeline-dot"></div>
           <div class="timeline-connector"></div>
           <div class="timeline-content">
@@ -1020,7 +1103,18 @@
           </div>
         </div>
 
-        <!-- 3. Paul Lukez — above -->
+        <!-- 4. Vice President — below -->
+        <div class="timeline-node below">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+          <div class="timeline-content">
+            <p class="timeline-date">Apr 2024–Apr 2025</p>
+            <p class="timeline-role">Vice President</p>
+            <p class="timeline-org">NU Barkada</p>
+          </div>
+        </div>
+
+        <!-- 5. Paul Lukez — above -->
         <div class="timeline-node above">
           <div class="timeline-dot"></div>
           <div class="timeline-connector"></div>
@@ -1031,7 +1125,7 @@
           </div>
         </div>
 
-        <!-- 4. Sandbox — below -->
+        <!-- 6. Sandbox — below -->
         <div class="timeline-node below">
           <div class="timeline-dot"></div>
           <div class="timeline-connector"></div>
@@ -1055,6 +1149,7 @@
         <a href="tel:8622424295" class="contact-link">(862) 242-4295</a>
         <a href="https://www.linkedin.com/in/paulinacosta/" target="_blank" rel="noopener" class="contact-link">LinkedIn ↗</a>
       </div>
+      <a href="images/homepage/00Acosta_Resume.pdf" download class="resume-btn reveal reveal-delay-2">Download my resume ↓</a>
     </div>
   </section>
 
@@ -1063,7 +1158,7 @@
     <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.3);">Typefaces</p>
     <div style="display: flex; gap: 48px; align-items: baseline;">
       <div style="text-align: center;">
-        <p style="font-family: Georgia, serif; font-style: italic; font-size: 20px; font-weight: normal; color: rgba(15,27,45,0.45); letter-spacing: -0.01em; margin-bottom: 4px;">Georgia</p>
+        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 20px; font-weight: 300; color: rgba(15,27,45,0.45); letter-spacing: -0.01em; margin-bottom: 4px;">Fraunces</p>
         <p style="font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.25);">Display · Serif</p>
       </div>
       <div style="text-align: center;">
@@ -1144,6 +1239,56 @@
         }
       });
     });
+
+    /* ── Chat-prompt project filter ── */
+    (function () {
+      const pills = document.querySelectorAll('.filter-pill');
+
+      const workCols    = Array.from(document.querySelectorAll('.work-col'));
+      const workCards   = Array.from(document.querySelectorAll('.work-grid .card-link'));
+      const archiveCols  = Array.from(document.querySelectorAll('.archive-col'));
+      const archiveCards = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
+
+      // Largest-first bin-packing: keeps column heights balanced regardless of source order.
+      function distribute(cols, cards, filter) {
+        const visible = cards.filter(c => filter === 'all' || c.dataset.cats.split(' ').includes(filter));
+        const hidden  = cards.filter(c => !visible.includes(c));
+
+        hidden.forEach(c => { c.style.display = 'none'; });
+
+        const sorted  = [...visible].sort((a, b) => parseFloat(b.dataset.h) - parseFloat(a.dataset.h));
+        const heights = cols.map(() => 0);
+        const counts  = cols.map(() => 0);
+
+        sorted.forEach(card => {
+          let shortest = 0;
+          for (let i = 1; i < heights.length; i++) {
+            if (heights[i] < heights[shortest]) shortest = i;
+          }
+          cols[shortest].appendChild(card);
+          card.style.display = '';
+          heights[shortest] += parseFloat(card.dataset.h);
+          counts[shortest]++;
+        });
+
+        cols.forEach((col, i) => {
+          col.style.display = counts[i] ? '' : 'none';
+        });
+      }
+
+      function applyFilter(filter) {
+        distribute(workCols, workCards, filter);
+        distribute(archiveCols, archiveCards, filter);
+      }
+
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          pills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          applyFilter(pill.dataset.filter);
+        });
+      });
+    })();
   </script>
 </body>
 </html>
