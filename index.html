@@ -245,13 +245,15 @@
     .filter-pill[data-filter="branding"]   { color: #C2542B; border-color: #C2542B; }
     .filter-pill[data-filter="ui-ux"]      { color: #1E8A8A; border-color: #1E8A8A; }
     .filter-pill[data-filter="print"]      { color: #B8860B; border-color: #B8860B; }
+    .filter-pill[data-filter="packaging"]  { color: #4C8C4A; border-color: #4C8C4A; }
     .filter-pill[data-filter="marketing"]  { color: #A6326B; border-color: #A6326B; }
-    .filter-pill[data-filter="sidequests"] { color: #6B4FA0; border-color: #6B4FA0; }
+    .filter-pill[data-filter="fun"] { color: #6B4FA0; border-color: #6B4FA0; }
     .filter-pill[data-filter="branding"].active   { background: #C2542B; color: var(--white); box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
     .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; color: var(--white); box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
     .filter-pill[data-filter="print"].active      { background: #B8860B; color: var(--white); box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
+    .filter-pill[data-filter="packaging"].active  { background: #4C8C4A; color: var(--white); box-shadow: 0 4px 14px rgba(76,140,74,0.3); }
     .filter-pill[data-filter="marketing"].active  { background: #A6326B; color: var(--white); box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
-    .filter-pill[data-filter="sidequests"].active { background: #6B4FA0; color: var(--white); box-shadow: 0 4px 14px rgba(107,79,160,0.3); }
+    .filter-pill[data-filter="fun"].active { background: #6B4FA0; color: var(--white); box-shadow: 0 4px 14px rgba(107,79,160,0.3); }
 
     /* ── Work grid ── */
     #work {
@@ -259,16 +261,18 @@
     }
     #work .section-label { color: var(--accent); }
     .work-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-flow: row dense;
+      grid-auto-rows: 2px;
+      align-items: start;
       gap: 20px;
-      align-items: flex-start;
     }
-    .work-col {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      flex: 1 1 0;
-      min-width: 0;
+    .card-link {
+      grid-column: 3;
+    }
+    .card-isa, .card-barkada {
+      grid-column: 1 / 3;
     }
 
     .card {
@@ -283,20 +287,20 @@
       width: 100%;
       overflow: hidden;
     }
-    .card-isa .card-inner       { padding-bottom: 92%; }   /* ISA — emphasized */
-    .card-barkada .card-inner   { padding-bottom: 138%; }  /* Barkada — emphasized */
-    .card-nextflix .card-inner  { padding-bottom: 62%; }   /* Nextflix — landscape */
-    .card-bn .card-inner        { padding-bottom: 129%; }  /* B&N — portrait */
-    .card-noaa .card-inner      { padding-bottom: 129%; }  /* NOAA — portrait */
-    .card-mbta .card-inner      { padding-bottom: 129%; }  /* Charlie's — portrait */
+    .card-isa .card-inner       { padding-bottom: 69.6%; }   /* matches isa-cover.png */
+    .card-barkada .card-inner   { padding-bottom: 100%; }    /* matches barkada-benefit.jpg */
+    .card-nextflix .card-inner  { padding-bottom: 56.3%; }   /* matches nextflix-cover.png */
+    .card-bn .card-inner        { padding-bottom: 129.4%; }  /* matches bn-viet.jpg */
+    .card-noaa .card-inner      { padding-bottom: 194.1%; }  /* matches noaa-cover.png */
+    .card-mbta .card-inner      { padding-bottom: 216.4%; }  /* matches mbta-cover.png */
 
     .card-img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: top center;
+      object-fit: contain;
+      object-position: center center;
       transition: transform 0.6s var(--ease), opacity 0.4s var(--ease);
       opacity: 0;
     }
@@ -433,7 +437,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center center;
       transition: transform 0.5s var(--ease);
     }
@@ -727,8 +731,9 @@
       nav { padding: 0 24px; }
       .hero { padding: 120px 24px 60px; }
       .hero, .section, #contact { padding-left: 24px; padding-right: 24px; }
-      .work-grid { flex-wrap: wrap; gap: 18px; }
-      .work-col { flex: 1 1 45%; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .card-link { grid-column: auto; }
+      .card-isa, .card-barkada { grid-column: 1 / 3; }
       .archive-grid { flex-wrap: wrap; }
       .archive-col { flex: 1 1 45%; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -737,8 +742,9 @@
     @media (max-width: 600px) {
       .hero { padding: 100px 20px 48px; }
       .section, #contact { padding-left: 20px; padding-right: 20px; }
-      .work-col { flex: 1 1 100%; }
-      .card-link:nth-child(n) .card-inner { padding-bottom: 75%; }
+      .work-grid { grid-template-columns: 1fr; }
+      .card-link, .card-isa, .card-barkada { grid-column: 1; }
+      .work-grid .card-link .card-inner { padding-bottom: 75%; }
       .archive-grid { gap: 12px; }
       .archive-col { flex: 1 1 100%; }
       .archive-card-inner, .archive-card-inner.portrait { padding-bottom: 75%; }
@@ -792,146 +798,141 @@
         <button class="filter-pill" data-filter="branding">Branding</button>
         <button class="filter-pill" data-filter="ui-ux">UI/UX</button>
         <button class="filter-pill" data-filter="print">Print</button>
+        <button class="filter-pill" data-filter="packaging">Packaging</button>
         <button class="filter-pill" data-filter="marketing">Marketing</button>
-        <button class="filter-pill" data-filter="sidequests">Sidequests</button>
+        <button class="filter-pill" data-filter="fun">Just for Fun</button>
       </div>
     </div>
 
     <div class="work-grid">
 
-      <div class="work-col">
-        <!-- 1. ISA -->
-        <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding print ui-ux" data-h="92">
-        <article class="card">
-          <div class="card-inner">
-            <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
-            <img class="card-img" src="images/homepage/isa-website.png" alt="ISA website">
-            <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging">
-          </div>
-          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-          <div class="card-dots">
-            <button class="card-dot active" aria-label="Image 1"></button>
-            <button class="card-dot" aria-label="Image 2"></button>
-            <button class="card-dot" aria-label="Image 3"></button>
-          </div>
-        </article>
-        <div class="card-caption">
-          <h2 class="card-title">ISA</h2>
-          <p class="card-type">Brand Identity · Packaging · Website</p>
+      <!-- 1. ISA -->
+      <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding print packaging ui-ux" data-h="70">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
+          <img class="card-img" src="images/homepage/isa-website.png" alt="ISA website">
+          <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging">
         </div>
-        </a>
-
-        <!-- 4. B&N Sandwiches -->
-        <a href="bn.html" class="card-link card-bn reveal reveal-delay-1" data-cats="branding print marketing" data-h="129">
-        <article class="card">
-          <div class="card-inner">
-            <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese">
-            <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster">
-          </div>
-          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-          <div class="card-dots">
-            <button class="card-dot active" aria-label="Image 1"></button>
-            <button class="card-dot" aria-label="Image 2"></button>
-          </div>
-        </article>
-        <div class="card-caption">
-          <h2 class="card-title">B&amp;N Sandwiches</h2>
-          <p class="card-type">Brand Identity · Print · Social</p>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
+          <button class="card-dot" aria-label="Image 2"></button>
+          <button class="card-dot" aria-label="Image 3"></button>
         </div>
-        </a>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">ISA</h2>
+        <p class="card-type">Brand Identity · Packaging · Website</p>
       </div>
+      </a>
 
-      <div class="work-col">
-        <!-- 2. Barkada -->
-        <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding marketing" data-h="138">
-        <article class="card">
-          <div class="card-inner">
-            <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
-            <img class="card-img" src="images/homepage/barkada-cover.png" alt="Barkada sticker" style="object-position: center center;">
-            <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch">
-          </div>
-          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-          <div class="card-dots">
-            <button class="card-dot active" aria-label="Image 1"></button>
-            <button class="card-dot" aria-label="Image 2"></button>
-            <button class="card-dot" aria-label="Image 3"></button>
-          </div>
-        </article>
-        <div class="card-caption">
-          <h2 class="card-title">Barkada</h2>
-          <p class="card-type">Brand · Event Design · Social</p>
+      <!-- 2. Barkada -->
+      <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding marketing" data-h="100">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
+          <img class="card-img" src="images/homepage/barkada-cover.png" alt="Barkada sticker" style="object-position: center center;">
+          <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch">
         </div>
-        </a>
-
-        <!-- 5. NOAA -->
-        <a href="noaa.html" class="card-link card-noaa reveal reveal-delay-2" data-cats="ui-ux print" data-h="129">
-        <article class="card">
-          <div class="card-inner">
-            <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign">
-          </div>
-          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-          <div class="card-dots">
-            <button class="card-dot active" aria-label="Image 1"></button>
-          </div>
-        </article>
-        <div class="card-caption">
-          <h2 class="card-title">NOAA Redesign</h2>
-          <p class="card-type">UI Redesign · Print</p>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
+          <button class="card-dot" aria-label="Image 2"></button>
+          <button class="card-dot" aria-label="Image 3"></button>
         </div>
-        </a>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">Barkada</h2>
+        <p class="card-type">Brand · Event Design · Social</p>
       </div>
+      </a>
 
-      <div class="work-col">
-        <!-- 3. Nextflix -->
-        <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux" data-h="62">
-        <article class="card">
-          <div class="card-inner">
-            <img class="card-img active" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="object-position: center;">
-          </div>
-          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-          <div class="card-dots">
-            <button class="card-dot active" aria-label="Image 1"></button>
-          </div>
-        </article>
-        <div class="card-caption">
-          <h2 class="card-title">Nextflix</h2>
-          <p class="card-type">UI/UX · Product Design</p>
+      <!-- 3. Nextflix -->
+      <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux" data-h="56">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="object-position: center;">
         </div>
-        </a>
-
-        <!-- 6. Charlie's Card -->
-        <a href="mbta.html" class="card-link card-mbta reveal reveal-delay-3" data-cats="ui-ux" data-h="129">
-        <article class="card">
-          <div class="card-inner">
-            <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
-          </div>
-          <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
-          <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
-          <div class="card-dots">
-            <button class="card-dot active" aria-label="Image 1"></button>
-          </div>
-        </article>
-        <div class="card-caption">
-          <h2 class="card-title">Charlie's Card</h2>
-          <p class="card-type">UI/UX · App Design</p>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
         </div>
-        </a>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">Nextflix</h2>
+        <p class="card-type">UI/UX · Product Design</p>
       </div>
+      </a>
+
+      <!-- 4. B&N Sandwiches -->
+      <a href="bn.html" class="card-link card-bn reveal reveal-delay-1" data-cats="branding print marketing" data-h="129">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese">
+          <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster">
+        </div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
+          <button class="card-dot" aria-label="Image 2"></button>
+        </div>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">B&amp;N Sandwiches</h2>
+        <p class="card-type">Brand Identity · Print · Social</p>
+      </div>
+      </a>
+
+      <!-- 5. NOAA -->
+      <a href="noaa.html" class="card-link card-noaa reveal reveal-delay-2" data-cats="ui-ux print" data-h="194">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign">
+        </div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
+        </div>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">NOAA Redesign</h2>
+        <p class="card-type">UI Redesign · Print</p>
+      </div>
+      </a>
+
+      <!-- 6. Charlie's Card -->
+      <a href="mbta.html" class="card-link card-mbta reveal reveal-delay-3" data-cats="ui-ux" data-h="216">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
+        </div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
+        </div>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">Charlie's Card</h2>
+        <p class="card-type">UI/UX · App Design</p>
+      </div>
+      </a>
 
     </div>
 
     <div class="archive-grid" style="margin-top: 56px;">
 
       <div class="archive-col">
-        <a href="mermaid.html" class="archive-card-link" data-cats="print ui-ux" data-h="130" style="display:block; text-decoration:none; color:inherit;">
+        <a href="mermaid.html" class="archive-card-link" data-cats="print ui-ux" data-h="155" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
-          <div class="archive-card-inner portrait">
-            <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet" style="object-position: top;">
+          <div class="archive-card-inner" style="padding-bottom: 154.6%;">
+            <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet">
           </div>
         </article>
         <div class="archive-caption">
@@ -940,9 +941,9 @@
         </div>
         </a>
 
-        <a href="translations.html" class="archive-card-link" data-cats="print" data-h="65" style="display:block; text-decoration:none; color:inherit;">
+        <a href="translations.html" class="archive-card-link" data-cats="print" data-h="75" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
-          <div class="archive-card-inner">
+          <div class="archive-card-inner" style="padding-bottom: 75%;">
             <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet">
           </div>
         </article>
@@ -954,9 +955,9 @@
       </div>
 
       <div class="archive-col">
-        <a href="anona.html" class="archive-card-link" data-cats="print" data-h="130" style="display:block; text-decoration:none; color:inherit;">
+        <a href="anona.html" class="archive-card-link" data-cats="print" data-h="178" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
-          <div class="archive-card-inner portrait">
+          <div class="archive-card-inner" style="padding-bottom: 177.8%;">
             <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards">
           </div>
         </article>
@@ -966,9 +967,9 @@
         </div>
         </a>
 
-        <a href="irh.html" class="archive-card-link" data-cats="sidequests" data-h="65" style="display:block; text-decoration:none; color:inherit;">
+        <a href="irh.html" class="archive-card-link" data-cats="fun" data-h="68" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
-          <div class="archive-card-inner">
+          <div class="archive-card-inner" style="padding-bottom: 68.1%;">
             <img class="archive-img" src="images/homepage/irh-cover.png" alt="Intergalactic Retirement Home">
           </div>
         </article>
@@ -980,9 +981,9 @@
       </div>
 
       <div class="archive-col">
-        <a href="toad.html" class="archive-card-link" data-cats="print sidequests" data-h="130" style="display:block; text-decoration:none; color:inherit;">
+        <a href="toad.html" class="archive-card-link" data-cats="print fun" data-h="129" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
-          <div class="archive-card-inner portrait">
+          <div class="archive-card-inner" style="padding-bottom: 129.4%;">
             <img class="archive-img" src="images/homepage/toad-cover.png" alt="Toad's Survival Guide">
           </div>
         </article>
@@ -992,10 +993,10 @@
         </div>
         </a>
 
-        <a href="curl.html" class="archive-card-link" data-cats="print ui-ux sidequests" data-h="65" style="display:block; text-decoration:none; color:inherit;">
+        <a href="curl.html" class="archive-card-link" data-cats="print ui-ux" data-h="56" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal" style="background: none;">
-          <div class="archive-card-inner">
-            <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards" style="object-position: left;">
+          <div class="archive-card-inner" style="padding-bottom: 56.3%;">
+            <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards">
           </div>
         </article>
         <div class="archive-caption">
@@ -1262,10 +1263,30 @@
     (function () {
       const pills = document.querySelectorAll('.filter-pill');
 
-      const workCols    = Array.from(document.querySelectorAll('.work-col'));
-      const workCards   = Array.from(document.querySelectorAll('.work-grid .card-link'));
-      const archiveCols  = Array.from(document.querySelectorAll('.archive-col'));
-      const archiveCards = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
+      const workCards     = Array.from(document.querySelectorAll('.work-grid .card-link'));
+      const archiveCols   = Array.from(document.querySelectorAll('.archive-col'));
+      const archiveCards  = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
+
+      let currentFilter = 'all';
+
+      // CSS Grid masonry: each card gets a row-span computed from its real rendered
+      // height, so cards of any column-span (including the 2-wide ISA/Barkada tiles)
+      // pack tightly without gaps. Must match .work-grid's grid-auto-rows / gap.
+      const ROW_UNIT = 2;
+      const ROW_GAP  = 20;
+
+      function layoutFeatured(filter) {
+        workCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.cats.split(' ').includes(filter);
+          card.style.display = show ? '' : 'none';
+        });
+        workCards.forEach(card => {
+          if (card.style.display === 'none') return;
+          const height = card.getBoundingClientRect().height;
+          const span = Math.ceil((height + ROW_GAP) / (ROW_UNIT + ROW_GAP));
+          card.style.gridRowEnd = 'span ' + span;
+        });
+      }
 
       // Largest-first bin-packing: keeps column heights balanced regardless of source order.
       function distribute(cols, cards, filter) {
@@ -1295,7 +1316,8 @@
       }
 
       function applyFilter(filter) {
-        distribute(workCols, workCards, filter);
+        currentFilter = filter;
+        layoutFeatured(filter);
         distribute(archiveCols, archiveCards, filter);
       }
 
@@ -1305,6 +1327,14 @@
           pill.classList.add('active');
           applyFilter(pill.dataset.filter);
         });
+      });
+
+      layoutFeatured(currentFilter);
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => layoutFeatured(currentFilter), 150);
       });
     })();
   </script>
