@@ -143,8 +143,8 @@
     .hero {
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      padding: 120px 48px 80px;
+      align-items: flex-end;
+      padding: 120px 48px 100px;
       position: relative;
       overflow: hidden;
     }
@@ -247,11 +247,11 @@
     .filter-pill[data-filter="print"]      { color: #B8860B; border-color: #B8860B; }
     .filter-pill[data-filter="marketing"]  { color: #A6326B; border-color: #A6326B; }
     .filter-pill[data-filter="sidequests"] { color: #6B4FA0; border-color: #6B4FA0; }
-    .filter-pill[data-filter="branding"].active   { background: #C2542B; box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
-    .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
-    .filter-pill[data-filter="print"].active      { background: #B8860B; box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
-    .filter-pill[data-filter="marketing"].active  { background: #A6326B; box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
-    .filter-pill[data-filter="sidequests"].active { background: #6B4FA0; box-shadow: 0 4px 14px rgba(107,79,160,0.3); }
+    .filter-pill[data-filter="branding"].active   { background: #C2542B; color: var(--white); box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
+    .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; color: var(--white); box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
+    .filter-pill[data-filter="print"].active      { background: #B8860B; color: var(--white); box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
+    .filter-pill[data-filter="marketing"].active  { background: #A6326B; color: var(--white); box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
+    .filter-pill[data-filter="sidequests"].active { background: #6B4FA0; color: var(--white); box-shadow: 0 4px 14px rgba(107,79,160,0.3); }
 
     /* ── Work grid ── */
     #work {
@@ -495,10 +495,17 @@
       align-items: start;
     }
     .about-photo-row {
-      --photo-step: 144px;
+      overflow: hidden;
+      width: 100%;
+      margin-bottom: 40px;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .about-photo-track {
       display: flex;
       gap: 14px;
-      margin-bottom: 40px;
+      width: max-content;
+      animation: about-photo-scroll 34s linear infinite;
     }
     .about-photo-tile {
       width: 130px;
@@ -506,7 +513,6 @@
       border-radius: 12px;
       overflow: hidden;
       flex-shrink: 0;
-      transition: transform 0.9s var(--ease);
     }
     .about-photo-tile img {
       display: block;
@@ -514,10 +520,6 @@
       height: 100%;
       object-fit: cover;
     }
-    .about-photo-row .about-photo-tile:nth-child(2) { transform: translateX(calc(var(--photo-step) * -1)); transition-delay: 0.08s; }
-    .about-photo-row .about-photo-tile:nth-child(3) { transform: translateX(calc(var(--photo-step) * -2)); transition-delay: 0.16s; }
-    .about-photo-row .about-photo-tile:nth-child(4) { transform: translateX(calc(var(--photo-step) * -3)); transition-delay: 0.24s; }
-    .about-photo-row.visible .about-photo-tile { transform: translateX(0); }
     .about-headline {
       font-family: var(--serif);
       font-size: clamp(18px, 2vw, 24px);
@@ -704,6 +706,10 @@
 
     /* ── Animations ── */
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes about-photo-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
 
     .reveal {
       opacity: 0;
@@ -736,7 +742,7 @@
       .archive-grid { gap: 12px; }
       .archive-col { flex: 1 1 100%; }
       .archive-card-inner, .archive-card-inner.portrait { padding-bottom: 75%; }
-      .about-photo-row { --photo-step: 78px; gap: 8px; }
+      .about-photo-track { gap: 8px; }
       .about-photo-tile { width: 70px; height: 92px; }
       .nav-links { display: none; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
@@ -771,7 +777,7 @@
       <p class="hero-eyebrow">Brand · UI/UX · Experiential</p>
       <h1 class="hero-headline"><em>paulina acosta</em> <span style="color: var(--accent); font-style: normal;">♡</span></h1>
       <p class="hero-sub">
-        A multidisciplinary designer based in NJ/NY working across brand, print, and interaction design. I make work that connects with the people it's meant for.
+        A multidisciplinary designer based in NJ/NY working across brand, print, and interaction design, with a love for planning events. Overall, I make work that connects with the people it's meant for.
       </p>
     </div>
   </section>
@@ -1007,10 +1013,25 @@
     <p class="section-label reveal">About</p>
 
     <div class="about-photo-row reveal">
-      <div class="about-photo-tile"><img src="images/homepage/pao1.JPG" alt="Paulina Acosta"></div>
-      <div class="about-photo-tile"><img src="images/homepage/pao2.JPG" alt="Paulina Acosta"></div>
-      <div class="about-photo-tile"><img src="images/homepage/pao3.JPG" alt="Paulina Acosta"></div>
-      <div class="about-photo-tile"><img src="images/homepage/pao4.JPG" alt="Paulina Acosta"></div>
+      <div class="about-photo-track">
+        <div class="about-photo-tile"><img src="images/homepage/pao1.JPG" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao2.JPG" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao3.JPG" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao4.JPG" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao5.jpg" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao6.jpg" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao7.jpg" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao8.jpg" alt="Paulina Acosta"></div>
+        <!-- duplicated for a seamless infinite loop -->
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao1.JPG" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao2.JPG" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao3.JPG" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao4.JPG" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao5.jpg" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao6.jpg" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao7.jpg" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao8.jpg" alt=""></div>
+      </div>
     </div>
 
     <div class="about-grid">
@@ -1019,19 +1040,16 @@
           I'm a <em class="blue">multidisciplinary designer</em> based in <em>NJ/NY</em>.
         </h2>
         <p class="about-body">
-          I recently graduated from Northeastern University with a B.S. in Computer Science and Design, concentrating in Interaction Design — I fell in love with designing cool things while keeping the people using them in mind.
+          I recently graduated from Northeastern University with a B.S. in Computer Science and Design, with a concentration in Interaction Design. I fell in love with designing cool things while keeping users in mind. Throughout my past experiences, which included co-ops and leadership positions, I've designed brand systems, event identities, merchandise, packaging, social content, and digital products, often multitasking but never cutting corners on quality.
         </p>
         <p class="about-body" style="margin-top: 16px;">
-          Since then, I've designed <strong>brand systems, event identities, merchandise, packaging, social content, and digital products</strong> — often multitasking, never cutting corners on quality.
+          Outside of work, I'm passionate about my Filipino culture. I served on the e-board of Barkada, Northeastern's Filipino student organization, for two years and as a mentor for four years. I started as their Media Specialist in 2023, connecting my love for design and my culture through graphics and merchandise. As Vice President the next year, I continued designing events to bring my community together. That passion for design and my culture came full circle this past semester when I developed my senior capstone project, ISA, an e-commerce site spotlighting Filipino-American fashion brands.
         </p>
         <p class="about-body" style="margin-top: 16px;">
-          Outside of work, I'm passionate about my Filipino culture. I served on the e-board of Barkada, Northeastern's Filipino student organization, for two years and as a mentor for four years, starting as their Media Specialist in 2023 — connecting my love for design and my culture through graphics and merchandise.
+          Through these experiences, I realized how design can be used to connect, support, and build up people and their communities. That is exactly why I want to continue working in design.
         </p>
         <p class="about-body" style="margin-top: 16px;">
-          That intersection continued this past semester in my senior capstone, ISA, an e-commerce site spotlighting Filipino-American fashion brands. Through it, I realized how design can be used to connect and support people and their communities.
-        </p>
-        <p class="about-body" style="margin-top: 16px;">
-          Also, I love travelling, collecting trinkets and blind boxes, and fashion!
+          Beyond that, I love travelling, fashion, eating my way through any city, and collecting trinkets and blind boxes!
         </p>
       </div>
       <div class="skills-block reveal">
