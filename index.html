@@ -266,7 +266,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-auto-flow: row dense;
-      grid-auto-rows: 2px;
+      grid-auto-rows: 1px;
       align-items: start;
       gap: 20px;
     }
@@ -1275,8 +1275,9 @@
       // CSS Grid masonry: each card gets a row-span computed from its real rendered
       // height, so cards of any column-span (including the 2-wide ISA/Barkada tiles)
       // pack tightly without gaps. Must match .work-grid's grid-auto-rows / gap.
-      const ROW_UNIT = 2;
+      const ROW_UNIT = 1;
       const ROW_GAP  = 20;
+      const ROW_BUFFER = 24; // absorbs sub-pixel rounding drift across many row units
 
       function layoutFeatured(filter) {
         workCards.forEach(card => {
@@ -1285,7 +1286,7 @@
         });
         workCards.forEach(card => {
           if (card.style.display === 'none') return;
-          const height = card.getBoundingClientRect().height;
+          const height = card.getBoundingClientRect().height + ROW_BUFFER;
           const span = Math.ceil((height + ROW_GAP) / (ROW_UNIT + ROW_GAP));
           card.style.gridRowEnd = 'span ' + span;
         });
@@ -1333,6 +1334,10 @@
       });
 
       layoutFeatured(currentFilter);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => layoutFeatured(currentFilter));
+      }
 
       let resizeTimer;
       window.addEventListener('resize', () => {
