@@ -263,19 +263,18 @@
     }
     #work .section-label { color: var(--accent); }
     .work-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-flow: row dense;
-      grid-auto-rows: 1px;
-      align-items: start;
+      display: flex;
       gap: 20px;
+      align-items: flex-start;
     }
-    .card-link {
-      grid-column: span 1;
+    .work-col-wide, .work-col-narrow {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      min-width: 0;
     }
-    .card-isa, .card-barkada {
-      grid-column: span 2;
-    }
+    .work-col-wide { flex: 2 1 0; }
+    .work-col-narrow { flex: 1 1 0; }
 
     .card {
       position: relative;
@@ -733,7 +732,7 @@
       nav { padding: 0 24px; }
       .hero { padding: 120px 24px 60px; }
       .hero, .section, #contact { padding-left: 24px; padding-right: 24px; }
-      .work-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .work-grid { flex-direction: column; gap: 18px; }
       .archive-grid { flex-wrap: wrap; }
       .archive-col { flex: 1 1 45%; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -742,7 +741,6 @@
     @media (max-width: 600px) {
       .hero { padding: 100px 20px 48px; }
       .section, #contact { padding-left: 20px; padding-right: 20px; }
-      .work-grid { grid-template-columns: 1fr; }
       .work-grid .card-link .card-inner { padding-bottom: 75%; }
       .archive-grid { gap: 12px; }
       .archive-col { flex: 1 1 100%; }
@@ -806,6 +804,7 @@
 
     <div class="work-grid">
 
+      <div class="work-col-wide">
       <!-- 1. ISA -->
       <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding packaging ui-ux" data-h="70">
       <article class="card">
@@ -849,7 +848,9 @@
         <p class="card-type">Brand · Print · Social</p>
       </div>
       </a>
+      </div>
 
+      <div class="work-col-narrow">
       <!-- 3. Nextflix -->
       <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux" data-h="56">
       <article class="card">
@@ -923,6 +924,7 @@
         <p class="card-type">UI/UX · App Design</p>
       </div>
       </a>
+      </div>
 
     </div>
 
@@ -1263,30 +1265,79 @@
     (function () {
       const pills = document.querySelectorAll('.filter-pill');
 
-      const workCards     = Array.from(document.querySelectorAll('.work-grid .card-link'));
-      const archiveCols   = Array.from(document.querySelectorAll('.archive-col'));
-      const archiveCards  = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
+      const colWide      = document.querySelector('.work-col-wide');
+      const colNarrow    = document.querySelector('.work-col-narrow');
+      const isaCard      = document.querySelector('.card-isa');
+      const barkadaCard  = document.querySelector('.card-barkada');
+      const workCards    = Array.from(document.querySelectorAll('.work-grid .card-link'));
+      const otherCards   = workCards.filter(c => c !== isaCard && c !== barkadaCard);
+      const archiveCols  = Array.from(document.querySelectorAll('.archive-col'));
+      const archiveCards = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
 
       let currentFilter = 'all';
+      const CAPTION_H = 70; // approx caption block height — doesn't scale with card width
+      const GAP = 28;       // matches .work-col-wide / .work-col-narrow gap
 
-      // CSS Grid masonry: each card gets a row-span computed from its real rendered
-      // height, so cards of any column-span (including the 2-wide ISA/Barkada tiles)
-      // pack tightly without gaps. Must match .work-grid's grid-auto-rows / gap.
-      const ROW_UNIT = 1;
-      const ROW_GAP  = 20;
-      const ROW_BUFFER = 24; // absorbs sub-pixel rounding drift across many row units
+      function estHeight(card, width) {
+        const h = parseFloat(card.dataset.h) || 100;
+        return width * h / 100 + CAPTION_H;
+      }
 
+      // ISA and Barkada always live in the wide column. For the remaining cards,
+      // brute-force every subset (only 4 items, so 16 combinations) to find which
+      // ones should also join the wide column so both sides end up closest in
+      // height — rather than relying on CSS auto-placement, which just grabs
+      // whichever card fits first and can leave one side much taller than the other.
       function layoutFeatured(filter) {
-        workCards.forEach(card => {
-          const show = filter === 'all' || card.dataset.cats.split(' ').includes(filter);
-          card.style.display = show ? '' : 'none';
+        const wideW   = colWide.getBoundingClientRect().width;
+        const narrowW = colNarrow.getBoundingClientRect().width;
+
+        // Layout hasn't settled yet (columns still 0-width) — bail and retry next frame
+        // rather than balancing against garbage measurements and locking in a bad split.
+        if (wideW < 10 || narrowW < 10) {
+          requestAnimationFrame(() => layoutFeatured(filter));
+          return;
+        }
+
+        const show = c => filter === 'all' || c.dataset.cats.split(' ').includes(filter);
+
+        const visibleFixed  = [isaCard, barkadaCard].filter(show);
+        const visibleOthers = otherCards.filter(show);
+        const hidden = workCards.filter(c => !show(c));
+        hidden.forEach(c => { c.style.display = 'none'; });
+
+        let wideBase = 0;
+        visibleFixed.forEach((c, i) => { wideBase += estHeight(c, wideW) + (i > 0 ? GAP : 0); });
+
+        const n = visibleOthers.length;
+        let bestMask = 0, bestDiff = Infinity;
+        for (let mask = 0; mask < (1 << n); mask++) {
+          let wideExtra = 0, narrowTotal = 0;
+          for (let i = 0; i < n; i++) {
+            const card = visibleOthers[i];
+            if (mask & (1 << i)) {
+              wideExtra += estHeight(card, wideW) + GAP;
+            } else {
+              narrowTotal += estHeight(card, narrowW) + GAP;
+            }
+          }
+          const diff = Math.abs((wideBase + wideExtra) - narrowTotal);
+          if (diff < bestDiff) { bestDiff = diff; bestMask = mask; }
+        }
+
+        let wideCount = 0, narrowCount = 0;
+        visibleFixed.forEach(c => { colWide.appendChild(c); c.style.display = ''; wideCount++; });
+        visibleOthers.forEach((card, i) => {
+          if (bestMask & (1 << i)) {
+            colWide.appendChild(card); wideCount++;
+          } else {
+            colNarrow.appendChild(card); narrowCount++;
+          }
+          card.style.display = '';
         });
-        workCards.forEach(card => {
-          if (card.style.display === 'none') return;
-          const height = card.getBoundingClientRect().height + ROW_BUFFER;
-          const span = Math.ceil((height + ROW_GAP) / (ROW_UNIT + ROW_GAP));
-          card.style.gridRowEnd = 'span ' + span;
-        });
+
+        colWide.style.display   = wideCount   ? '' : 'none';
+        colNarrow.style.display = narrowCount ? '' : 'none';
       }
 
       // Largest-first bin-packing: keeps column heights balanced regardless of source order.
@@ -1330,7 +1381,10 @@
         });
       });
 
-      layoutFeatured(currentFilter);
+      // Defer the first run until the browser has committed a real layout pass —
+      // measuring column widths synchronously on load can catch them at 0/unsettled,
+      // which fed the balancer garbage and locked in a bad split permanently.
+      requestAnimationFrame(() => requestAnimationFrame(() => layoutFeatured(currentFilter)));
 
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(() => layoutFeatured(currentFilter));
