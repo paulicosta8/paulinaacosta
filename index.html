@@ -247,12 +247,14 @@
     .filter-pill[data-filter="print"]      { color: #B8860B; border-color: #B8860B; }
     .filter-pill[data-filter="packaging"]  { color: #4C8C4A; border-color: #4C8C4A; }
     .filter-pill[data-filter="marketing"]  { color: #A6326B; border-color: #A6326B; }
+    .filter-pill[data-filter="animations"] { color: #E85D75; border-color: #E85D75; }
     .filter-pill[data-filter="fun"] { color: #6B4FA0; border-color: #6B4FA0; }
     .filter-pill[data-filter="branding"].active   { background: #C2542B; color: var(--white); box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
     .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; color: var(--white); box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
     .filter-pill[data-filter="print"].active      { background: #B8860B; color: var(--white); box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
     .filter-pill[data-filter="packaging"].active  { background: #4C8C4A; color: var(--white); box-shadow: 0 4px 14px rgba(76,140,74,0.3); }
     .filter-pill[data-filter="marketing"].active  { background: #A6326B; color: var(--white); box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
+    .filter-pill[data-filter="animations"].active { background: #E85D75; color: var(--white); box-shadow: 0 4px 14px rgba(232,93,117,0.3); }
     .filter-pill[data-filter="fun"].active { background: #6B4FA0; color: var(--white); box-shadow: 0 4px 14px rgba(107,79,160,0.3); }
 
     /* ── Work grid ── */
@@ -800,6 +802,7 @@
         <button class="filter-pill" data-filter="print">Print</button>
         <button class="filter-pill" data-filter="packaging">Packaging</button>
         <button class="filter-pill" data-filter="marketing">Marketing</button>
+        <button class="filter-pill" data-filter="animations">Animations</button>
         <button class="filter-pill" data-filter="fun">Just for Fun</button>
       </div>
     </div>
@@ -807,7 +810,7 @@
     <div class="work-grid">
 
       <!-- 1. ISA -->
-      <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding print packaging ui-ux" data-h="70">
+      <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding packaging ui-ux" data-h="70">
       <article class="card">
         <div class="card-inner">
           <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
@@ -829,7 +832,7 @@
       </a>
 
       <!-- 2. Barkada -->
-      <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding marketing" data-h="100">
+      <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding print marketing" data-h="100">
       <article class="card">
         <div class="card-inner">
           <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
@@ -846,7 +849,7 @@
       </article>
       <div class="card-caption">
         <h2 class="card-title">Barkada</h2>
-        <p class="card-type">Brand · Event Design · Social</p>
+        <p class="card-type">Brand · Print · Social</p>
       </div>
       </a>
 
@@ -937,11 +940,11 @@
         </article>
         <div class="archive-caption">
           <p class="archive-caption-title">Little Mermaid Retold</p>
-          <p class="archive-caption-type">Typography · Web Design</p>
+          <p class="archive-caption-type">Typography · Print · Web Design</p>
         </div>
         </a>
 
-        <a href="translations.html" class="archive-card-link" data-cats="print" data-h="75" style="display:block; text-decoration:none; color:inherit;">
+        <a href="translations.html" class="archive-card-link" data-cats="print animations" data-h="75" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 75%;">
             <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet">
@@ -949,13 +952,13 @@
         </article>
         <div class="archive-caption">
           <p class="archive-caption-title">Translations</p>
-          <p class="archive-caption-type">Typography · Print</p>
+          <p class="archive-caption-type">Typography · Print · Animation</p>
         </div>
         </a>
       </div>
 
       <div class="archive-col">
-        <a href="anona.html" class="archive-card-link" data-cats="print" data-h="178" style="display:block; text-decoration:none; color:inherit;">
+        <a href="anona.html" class="archive-card-link" data-cats="print animations" data-h="178" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 177.8%;">
             <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards">
@@ -967,7 +970,7 @@
         </div>
         </a>
 
-        <a href="irh.html" class="archive-card-link" data-cats="fun" data-h="68" style="display:block; text-decoration:none; color:inherit;">
+        <a href="irh.html" class="archive-card-link" data-cats="print fun" data-h="68" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 68.1%;">
             <img class="archive-img" src="images/homepage/irh-cover.png" alt="Intergalactic Retirement Home">
@@ -975,7 +978,7 @@
         </article>
         <div class="archive-caption">
           <p class="archive-caption-title">Intergalactic Retirement Home</p>
-          <p class="archive-caption-type">Game Design · Graphic Design</p>
+          <p class="archive-caption-type">Game Design · Print</p>
         </div>
         </a>
       </div>
@@ -993,7 +996,7 @@
         </div>
         </a>
 
-        <a href="curl.html" class="archive-card-link" data-cats="print ui-ux" data-h="56" style="display:block; text-decoration:none; color:inherit;">
+        <a href="curl.html" class="archive-card-link" data-cats="print packaging" data-h="56" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal" style="background: none;">
           <div class="archive-card-inner" style="padding-bottom: 56.3%;">
             <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards">
@@ -1001,7 +1004,7 @@
         </article>
         <div class="archive-caption">
           <p class="archive-caption-title">Curl In / Curl Out</p>
-          <p class="archive-caption-type">Print · Interaction Design</p>
+          <p class="archive-caption-type">Print · Packaging</p>
         </div>
         </a>
       </div>

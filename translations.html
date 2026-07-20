@@ -70,13 +70,14 @@
     .hero-img-wrap {
       position: relative;
       width: 100%;
-      height: 85vh;
+      aspect-ratio: 3000 / 2250;
+      max-height: 85vh;
       overflow: hidden;
     }
     .hero-img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: center top;
     }
     .hero-text {
       padding: 48px 56px 44px;
@@ -230,7 +231,6 @@
     }
     @media (max-width: 600px) {
       .three-col { grid-template-columns: 1fr; }
-      .hero-img-wrap { height: 70vh; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
