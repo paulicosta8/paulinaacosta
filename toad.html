@@ -8,7 +8,7 @@
   <title>Toad's Survival Guide — Paulina Acosta</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Georgia&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -20,7 +20,7 @@
       --ink:        #1A1208;
       --ink-mid:    #4A3828;
       --ink-light:  #8A7060;
-      --serif:      Georgia, serif;
+      --serif:      'Bricolage Grotesque', 'DM Sans', sans-serif;
       --sans:       'DM Sans', sans-serif;
       --ease:       cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -41,7 +41,7 @@
     }
     .nav-back:hover { color: var(--ink); }
     .nav-back::before { content: '←'; }
-    .nav-project-name { font-family: var(--serif); font-size: 17px; font-weight: normal; font-style: italic; color: var(--brown); }
+    .nav-project-name { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--brown); }
     .hero { padding-top: 64px; }
     .hero-img-wrap { position: relative; width: 100%; aspect-ratio: 612 / 792; max-height: 85vh; overflow: hidden; }
     .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -50,7 +50,7 @@
       max-width: 600px;
     }
     .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown); margin-bottom: 14px; }
-    .hero-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 72px); font-weight: normal; font-style: italic; color: var(--brown-dark); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 72px); font-weight: 700; color: var(--brown-dark); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
     .hero-sub { font-size: 16px; font-weight: 300; color: var(--ink-mid); max-width: 480px; line-height: 1.65; }
     .overview { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid rgba(196,154,108,0.3); background: var(--cream); }
     .overview-item { padding: 32px 40px; border-right: 1px solid rgba(196,154,108,0.3); }
@@ -60,7 +60,7 @@
     .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brown); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
     .section-label::after { content: ''; display: block; height: 1px; width: 40px; background: var(--brown-light); }
     .posters { padding: 100px 80px; background: var(--warm-white); }
-    .posters h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px; }
+    .posters h2 { font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--brown-dark); margin-bottom: 12px; }
     .posters-intro { font-size: 15px; color: var(--ink-mid); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
     .poster-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
     .poster-item { overflow: hidden; border-radius: 4px; }
@@ -69,26 +69,26 @@
     .postcards { background: var(--brown-dark); padding: 100px 80px; }
     .postcards .section-label { color: var(--brown-light); }
     .postcards .section-label::after { background: var(--brown-light); }
-    .postcards h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: white; margin-bottom: 12px; }
+    .postcards h2 { font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: white; margin-bottom: 12px; }
     .postcards-intro { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
     .postcard-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
     .postcard-item { overflow: hidden; border-radius: 4px; }
     .postcard-item img { width: 100%; display: block; transition: transform 0.4s ease; }
     .postcard-item:hover img { transform: scale(1.03); }
     .brochure { background: var(--cream); padding: 100px 80px; }
-    .brochure h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px; }
+    .brochure h2 { font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--brown-dark); margin-bottom: 12px; }
     .brochure-intro { font-size: 15px; color: var(--ink-mid); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
     .brochure-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
     .brochure-spread img { width: 100%; display: block; border-radius: 4px; box-shadow: 0 4px 24px rgba(92,58,26,0.15); }
     .booklet { background: var(--warm-white); padding: 100px 80px; }
-    .booklet h2 { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px; }
+    .booklet h2 { font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--brown-dark); margin-bottom: 12px; }
     .booklet-intro { font-size: 15px; color: var(--ink-mid); max-width: 580px; line-height: 1.75; margin-bottom: 48px; }
     .booklet-feature { display: grid; gap: 12px; margin-bottom: 12px; }
     .booklet-feature img { width: 100%; display: block; border-radius: 4px; box-shadow: 0 2px 12px rgba(92,58,26,0.1); }
     .next-project { padding: 80px 56px; border-top: 1px solid rgba(196,154,108,0.3); display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
     .next-project:hover { background: var(--cream); }
     .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
-    .next-title { font-family: var(--serif); font-size: 28px; font-weight: normal; font-style: italic; color: var(--ink); }
+    .next-title { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--ink); }
     .next-arrow { font-size: 28px; color: var(--brown); transition: transform 0.2s; }
     .next-project:hover .next-arrow { transform: translateX(8px); }
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
@@ -150,7 +150,7 @@
 
   <section class="posters" style="border-bottom: 1px solid rgba(196,154,108,0.3);">
     <p class="section-label reveal">The project</p>
-    <h2 class="reveal" style="font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3vw, 38px); font-weight: normal; color: var(--brown-dark); margin-bottom: 12px;">A travel agency for the Mushroom World.</h2>
+    <h2 class="reveal" style="font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--brown-dark); margin-bottom: 12px;">A travel agency for the Mushroom World.</h2>
     <p class="posters-intro reveal">The Mushroom World Travel Agency needed a complete brand kit to market five Nintendo game-world destinations to would-be tourists. Each location got its own poster, postcard, and booklet entry written from Toad's firsthand perspective, with star reviews, field notes, and local creature warnings included.</p>
   </section>
 
