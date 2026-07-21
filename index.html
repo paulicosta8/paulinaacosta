@@ -15,7 +15,7 @@
   <title>Paulina Acosta — Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:        #F6F6F4;
@@ -28,8 +28,8 @@
       --accent-wash: #D4E6F4;
       --dark-navy: #0F1B2D;
       --white:     #FFFFFF;
-      --serif:     'Fraunces', Georgia, 'Times New Roman', serif;
       --sans:      'Inter', system-ui, sans-serif;
+      --display:   'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
       --ease:      cubic-bezier(0.4, 0, 0.2, 1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,10 +63,9 @@
     }
     nav.scrolled { border-bottom-color: var(--border); }
     .nav-name {
-      font-family: var(--serif);
-      font-style: italic;
+      font-family: var(--display);
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 700;
       letter-spacing: 0.01em;
       color: var(--accent);
     }
@@ -164,17 +163,16 @@
       animation: fadeUp 0.8s var(--ease) 0.2s forwards;
     }
     .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(56px, 9vw, 128px);
-      line-height: 1.02;
+      font-family: var(--display);
+      font-size: clamp(52px, 8.5vw, 116px);
+      line-height: 1.0;
       letter-spacing: -0.02em;
-      font-weight: 300;
-      color: var(--text);
+      font-weight: 750;
+      color: var(--accent);
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.9s var(--ease) 0.4s forwards;
     }
-    .hero-headline em { font-style: italic; color: var(--accent); }
     .hero-sub {
       margin-top: 32px;
       font-size: 18px;
@@ -212,9 +210,8 @@
     /* ── Filter bar ── */
     .filter-bar { margin-bottom: 48px; }
     .filter-label {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 300;
+      font-family: var(--display);
+      font-weight: 500;
       font-size: clamp(22px, 2.4vw, 30px);
       color: var(--text);
       margin-bottom: 20px;
@@ -314,7 +311,7 @@
       align-items: center;
       justify-content: center;
       background: var(--surface);
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: 13px;
       color: var(--border);
       letter-spacing: 0.05em;
@@ -387,9 +384,9 @@
     /* ── Caption (below image) ── */
     .card-caption { padding: 14px 2px 0; }
     .card-title {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: 21px;
-      font-weight: 300;
+      font-weight: 500;
       color: var(--text);
       line-height: 1.2;
       margin-bottom: 5px;
@@ -469,17 +466,17 @@
       margin-bottom: 3px;
     }
     .archive-label-title {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: 15px;
-      font-weight: 300;
+      font-weight: 500;
       color: #F6F6F4;
       line-height: 1.2;
     }
     .archive-card:hover .archive-img { transform: scale(1.04); }
     .archive-caption { padding: 12px 2px 0; }
     .archive-caption-title {
-      font-family: var(--serif);
-      font-size: 16px; font-weight: 300;
+      font-family: var(--display);
+      font-size: 16px; font-weight: 500;
       color: var(--text); line-height: 1.25; margin-bottom: 3px;
       transition: color 0.2s var(--ease);
     }
@@ -527,11 +524,11 @@
       object-fit: cover;
     }
     .about-headline {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: clamp(18px, 2vw, 24px);
       line-height: 1.45;
       letter-spacing: -0.01em;
-      font-weight: 300;
+      font-weight: 500;
       font-style: normal;
       margin-bottom: 24px;
       color: var(--text);
@@ -571,18 +568,26 @@
     /* ── Timeline ── */
     .timeline {
       margin-top: 72px;
-      border-top: 1px solid rgba(15,27,45,0.1);
-      padding-top: 48px;
       overflow-x: auto;
     }
     .timeline-label {
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(15,27,45,0.4);
+      color: var(--accent);
       margin-bottom: 64px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .timeline-label::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
     }
     .timeline-track-wrap {
       position: relative;
@@ -672,14 +677,13 @@
     }
     .contact-inner { max-width: 680px; }
     .contact-headline {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: clamp(40px, 5vw, 68px);
       line-height: 1.1;
       letter-spacing: -0.02em;
-      font-weight: 300;
+      font-weight: 700;
       margin-bottom: 20px;
     }
-    .contact-headline em { font-style: italic; color: var(--accent); }
     .contact-links { display: flex; gap: 24px; flex-wrap: wrap; }
     .contact-link {
       font-size: 14px;
@@ -779,7 +783,7 @@
   <section class="hero" id="home">
     <div class="hero-content">
       <p class="hero-eyebrow">Brand · UI/UX · Experiential</p>
-      <h1 class="hero-headline"><em>paulina acosta</em> <span style="color: var(--accent); font-style: normal;">♡</span></h1>
+      <h1 class="hero-headline">paulina acosta <span style="color: var(--accent);">♥</span></h1>
       <p class="hero-sub">
         A multidisciplinary designer based in NJ/NY working across brand, print, and interaction design. I make work that connects with the people it's meant for.
       </p>
@@ -1182,8 +1186,8 @@
     <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.3);">Typefaces</p>
     <div style="display: flex; gap: 48px; align-items: baseline;">
       <div style="text-align: center;">
-        <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 20px; font-weight: 300; color: rgba(15,27,45,0.45); letter-spacing: -0.01em; margin-bottom: 4px;">Fraunces</p>
-        <p style="font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.25);">Display · Serif</p>
+        <p style="font-family: 'Bricolage Grotesque', 'Inter', sans-serif; font-weight: 700; font-size: 20px; color: rgba(15,27,45,0.45); letter-spacing: -0.01em; margin-bottom: 4px;">Bricolage Grotesque</p>
+        <p style="font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.25);">Display · Sans-serif</p>
       </div>
       <div style="text-align: center;">
         <p style="font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 300; color: rgba(15,27,45,0.45); letter-spacing: 0.01em; margin-bottom: 4px;">Inter</p>
