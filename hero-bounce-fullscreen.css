@@ -1,0 +1,88 @@
+.hero-bounce-arena {
+  /* top / left / width / height are all set at runtime by
+     initHeroBounceFullscreen() — don't set them here. */
+  position: absolute;
+  overflow: visible;
+  z-index: 0;
+}
+
+.bounce-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.bounce-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
+.bounce-item:hover img,
+.bounce-item:focus-visible img {
+  opacity: 0.55;
+}
+
+.bounce-item-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 10px;
+  color: #2c2c2a; /* dark, not white — the hover dim on .bounce-item img blends the image toward the light page background behind it, not toward black, so dark text is what actually reads across most thumbnails */
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.bounce-item:hover .bounce-item-label,
+.bounce-item:focus-visible .bounce-item-label {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .bounce-item-label {
+    opacity: 1;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 8px 10px;
+    color: #fff; /* this variant sits on a dark gradient scrim, not a lightened image, so white is correct here even though the hover version above uses dark text */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  }
+}
+
+/* The name + kicker + bio wrapper. Sits visually above the arena via
+   z-index, with a translucent + blurred background so it stays
+   legible no matter what color is drifting behind it at any moment.
+   pointer-events: none lets clicks pass straight through the panel to
+   a thumbnail underneath, if one happens to be there. */
+.hero-text-panel {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(250, 249, 246, 0.92); /* brighter + more opaque than the page background so it reads as its own surface, not a faint wash of the same color */
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06); /* hairline edge so the eye can find the boundary of the card */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06); /* subtle lift, not a heavy drop shadow */
+  padding: 2rem 2rem 2.5rem;
+  border-radius: 12px;
+}
+
+/* If you ever add a real interactive element inside the text panel
+   (a resume link, a CTA button), it needs pointer-events restored
+   individually, since the parent panel blocks clicks by default:
+   .hero-text-panel a { pointer-events: auto; }
+*/

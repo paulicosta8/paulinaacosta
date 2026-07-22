@@ -144,9 +144,18 @@
       min-height: 100vh;
       display: flex;
       align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
       padding: 120px 48px 100px;
       position: relative;
       overflow: hidden;
+      /* .hero is a transparent box that sits in front of the full-bleed
+         bounce arena in stacking order (later DOM sibling, same z-index
+         layer). Without this, .hero's own empty area would swallow
+         every click over the arena even though nothing is visibly
+         there — not just clicks over the text panel. Interactive
+         children (the pause toggle) opt back in individually. */
+      pointer-events: none;
     }
     .hero-content {
       max-width: 900px;
@@ -164,7 +173,7 @@
     }
     .hero-headline {
       font-family: var(--display);
-      font-size: clamp(44px, 7vw, 92px);
+      font-size: clamp(34px, 5vw, 64px);
       line-height: 1.0;
       letter-spacing: -0.02em;
       font-weight: 750;
@@ -174,15 +183,39 @@
       animation: fadeUp 0.9s var(--ease) 0.4s forwards;
     }
     .hero-sub {
-      margin-top: 16px;
-      font-size: 18px;
+      margin-top: 14px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--muted);
-      max-width: 480px;
+      max-width: 420px;
       line-height: 1.7;
       opacity: 0;
       transform: translateY(12px);
       animation: fadeUp 0.9s var(--ease) 0.65s forwards;
+    }
+    .hero-bounce-toggle {
+      position: relative;
+      z-index: 2;
+      pointer-events: auto;
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.9s var(--ease) 0.55s forwards;
+      transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+    }
+    .hero-bounce-toggle:hover,
+    .hero-bounce-toggle:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* ── Section wrapper ── */
@@ -760,6 +793,7 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="hero-bounce-fullscreen.css" />
 </head>
 <body>
 
@@ -780,14 +814,82 @@
     <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
+  <!-- Direct child of body, not nested inside .hero — .hero has its own
+       position: relative + overflow: hidden, which would break the
+       viewport-absolute bounds math in hero-bounce-fullscreen.js and
+       could clip thumbnails. Kept as a body-level sibling instead. -->
+  <div id="heroBounceArena" class="hero-bounce-arena">
+    <a href="isa.html" class="bounce-item" style="width: 160px; height: 111px;">
+      <img src="images/homepage/isa-cover.png" alt="">
+      <span class="bounce-item-label">ISA</span>
+    </a>
+    <a href="isa.html" class="bounce-item" style="width: 160px; height: 103px;">
+      <img src="images/homepage/isa-website.png" alt="">
+      <span class="bounce-item-label">ISA</span>
+    </a>
+    <a href="isa.html" class="bounce-item" style="width: 160px; height: 100px;">
+      <img src="images/isa/isa-mockup1.jpg" alt="">
+      <span class="bounce-item-label">ISA</span>
+    </a>
+    <a href="barkada.html" class="bounce-item" style="width: 160px; height: 160px;">
+      <img src="images/homepage/barkada-benefit.jpg" alt="">
+      <span class="bounce-item-label">Barkada</span>
+    </a>
+    <a href="barkada.html" class="bounce-item" style="width: 160px; height: 124px;">
+      <img src="images/homepage/barkada-cover.png" alt="">
+      <span class="bounce-item-label">Barkada</span>
+    </a>
+    <a href="barkada.html" class="bounce-item" style="width: 160px; height: 151px;">
+      <img src="images/barkada/barky-shirt.png" alt="">
+      <span class="bounce-item-label">Barkada</span>
+    </a>
+    <a href="barkada.html" class="bounce-item" style="width: 160px; height: 160px;">
+      <img src="images/barkada/gm4.jpg" alt="">
+      <span class="bounce-item-label">Barkada</span>
+    </a>
+    <a href="barkada.html" class="bounce-item" style="width: 160px; height: 160px;">
+      <img src="images/barkada/fcc-ig.jpg" alt="">
+      <span class="bounce-item-label">Barkada</span>
+    </a>
+    <a href="nextflix.html" class="bounce-item" style="width: 160px; height: 90px;">
+      <img src="images/homepage/nextflix-cover.png" alt="">
+      <span class="bounce-item-label">Nextflix</span>
+    </a>
+    <a href="bn.html" class="bounce-item" style="width: 124px; height: 160px;">
+      <img src="images/homepage/bn-viet.jpg" alt="">
+      <span class="bounce-item-label">B&amp;N Sandwiches</span>
+    </a>
+    <a href="bn.html" class="bounce-item" style="width: 124px; height: 160px;">
+      <img src="images/homepage/bn-cover.jpg" alt="">
+      <span class="bounce-item-label">B&amp;N Sandwiches</span>
+    </a>
+    <a href="noaa.html" class="bounce-item" style="width: 82px; height: 160px;">
+      <img src="images/homepage/noaa-cover.png" alt="">
+      <span class="bounce-item-label">NOAA</span>
+    </a>
+    <a href="translations.html" class="bounce-item" style="width: 160px; height: 100px;">
+      <img src="images/translations/012.jpg" alt="">
+      <span class="bounce-item-label">Translations</span>
+    </a>
+    <a href="anona.html" class="bounce-item" style="width: 90px; height: 160px;">
+      <img src="images/homepage/anona-cover.gif" alt="">
+      <span class="bounce-item-label">Anona Specimen Cards</span>
+    </a>
+    <a href="toad.html" class="bounce-item" style="width: 124px; height: 160px;">
+      <img src="images/homepage/toad-cover.png" alt="">
+      <span class="bounce-item-label">Toad's Survival Guide</span>
+    </a>
+  </div>
+
   <section class="hero" id="home">
-    <div class="hero-content">
+    <div class="hero-content hero-text-panel" id="heroTextPanel">
       <p class="hero-eyebrow">Brand · UI/UX · Experiential</p>
       <h1 class="hero-headline">paulina acosta&nbsp;<span style="color: var(--accent);">♥</span></h1>
       <p class="hero-sub">
         A multidisciplinary designer based in NJ/NY working across brand, print, and interaction design. I make work that connects with the people it's meant for.
       </p>
     </div>
+    <button id="heroBounceToggle" class="hero-bounce-toggle" type="button" aria-pressed="false">Pause motion</button>
   </section>
 
   <section class="section" id="work">
@@ -1200,6 +1302,33 @@
     <p style="font-size: 10px; font-weight: 400; letter-spacing: 0.04em; color: rgba(15,27,45,0.3);">Designed and coded in HTML, CSS, and JavaScript.</p>
   </div>
 
+  <script src="hero-bounce-fullscreen.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      initHeroBounceFullscreen({
+        arenaSelector: '#heroBounceArena',
+        headerSelector: '#nav',
+        textPanelSelector: '#heroTextPanel',
+        toggleSelector: '#heroBounceToggle'
+      });
+      var bounceToggle = document.getElementById('heroBounceToggle');
+      if (bounceToggle) {
+        bounceToggle.addEventListener('click', function () {
+          var paused = bounceToggle.getAttribute('aria-pressed') === 'true';
+          bounceToggle.textContent = paused ? 'Play motion' : 'Pause motion';
+        });
+      }
+      // The hero text panel's size depends on Bricolage Grotesque, which
+      // loads async — re-trigger the arena's existing resize-based bounds
+      // recalculation once the real font has swapped in for the fallback,
+      // so the arena isn't left sized to the pre-font-load layout.
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+          window.dispatchEvent(new Event('resize'));
+        });
+      }
+    });
+  </script>
   <script>
     const nav = document.getElementById('nav');
     const hamburger = document.getElementById('hamburger');
