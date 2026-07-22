@@ -51,15 +51,12 @@
   opacity: 1;
 }
 
+/* On touch devices there's no hover to reveal the label on demand, so
+   rather than forcing it always-on with a dark scrim over the image,
+   just leave it hidden — touch users see the bare thumbnails only. */
 @media (hover: none) {
   .bounce-item-label {
-    opacity: 1;
-    align-items: flex-end;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 8px 10px;
-    color: #fff; /* this variant sits on a dark gradient scrim, not a lightened image, so white is correct here even though the hover version above uses dark text */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+    display: none;
   }
 }
 
