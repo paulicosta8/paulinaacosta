@@ -118,44 +118,64 @@ function initHeroBounceFullscreen(config) {
     return x < panelX2 && x + w > panelX1 && y < panelY2 && y + h > panelY1;
   }
 
-  // Spread items across roughly-equal regions of the arena so they
-  // start out well-distributed, and steer each one's home position
-  // away from the copy panel's footprint for a clean initial paint —
+  // Spread items across the arena's actually-free space so they start
+  // out well-distributed, and steer each one's home position away
+  // from the copy panel's footprint for a clean initial paint —
   // ongoing drift is kept clear of the panel separately, at runtime,
   // by resolvePanelCollision() below.
   function generateHomePositions(count, sizeList) {
-    var cols = Math.max(1, Math.ceil(Math.sqrt(count)));
-    var rows = Math.max(1, Math.ceil(count / cols));
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+      }
+      return arr;
+    }
+
+    // Use more candidate cells than items so there's slack to skip
+    // cells that are mostly eaten by the panel, rather than a grid
+    // sized 1:1 with the item count (which forces every panel-heavy
+    // cell's item into the same narrow strip above the panel).
+    var cols = Math.max(1, Math.ceil(Math.sqrt(count * 2)));
+    var rows = Math.max(1, Math.ceil((count * 2) / cols));
     var cellW = W / cols;
     var cellH = H / rows;
 
-    var cellIndexes = [];
-    for (var i = 0; i < cols * rows; i++) cellIndexes.push(i);
-    for (var i2 = cellIndexes.length - 1; i2 > 0; i2--) {
-      var j = Math.floor(Math.random() * (i2 + 1));
-      var tmp = cellIndexes[i2];
-      cellIndexes[i2] = cellIndexes[j];
-      cellIndexes[j] = tmp;
+    var freeCells = [];
+    var busyCells = [];
+    for (var row = 0; row < rows; row++) {
+      for (var col = 0; col < cols; col++) {
+        var cellX = col * cellW;
+        var cellY = row * cellH;
+        var ox = Math.max(0, Math.min(cellX + cellW, panelX2) - Math.max(cellX, panelX1));
+        var oy = Math.max(0, Math.min(cellY + cellH, panelY2) - Math.max(cellY, panelY1));
+        var overlapFraction = (ox * oy) / (cellW * cellH);
+        (overlapFraction < 0.35 ? freeCells : busyCells).push({ x: cellX, y: cellY });
+      }
     }
+    shuffle(freeCells);
+    shuffle(busyCells);
+    // Free (panel-clear) cells are handed out first — items only spill
+    // into busy cells if there are literally more items than free
+    // cells to put them in.
+    var cellOrder = freeCells.concat(busyCells);
 
     var positions = [];
     for (var k = 0; k < count; k++) {
-      var cell = cellIndexes[k];
-      var col = cell % cols;
-      var row = Math.floor(cell / cols);
-      var cellX = col * cellW;
-      var cellY = row * cellH;
+      var cell = cellOrder[k % cellOrder.length];
       var w = sizeList[k].w0;
       var h = sizeList[k].h0;
       var maxX = Math.max(0, cellW - w);
       var maxY = Math.max(0, cellH - h);
 
-      var x = cellX;
-      var y = cellY;
+      var x = cell.x;
+      var y = cell.y;
       var found = false;
       for (var attempt = 0; attempt < 12; attempt++) {
-        x = cellX + Math.random() * maxX;
-        y = cellY + Math.random() * maxY;
+        x = cell.x + Math.random() * maxX;
+        y = cell.y + Math.random() * maxY;
         if (!rectOverlapsPanel(x, y, w, h)) {
           found = true;
           break;
@@ -172,9 +192,57 @@ function initHeroBounceFullscreen(config) {
         }
       }
 
-      positions.push({ x: x, y: y });
+      x = Math.max(0, Math.min(x, W - w));
+      y = Math.max(0, Math.min(y, H - h));
+      positions.push({ x: x, y: y, w: w, h: h });
     }
-    return positions;
+
+    // Cell placement alone only guarantees two items don't overlap
+    // when they land in different cells AND both fit comfortably
+    // inside their own cell — with this many images that's not always
+    // true. Relax the raw cell positions a handful of times so the
+    // starting layout itself is already clear, instead of leaving all
+    // of that separation work to the render loop's per-frame resolve.
+    for (var relax = 0; relax < 8; relax++) {
+      for (var i2 = 0; i2 < positions.length; i2++) {
+        for (var j2 = i2 + 1; j2 < positions.length; j2++) {
+          var a = positions[i2];
+          var b = positions[j2];
+          var overlapX = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+          var overlapY = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+          if (overlapX > 0 && overlapY > 0) {
+            if (overlapX < overlapY) {
+              var pushX = overlapX / 2;
+              if (a.x < b.x) { a.x -= pushX; b.x += pushX; }
+              else { a.x += pushX; b.x -= pushX; }
+            } else {
+              var pushY = overlapY / 2;
+              if (a.y < b.y) { a.y -= pushY; b.y += pushY; }
+              else { a.y += pushY; b.y -= pushY; }
+            }
+          }
+        }
+      }
+      positions.forEach(function (p) {
+        var ox2 = Math.min(p.x + p.w, panelX2) - Math.max(p.x, panelX1);
+        var oy2 = Math.min(p.y + p.h, panelY2) - Math.max(p.y, panelY1);
+        if (ox2 > 0 && oy2 > 0) {
+          var panelCenterX = (panelX1 + panelX2) / 2;
+          var panelCenterY = (panelY1 + panelY2) / 2;
+          var itemCenterX = p.x + p.w / 2;
+          var itemCenterY = p.y + p.h / 2;
+          if (ox2 < oy2) {
+            p.x += itemCenterX < panelCenterX ? -ox2 : ox2;
+          } else {
+            p.y += itemCenterY < panelCenterY ? -oy2 : oy2;
+          }
+        }
+        p.x = Math.max(0, Math.min(p.x, W - p.w));
+        p.y = Math.max(0, Math.min(p.y, H - p.h));
+      });
+    }
+
+    return positions.map(function (p) { return { x: p.x, y: p.y }; });
   }
 
   // Random, fixed priority order decided once at load — as fewer
