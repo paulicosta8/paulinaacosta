@@ -11,17 +11,16 @@
  * at, so this works the same whether a visitor resizes down from
  * desktop or loads the page directly on a phone.
  *
- * Each visible item rests at its own fixed "home" position, chosen up
- * front with a little retry logic to start clear of the copy panel.
- * From there, it drifts very slowly in a small, independent loop
- * around that home — no autonomous travel, nothing to get stuck
- * against.
- *
- * Every frame, after drift is applied: items that ended up
- * overlapping each other get nudged apart, and anything that drifted
- * into the copy panel's own footprint gets pushed back out — it
- * bounces off the panel like a wall, the same way it'd bounce off the
- * edge of the arena.
+ * Each visible item starts at a well-spread, non-overlapping position
+ * (chosen up front, biased away from the copy panel) and then just
+ * keeps moving — real constant-velocity drift, not a wobble around a
+ * fixed spot. When it reaches the edge of the arena, another item, or
+ * the copy panel, it bounces off like a ball off a wall: it gets
+ * pushed clear and its velocity reflects away from whatever it hit,
+ * so it heads off in a new direction instead of settling in place.
+ * Nothing ever leaves the arena or teleports back in — every bounce
+ * is off one of those three things (a wall, another item, or the
+ * panel), never an off-screen entry or exit.
  *
  * Clicking the "stop motion" toggle freezes everything exactly where
  * it currently is, so the real, clickable links underneath can
@@ -59,16 +58,15 @@
  *
  * Optional config: referenceWidth (default 1440 — the width at which
  * every item shows at full size/count), minVisibleCount (default 3),
- * floatAmplitude, floatPeriod (ms per drift cycle), minScale, maxScale.
+ * speed (px/second, default 22), minScale, maxScale.
  */
 function initHeroBounceFullscreen(config) {
   config = config || {};
-  var floatAmplitude = config.floatAmplitude || 10;
-  var floatPeriod = config.floatPeriod || 7000; // ms per drift loop — slow, gentle
   var minScale = config.minScale || 0.55;
   var maxScale = config.maxScale || 1;
   var referenceWidth = config.referenceWidth || 1440;
   var minVisibleCount = Math.max(1, config.minVisibleCount || 3);
+  var baseSpeed = config.speed || 10; // px/second — slow, gentle drift
 
   var arena = document.querySelector(config.arenaSelector);
   var header = document.querySelector(config.headerSelector);
@@ -118,22 +116,22 @@ function initHeroBounceFullscreen(config) {
     return x < panelX2 && x + w > panelX1 && y < panelY2 && y + h > panelY1;
   }
 
-  // Spread items across the arena's actually-free space so they start
-  // out well-distributed, and steer each one's home position away
-  // from the copy panel's footprint for a clean initial paint —
-  // ongoing drift is kept clear of the panel separately, at runtime,
-  // by resolvePanelCollision() below.
-  function generateHomePositions(count, sizeList) {
-    function shuffle(arr) {
-      for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-      }
-      return arr;
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
     }
+    return arr;
+  }
 
+  // Spread items across the arena's actually-free space so they start
+  // out well-distributed and non-overlapping, biased away from the
+  // copy panel's footprint for a clean initial paint. This is only
+  // the STARTING point — from here on, items drift under their own
+  // velocity (see the render loop) instead of returning to it.
+  function generateStartPositions(count, sizeList) {
     // Use more candidate cells than items so there's slack to skip
     // cells that are mostly eaten by the panel, rather than a grid
     // sized 1:1 with the item count (which forces every panel-heavy
@@ -222,8 +220,7 @@ function initHeroBounceFullscreen(config) {
     // when they land in different cells AND both fit comfortably
     // inside their own cell — with this many images that's not always
     // true. Relax the raw cell positions a handful of times so the
-    // starting layout itself is already clear, instead of leaving all
-    // of that separation work to the render loop's per-frame resolve.
+    // starting layout itself is already clear.
     for (var relax = 0; relax < 8; relax++) {
       for (var i2 = 0; i2 < positions.length; i2++) {
         for (var j2 = i2 + 1; j2 < positions.length; j2++) {
@@ -282,29 +279,26 @@ function initHeroBounceFullscreen(config) {
   var sizes = items.map(function (el) {
     return { w0: el.offsetWidth || 90, h0: el.offsetHeight || 60 };
   });
-  var homePositions = generateHomePositions(items.length, sizes);
+  var startPositions = generateStartPositions(items.length, sizes);
+
+  function randomVelocity() {
+    if (prefersReducedMotion) return { vx: 0, vy: 0 };
+    var speed = baseSpeed * (0.7 + Math.random() * 0.6);
+    var angle = Math.random() * Math.PI * 2;
+    return { vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed };
+  }
 
   var boxes = items.map(function (el, i) {
+    var v = randomVelocity();
     return {
       el: el,
       w: sizes[i].w0,
       h: sizes[i].h0,
-      x: homePositions[i].x,
-      y: homePositions[i].y,
-      homeX: homePositions[i].x,
-      homeY: homePositions[i].y,
-      freqX: 0.6 + Math.random() * 0.5,
-      freqY: 0.6 + Math.random() * 0.5,
-      phaseX: Math.random() * Math.PI * 2,
-      phaseY: Math.random() * Math.PI * 2,
+      x: startPositions[i].x,
+      y: startPositions[i].y,
+      vx: v.vx,
+      vy: v.vy,
       hidden: false,
-      // Persistent, eased separation offset — see the render loop for
-      // why this exists instead of just snapping straight to whatever
-      // resolveCollisions() computes.
-      sepX: 0,
-      sepY: 0,
-      baseX: homePositions[i].x,
-      baseY: homePositions[i].y,
     };
   });
 
@@ -348,24 +342,46 @@ function initHeroBounceFullscreen(config) {
   updateVisibility();
 
   window.addEventListener('resize', function () {
+    var oldW = W;
+    var oldH = H;
     computeBounds();
     applyScale();
     updateVisibility();
-    // Home positions were computed for the old bounds — recompute so
-    // nothing ends up off-screen or back inside the panel after a
-    // big resize.
-    var newHomes = generateHomePositions(items.length, sizes);
-    boxes.forEach(function (b, i) {
-      b.homeX = newHomes[i].x;
-      b.homeY = newHomes[i].y;
-    });
+    // Rescale existing positions to the new bounds proportionally,
+    // rather than jumping items to freshly-generated spots — keeps
+    // motion continuous across a resize instead of a visible snap.
+    if (oldW > 0 && oldH > 0) {
+      var scaleX = W / oldW;
+      var scaleY = H / oldH;
+      boxes.forEach(function (b) {
+        b.x = Math.max(0, Math.min(b.x * scaleX, W - b.w));
+        b.y = Math.max(0, Math.min(b.y * scaleY, H - b.h));
+      });
+    }
   });
 
-  // Simple, stateless positional nudge: if two visible items end up
-  // overlapping this frame (after their own drift is applied),
-  // separate them by half the overlap along whichever axis has the
-  // smaller penetration.
-  function resolveCollisions() {
+  // A collision always leaves whichever item(s) it involves moving
+  // away from what they hit — never zero — so nothing can stall out
+  // sitting still against a wall or another item.
+  var MIN_BOUNCE_SPEED = Math.max(2, baseSpeed * 0.35);
+  // A bounce sheds some of its speed rather than reflecting at full
+  // strength — softens the impact instead of it reading as a rigid,
+  // billiard-ball ricochet. Never below the floor above, so nothing
+  // ever settles down to a full stop.
+  var BOUNCE_RESTITUTION = 0.55;
+
+  function bounceAway(b, axis, negative) {
+    var mag = Math.max(Math.abs(b[axis]) * BOUNCE_RESTITUTION, MIN_BOUNCE_SPEED);
+    b[axis] = negative ? -mag : mag;
+  }
+
+  // Positional nudge + (on the first, dominant pass only) a velocity
+  // reflection: if two visible items end up overlapping, separate
+  // them along whichever axis has the smaller penetration, and send
+  // each one off moving away from the other along that axis. Later
+  // passes in the same frame skip the velocity reflection so a single
+  // collision doesn't flip an item's direction back and forth.
+  function resolveCollisions(reflectVelocity) {
     for (var i = 0; i < boxes.length; i++) {
       if (boxes[i].hidden) continue;
       for (var j = i + 1; j < boxes.length; j++) {
@@ -378,21 +394,21 @@ function initHeroBounceFullscreen(config) {
         if (overlapX > 0 && overlapY > 0) {
           if (overlapX < overlapY) {
             var pushXAmt = overlapX / 2;
-            if (a.x < b.x) {
-              a.x -= pushXAmt;
-              b.x += pushXAmt;
-            } else {
-              a.x += pushXAmt;
-              b.x -= pushXAmt;
+            var aIsLeft = a.x < b.x;
+            if (aIsLeft) { a.x -= pushXAmt; b.x += pushXAmt; }
+            else { a.x += pushXAmt; b.x -= pushXAmt; }
+            if (reflectVelocity) {
+              bounceAway(a, 'vx', aIsLeft);
+              bounceAway(b, 'vx', !aIsLeft);
             }
           } else {
             var pushYAmt = overlapY / 2;
-            if (a.y < b.y) {
-              a.y -= pushYAmt;
-              b.y += pushYAmt;
-            } else {
-              a.y += pushYAmt;
-              b.y -= pushYAmt;
+            var aIsAbove = a.y < b.y;
+            if (aIsAbove) { a.y -= pushYAmt; b.y += pushYAmt; }
+            else { a.y += pushYAmt; b.y -= pushYAmt; }
+            if (reflectVelocity) {
+              bounceAway(a, 'vy', aIsAbove);
+              bounceAway(b, 'vy', !aIsAbove);
             }
           }
         }
@@ -404,8 +420,8 @@ function initHeroBounceFullscreen(config) {
   // item overlaps it, push the item fully clear along whichever axis
   // has the smaller penetration (the panel itself never moves, unlike
   // the item-vs-item case above, which is why this pushes by the full
-  // overlap amount rather than splitting it).
-  function resolvePanelCollision(b) {
+  // overlap amount rather than splitting it), and bounce it away.
+  function resolvePanelCollision(b, reflectVelocity) {
     var overlapX = Math.min(b.x + b.w, panelX2) - Math.max(b.x, panelX1);
     var overlapY = Math.min(b.y + b.h, panelY2) - Math.max(b.y, panelY1);
     if (overlapX <= 0 || overlapY <= 0) return;
@@ -416,63 +432,47 @@ function initHeroBounceFullscreen(config) {
     var itemCenterY = b.y + b.h / 2;
 
     if (overlapX < overlapY) {
-      b.x += itemCenterX < panelCenterX ? -overlapX : overlapX;
+      var goLeft = itemCenterX < panelCenterX;
+      b.x += goLeft ? -overlapX : overlapX;
+      if (reflectVelocity) bounceAway(b, 'vx', goLeft);
     } else {
-      b.y += itemCenterY < panelCenterY ? -overlapY : overlapY;
+      var goUp = itemCenterY < panelCenterY;
+      b.y += goUp ? -overlapY : overlapY;
+      if (reflectVelocity) bounceAway(b, 'vy', goUp);
     }
   }
 
   var stopped = false;
   var raf = null;
-  var TWO_PI_OVER_PERIOD = (2 * Math.PI * 1000) / floatPeriod;
-  // Asymmetric on purpose: catching up to a needed push-apart is fast
-  // (converges to ~0 overlap in well under 10 frames), but relaxing
-  // back to 0 once clear is slower, so it reads as a soft release
-  // rather than an instant snap back to pure home + drift.
-  var SEPARATION_EASE_IN = 0.6;
-  var SEPARATION_EASE_OUT = 0.15;
+  var lastTimestamp = null;
 
   function render(timestamp) {
     if (!stopped) {
-      var t = (timestamp || 0) / 1000;
+      var dt = lastTimestamp === null ? 0 : (timestamp - lastTimestamp) / 1000;
+      // Clamp dt so a paused/backgrounded tab resuming doesn't send
+      // everything flying across the arena in one giant leap.
+      dt = Math.min(dt, 0.05);
+      lastTimestamp = timestamp;
 
-      // Pass 1: each item's resting spot for this instant (home +
-      // drift). The hard-resolve in Pass 2 is seeded from THIS raw
-      // spot, not from last frame's eased separation — if it were
-      // seeded from the eased position, a pair with no more actual
-      // overlap at that (already partly separated) position would
-      // compute a target equal to its current separation, and sepX/Y
-      // would never ease back down to 0. Seeding fresh from home each
-      // frame keeps the target honest: 0 when truly clear, nonzero
-      // only for as long as there's a real overlap to resolve.
+      // Move every item along its own velocity.
       boxes.forEach(function (b) {
         if (b.hidden) return;
-
-        var floatX = prefersReducedMotion
-          ? 0
-          : Math.sin(t * TWO_PI_OVER_PERIOD * b.freqX + b.phaseX) * floatAmplitude;
-        var floatY = prefersReducedMotion
-          ? 0
-          : Math.cos(t * TWO_PI_OVER_PERIOD * b.freqY + b.phaseY) * floatAmplitude;
-
-        b.baseX = b.homeX + floatX;
-        b.baseY = b.homeY + floatY;
-        b.x = b.baseX;
-        b.y = b.baseY;
+        b.x += b.vx * dt;
+        b.y += b.vy * dt;
       });
 
-      // Pass 2: hard-resolve from that raw starting point — nudge
-      // apart anything overlapping another item, then bounce anything
-      // inside the copy panel back out of it. Repeated a few times
-      // rather than run once, since resolving one overlapping pair
-      // can push one of them into a third item (or into the panel);
-      // a handful of iterations converges to (effectively) zero
-      // overlap in this target position.
+      // Resolve overlaps against each other, the panel, and the arena
+      // walls together, several times over — one pass can push an
+      // item straight into a third item (or the panel, or a wall), so
+      // a handful of iterations converges everything to clear. Only
+      // the first pass reflects velocity (the "which way did it get
+      // hit" signal); later passes are pure position cleanup.
       for (var iter = 0; iter < 6; iter++) {
-        resolveCollisions();
+        var reflect = iter === 0;
+        resolveCollisions(reflect);
         boxes.forEach(function (b) {
           if (b.hidden) return;
-          resolvePanelCollision(b);
+          resolvePanelCollision(b, reflect);
         });
         // Clamp to the arena on every iteration, not just once at the
         // end — otherwise a pair resolved near an edge can get pushed
@@ -481,33 +481,21 @@ function initHeroBounceFullscreen(config) {
         // time, which is exactly what let items pile up in corners.
         boxes.forEach(function (b) {
           if (b.hidden) return;
-          b.x = Math.max(0, Math.min(b.x, W - b.w));
-          b.y = Math.max(0, Math.min(b.y, H - b.h));
+          if (b.x < 0) { b.x = 0; bounceAway(b, 'vx', false); }
+          if (b.x > W - b.w) { b.x = W - b.w; bounceAway(b, 'vx', true); }
+          if (b.y < 0) { b.y = 0; bounceAway(b, 'vy', false); }
+          if (b.y > H - b.h) { b.y = H - b.h; bounceAway(b, 'vy', true); }
         });
       }
 
-      // Pass 3: that hard-resolved position is the TARGET separation,
-      // not the position to draw — ease each item's own persistent
-      // separation offset toward it instead of snapping straight
-      // there, using whichever rate is moving it further from 0
-      // (pushing apart) vs. back toward 0 (releasing).
       boxes.forEach(function (b) {
         if (b.hidden) return;
-        var targetSepX = b.x - b.baseX;
-        var targetSepY = b.y - b.baseY;
-        var easeX = Math.abs(targetSepX) > Math.abs(b.sepX) ? SEPARATION_EASE_IN : SEPARATION_EASE_OUT;
-        var easeY = Math.abs(targetSepY) > Math.abs(b.sepY) ? SEPARATION_EASE_IN : SEPARATION_EASE_OUT;
-        b.sepX += (targetSepX - b.sepX) * easeX;
-        b.sepY += (targetSepY - b.sepY) * easeY;
-      });
-
-      // Pass 4: final position, clamped to the arena, then draw.
-      boxes.forEach(function (b) {
-        if (b.hidden) return;
-        b.x = Math.max(0, Math.min(b.baseX + b.sepX, W - b.w));
-        b.y = Math.max(0, Math.min(b.baseY + b.sepY, H - b.h));
         b.el.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px)';
       });
+    } else {
+      // Keep the clock from jumping forward while paused, so resuming
+      // doesn't read as one huge elapsed frame.
+      lastTimestamp = timestamp;
     }
 
     raf = requestAnimationFrame(render);
