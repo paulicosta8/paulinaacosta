@@ -143,24 +143,45 @@ function initHeroBounceFullscreen(config) {
     var cellW = W / cols;
     var cellH = H / rows;
 
-    var freeCells = [];
-    var busyCells = [];
+    // Three tiers, best to worst:
+    //  1. beside   — cell's x-range doesn't touch the panel's x-range
+    //                at all, so it can never crowd the space directly
+    //                above the panel no matter its y position.
+    //  2. above    — cell shares the panel's x-range but sits entirely
+    //                above it (y-range ends before the panel starts) —
+    //                geometrically clear, but this is exactly the
+    //                "crowded above the text box" band, so it's only
+    //                used once every beside cell is taken.
+    //  3. overlap  — cell actually overlaps the panel rectangle —
+    //                last resort.
+    var besideCells = [];
+    var aboveCells = [];
+    var overlapCells = [];
     for (var row = 0; row < rows; row++) {
       for (var col = 0; col < cols; col++) {
         var cellX = col * cellW;
         var cellY = row * cellH;
-        var ox = Math.max(0, Math.min(cellX + cellW, panelX2) - Math.max(cellX, panelX1));
-        var oy = Math.max(0, Math.min(cellY + cellH, panelY2) - Math.max(cellY, panelY1));
+        var cellX2 = cellX + cellW;
+        var cellY2 = cellY + cellH;
+        var sharesPanelX = cellX < panelX2 && cellX2 > panelX1;
+        if (!sharesPanelX) {
+          besideCells.push({ x: cellX, y: cellY });
+          continue;
+        }
+        var ox = Math.max(0, Math.min(cellX2, panelX2) - Math.max(cellX, panelX1));
+        var oy = Math.max(0, Math.min(cellY2, panelY2) - Math.max(cellY, panelY1));
         var overlapFraction = (ox * oy) / (cellW * cellH);
-        (overlapFraction < 0.35 ? freeCells : busyCells).push({ x: cellX, y: cellY });
+        if (overlapFraction >= 0.35) {
+          overlapCells.push({ x: cellX, y: cellY });
+        } else {
+          aboveCells.push({ x: cellX, y: cellY });
+        }
       }
     }
-    shuffle(freeCells);
-    shuffle(busyCells);
-    // Free (panel-clear) cells are handed out first — items only spill
-    // into busy cells if there are literally more items than free
-    // cells to put them in.
-    var cellOrder = freeCells.concat(busyCells);
+    shuffle(besideCells);
+    shuffle(aboveCells);
+    shuffle(overlapCells);
+    var cellOrder = besideCells.concat(aboveCells, overlapCells);
 
     var positions = [];
     for (var k = 0; k < count; k++) {
@@ -447,11 +468,21 @@ function initHeroBounceFullscreen(config) {
       // can push one of them into a third item (or into the panel);
       // a handful of iterations converges to (effectively) zero
       // overlap in this target position.
-      for (var iter = 0; iter < 4; iter++) {
+      for (var iter = 0; iter < 6; iter++) {
         resolveCollisions();
         boxes.forEach(function (b) {
           if (b.hidden) return;
           resolvePanelCollision(b);
+        });
+        // Clamp to the arena on every iteration, not just once at the
+        // end — otherwise a pair resolved near an edge can get pushed
+        // to a position past the wall, "look" separated to the solver,
+        // and then get silently clamped back into each other at draw
+        // time, which is exactly what let items pile up in corners.
+        boxes.forEach(function (b) {
+          if (b.hidden) return;
+          b.x = Math.max(0, Math.min(b.x, W - b.w));
+          b.y = Math.max(0, Math.min(b.y, H - b.h));
         });
       }
 
