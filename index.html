@@ -1407,11 +1407,23 @@
       // height — rather than relying on CSS auto-placement, which just grabs
       // whichever card fits first and can leave one side much taller than the other.
       function layoutFeatured(filter) {
+        // A previous filter may have hidden a column entirely (zero
+        // matching cards), which zeroes its measured width. Un-hide
+        // both before measuring so that leftover state can't be
+        // mistaken for "layout hasn't settled yet" below — otherwise
+        // the bail-out keeps re-triggering off that same stale
+        // display:none forever, since it returns before ever reaching
+        // the code further down that would correct it.
+        colWide.style.display = '';
+        colNarrow.style.display = '';
+
         const wideW   = colWide.getBoundingClientRect().width;
         const narrowW = colNarrow.getBoundingClientRect().width;
 
-        // Layout hasn't settled yet (columns still 0-width) — bail and retry next frame
-        // rather than balancing against garbage measurements and locking in a bad split.
+        // Layout genuinely hasn't settled yet (e.g. very first call,
+        // before CSS/fonts have applied) — bail and retry next frame
+        // rather than balancing against garbage measurements and locking
+        // in a bad split.
         if (wideW < 10 || narrowW < 10) {
           requestAnimationFrame(() => layoutFeatured(filter));
           return;
