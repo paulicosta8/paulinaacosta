@@ -887,8 +887,8 @@
     <div class="filter-bar reveal">
       <p class="filter-label">What do you want to see?</p>
       <div class="filter-pills">
-        <button class="filter-pill" data-filter="featured">Featured</button>
-        <button class="filter-pill active" data-filter="all">Everything</button>
+        <button class="filter-pill active" data-filter="featured">Featured</button>
+        <button class="filter-pill" data-filter="all">Everything</button>
         <button class="filter-pill" data-filter="branding">Branding</button>
         <button class="filter-pill" data-filter="ui-ux">UI/UX</button>
         <button class="filter-pill" data-filter="print">Print</button>
@@ -1430,7 +1430,7 @@
       const archiveCols  = Array.from(document.querySelectorAll('.archive-col'));
       const archiveCards = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
 
-      let currentFilter = 'all';
+      let currentFilter = 'featured';
       const CAPTION_H = 70; // approx caption block height — doesn't scale with card width
       const GAP = 28;       // matches .work-col-wide / .work-col-narrow gap
 
@@ -1565,6 +1565,13 @@
           applyFilter(pill.dataset.filter);
         });
       });
+
+      // The archive grid doesn't measure column widths (it only compares
+      // data-h ratios), so unlike layoutFeatured below it doesn't need to
+      // wait for a real layout pass — run it immediately so archive cards
+      // that don't match the default filter are hidden from first paint,
+      // not just whichever ones happened to already be visible in the DOM.
+      distribute(archiveCols, archiveCards, currentFilter);
 
       // Defer the first run until the browser has committed a real layout pass —
       // measuring column widths synchronously on load can catch them at 0/unsettled,
