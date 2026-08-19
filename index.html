@@ -830,15 +830,15 @@
     </a>
     <a href="barkada.html" class="bounce-item" style="width: 160px; height: 160px;">
       <img src="images/homepage/barkada-benefit.jpg" alt="">
-      <span class="bounce-item-label">Barkada</span>
+      <span class="bounce-item-label">Barkada Graphics</span>
     </a>
     <a href="barkada.html" class="bounce-item" style="width: 160px; height: 124px;">
       <img src="images/homepage/barkada-cover.png" alt="">
-      <span class="bounce-item-label">Barkada</span>
+      <span class="bounce-item-label">Barkada Graphics</span>
     </a>
     <a href="barkada.html" class="bounce-item" style="width: 160px; height: 160px;">
       <img src="images/barkada/gm4.jpg" alt="">
-      <span class="bounce-item-label">Barkada</span>
+      <span class="bounce-item-label">Barkada Graphics</span>
     </a>
     <a href="nextflix.html" class="bounce-item" style="width: 160px; height: 90px;">
       <img src="images/homepage/nextflix-cover.png" alt="">
@@ -920,7 +920,7 @@
       </a>
 
       <!-- 2. Barkada -->
-      <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding print" data-h="100">
+      <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding print marketing" data-h="100">
       <article class="card">
         <div class="card-inner">
           <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
@@ -936,8 +936,8 @@
         </div>
       </article>
       <div class="card-caption">
-        <h2 class="card-title">Barkada</h2>
-        <p class="card-type">Brand · Print · Social</p>
+        <h2 class="card-title">Barkada Graphics</h2>
+        <p class="card-type">Brand · Print · Social · Marketing</p>
       </div>
       </a>
 
@@ -1416,9 +1416,10 @@
       const colWide      = document.querySelector('.work-col-wide');
       const colNarrow    = document.querySelector('.work-col-narrow');
       const isaCard      = document.querySelector('.card-isa');
-      const barkadaCard  = document.querySelector('.card-barkada');
+      const barkadaEventsCard   = document.querySelector('.card-barkada-events');
+      const barkadaGraphicsCard = document.querySelector('.card-barkada');
       const workCards    = Array.from(document.querySelectorAll('.work-grid .card-link'));
-      const otherCards   = workCards.filter(c => c !== isaCard && c !== barkadaCard);
+      const otherCards   = workCards.filter(c => c !== isaCard && c !== barkadaEventsCard && c !== barkadaGraphicsCard);
       const archiveCols  = Array.from(document.querySelectorAll('.archive-col'));
       const archiveCards = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
 
@@ -1431,11 +1432,15 @@
         return width * h / 100 + CAPTION_H;
       }
 
-      // ISA and Barkada always live in the wide column. For the remaining cards,
-      // brute-force every subset (only 4 items, so 16 combinations) to find which
-      // ones should also join the wide column so both sides end up closest in
-      // height — rather than relying on CSS auto-placement, which just grabs
-      // whichever card fits first and can leave one side much taller than the other.
+      // ISA and Barkada Events always live in the wide column (bigger), and
+      // Barkada Graphics always lives in the narrow column (smaller) — a
+      // deliberate size difference between the two Barkada projects, not
+      // something the balancer should be free to flip. For the remaining
+      // cards, brute-force every subset (only 4 items, so 16 combinations)
+      // to find which ones should join the wide column so both sides end
+      // up closest in height — rather than relying on CSS auto-placement,
+      // which just grabs whichever card fits first and can leave one side
+      // much taller than the other.
       function layoutFeatured(filter) {
         // A previous filter may have hidden a column entirely (zero
         // matching cards), which zeroes its measured width. Un-hide
@@ -1461,32 +1466,37 @@
 
         const show = c => filter === 'all' || c.dataset.cats.split(' ').includes(filter);
 
-        const visibleFixed  = [isaCard, barkadaCard].filter(show);
+        const visibleFixedWide   = [isaCard, barkadaEventsCard].filter(show);
+        const visibleFixedNarrow = [barkadaGraphicsCard].filter(show);
         const visibleOthers = otherCards.filter(show);
         const hidden = workCards.filter(c => !show(c));
         hidden.forEach(c => { c.style.display = 'none'; });
 
         let wideBase = 0;
-        visibleFixed.forEach((c, i) => { wideBase += estHeight(c, wideW) + (i > 0 ? GAP : 0); });
+        visibleFixedWide.forEach((c, i) => { wideBase += estHeight(c, wideW) + (i > 0 ? GAP : 0); });
+
+        let narrowBase = 0;
+        visibleFixedNarrow.forEach((c, i) => { narrowBase += estHeight(c, narrowW) + (i > 0 ? GAP : 0); });
 
         const n = visibleOthers.length;
         let bestMask = 0, bestDiff = Infinity;
         for (let mask = 0; mask < (1 << n); mask++) {
-          let wideExtra = 0, narrowTotal = 0;
+          let wideExtra = 0, narrowExtra = 0;
           for (let i = 0; i < n; i++) {
             const card = visibleOthers[i];
             if (mask & (1 << i)) {
               wideExtra += estHeight(card, wideW) + GAP;
             } else {
-              narrowTotal += estHeight(card, narrowW) + GAP;
+              narrowExtra += estHeight(card, narrowW) + GAP;
             }
           }
-          const diff = Math.abs((wideBase + wideExtra) - narrowTotal);
+          const diff = Math.abs((wideBase + wideExtra) - (narrowBase + narrowExtra));
           if (diff < bestDiff) { bestDiff = diff; bestMask = mask; }
         }
 
         let wideCount = 0, narrowCount = 0;
-        visibleFixed.forEach(c => { colWide.appendChild(c); c.style.display = ''; wideCount++; });
+        visibleFixedWide.forEach(c => { colWide.appendChild(c); c.style.display = ''; wideCount++; });
+        visibleFixedNarrow.forEach(c => { colNarrow.appendChild(c); c.style.display = ''; narrowCount++; });
         visibleOthers.forEach((card, i) => {
           if (bestMask & (1 << i)) {
             colWide.appendChild(card); wideCount++;
