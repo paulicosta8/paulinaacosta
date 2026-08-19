@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Barkada Events: planning and leading Northeastern Barkada's flagship events as Vice President, including a 150+ person professional conference and a performance that sold 250+ tickets in five minutes. By Paulina Acosta." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💙</text></svg>" />
+  <title>Barkada Events, Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F4EE;
+      --green:     #2A4A2A;
+      --green-lt:  #4A7A4A;
+      --cream:     #F0EDDF;
+      --charcoal:  #1E1E1E;
+      --muted:     #6B6B5A;
+      --border:    #DDDCD0;
+      --dark-bg:   #1A1F1A;
+      --serif:     'Bricolage Grotesque', 'Inter', sans-serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(245, 244, 238, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      max-height: 70vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    .hero-stat-banner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--green);
+    }
+    .hero-stat {
+      padding: 56px 32px;
+      text-align: center;
+      border-right: 1px solid rgba(240,237,223,0.15);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .hero-stat-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(240,237,223,0.75);
+      letter-spacing: 0.02em;
+    }
+    .hero-text {
+      padding: 48px 56px 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-text-inner {
+      max-width: 760px;
+    }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(44px, 6vw, 84px);
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-item {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+    }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .overview-value {
+      font-size: 15px;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .cs-section {
+      padding: 100px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cs-eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--green);
+      opacity: 0.4;
+    }
+    .cs-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+    .cs-body {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 680px;
+    }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .img-wrap { overflow: hidden; border-radius: 4px; }
+    .img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease);
+    }
+    .img-wrap:hover img { transform: scale(1.03); }
+    .img-land { aspect-ratio: 4/3; }
+
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-top: 40px;
+    }
+    .stat-item {
+      padding: 32px 36px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+
+    .fcc-section {
+      background: var(--dark-bg);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .fcc-section .cs-eyebrow { color: #7AB87A; }
+    .fcc-section .cs-eyebrow::after { background: #7AB87A; }
+    .fcc-section .cs-headline { color: #F0EDDF; }
+    .fcc-section .cs-body { color: rgba(240,237,223,0.6); }
+    .fcc-section .stats-strip { border-color: rgba(255,255,255,0.12); }
+    .fcc-section .stat-item { border-right-color: rgba(255,255,255,0.12); }
+    .fcc-section .stat-label { color: rgba(240,237,223,0.55); }
+
+    .bk-section {
+      background: var(--green);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .bk-section .cs-eyebrow { color: rgba(240,237,223,0.7); }
+    .bk-section .cs-eyebrow::after { background: rgba(240,237,223,0.4); }
+    .bk-section .cs-headline { color: var(--cream); }
+    .bk-section .cs-body { color: rgba(240,237,223,0.65); }
+    .bk-section .stats-strip { border-color: rgba(255,255,255,0.2); }
+    .bk-section .stat-item { border-right-color: rgba(255,255,255,0.2); }
+    .bk-section .stat-number { color: var(--cream); }
+    .bk-section .stat-label { color: rgba(240,237,223,0.6); }
+
+    .hgf-section {
+      background: var(--cream);
+      padding: 100px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .next-project {
+      padding: 80px 56px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .next-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+    .next-arrow {
+      font-size: 28px;
+      color: var(--green);
+      transition: transform 0.2s var(--ease);
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-stat { padding: 40px 16px; }
+      .hero-text { padding: 40px 24px 36px; }
+      .cs-section, .fcc-section, .bk-section { padding: 60px 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .two-col { grid-template-columns: 1fr; gap: 14px; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-stat-banner { grid-template-columns: 1fr; }
+      .hero-stat { border-right: none; border-bottom: 1px solid rgba(240,237,223,0.15); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">Barkada Events</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/barkada/bk/bk-crowd.jpg" alt="Sold-out crowd at Bahay Kubo">
+    </div>
+    <div class="hero-stat-banner">
+      <div class="hero-stat">
+        <span class="hero-stat-num">150+</span>
+        <span class="hero-stat-label">Attendees at a conference I planned and led</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">250+</span>
+        <span class="hero-stat-label">Tickets sold out in 5 minutes</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">12</span>
+        <span class="hero-stat-label">Person team led as Vice President</span>
+      </div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Event Strategy · Leadership · Audience Growth · 2024–25</p>
+        <h1 class="hero-title">Barkada Events</h1>
+        <p class="hero-sub">A year planning and leading Northeastern Barkada's flagship events as Vice President, from a professional conference to a ticketed performance show that sold out in minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Vice President · 2024–25</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Timeline</p>
+      <p class="overview-value">2024 – 2025</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Focus</p>
+      <p class="overview-value">Event strategy, program planning, speaker &amp; panelist outreach, ticketing, team leadership</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Team</p>
+      <p class="overview-value">Led a 12-person executive board</p>
+    </div>
+  </div>
+
+  <div style="border-bottom: 1px solid var(--border); padding: 0 56px; display: flex; gap: 32px;">
+    <a href="#fcc" style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; text-decoration: none;" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='transparent'">Filipino Community Conference</a>
+    <a href="#bahay-kubo" style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; text-decoration: none;" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='transparent'">Bahay Kubo</a>
+    <a href="#hgf" style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; text-decoration: none;" onmouseover="this.style.color='var(--green)';this.style.borderColor='var(--green)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='transparent'">Husky Global Fair</a>
+  </div>
+
+  <section class="cs-section">
+    <p class="cs-eyebrow reveal">The work</p>
+    <h2 class="cs-headline reveal">From designing for events to leading them.</h2>
+    <p class="cs-body reveal">As Media Specialist, I designed the visuals for every Barkada event. As Vice President the following year, I moved to the other side of that work, planning and leading the events themselves alongside a 12-person executive board I managed directly.</p>
+    <p class="cs-body reveal">Three events defined that year: a professional conference built from the ground up with university involvement, a ticketed performance show whose demand outpaced anything Barkada had seen before, and a campus-wide welcome week fair run in partnership with 40+ student organizations. Planning them meant learning outreach, logistics, and audience-building skills I hadn't needed as a designer.</p>
+    <p class="cs-body reveal">I also mentored the eboards that came after me on event planning, and wrote a post-event summary after each show breaking down what worked and what to improve for the following year.</p>
+  </section>
+
+  <section id="fcc" class="fcc-section">
+    <p class="cs-eyebrow reveal">Professional conference</p>
+    <h2 class="cs-headline reveal">Planning a 150+ person conference from the ground up.</h2>
+    <p class="cs-body reveal">The Filipino Community Conference is Barkada's conference-style event: a keynote speaker, a panel of Filipino professionals, and a full slate of workshops, built to create space for discussion about Filipino identity and connect people across the Greater Boston area.</p>
+    <p class="cs-body reveal">As VP, I led the planning behind that year's conference: coordinating keynote and panelist outreach, structuring the workshop lineup, and working with university leadership to secure the backing and space a conference of that scale needed. Over 150 students and community members filled the room.</p>
+    <div class="two-col reveal" style="margin-top: 32px;">
+      <div class="img-wrap img-land"><img src="images/barkada/fcc/fcc-team.jpg" alt="Barkada e-board with a Filipino Community Conference speaker"></div>
+      <div class="img-wrap img-land"><img src="images/barkada/fcc/fcc-workshop.jpg" alt="A Filipino Community Conference workshop in session"></div>
+    </div>
+    <div class="stats-strip reveal">
+      <div class="stat-item">
+        <p class="stat-number">150+</p>
+        <p class="stat-label">Attendees</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">1</p>
+        <p class="stat-label">Keynote speaker secured</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">6</p>
+        <p class="stat-label">Workshops programmed</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="bahay-kubo" class="bk-section">
+    <p class="cs-eyebrow reveal">Ticketed performance show</p>
+    <h2 class="cs-headline reveal">250+ tickets, sold out in 5 minutes.</h2>
+    <p class="cs-body reveal">Bahay Kubo is Barkada's biggest performance show of the year, a full night of modern and traditional Filipino dance, singing, and skits, and the final show for graduating seniors. As VP, I helped lead the planning behind that year's show: coordinating performers, venue logistics, and the ticket release itself.</p>
+    <p class="cs-body reveal">Demand for tickets that year outpaced anything before it: the full 250+ ticket release sold out in five minutes, built on the audience trust and anticipation from years of consistent, well-executed events.</p>
+    <div class="img-wrap reveal" style="margin-top: 32px; aspect-ratio: 16/9;">
+      <img src="images/barkada/bk/bk-cast.jpg" alt="Bahay Kubo cast on stage">
+    </div>
+    <div class="stats-strip reveal">
+      <div class="stat-item">
+        <p class="stat-number">250+</p>
+        <p class="stat-label">Tickets sold</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">5 min</p>
+        <p class="stat-label">Time to sell out</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">100%</p>
+        <p class="stat-label">Tickets claimed</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hgf" class="hgf-section">
+    <p class="cs-eyebrow reveal">Welcome week fair</p>
+    <h2 class="cs-headline reveal">40+ organizations. 12 performances. One fair.</h2>
+    <p class="cs-body reveal">Husky Global Fair takes place during welcome week and is marketed as one of the first, most important events new students should go to, the place where they find the cultural organizations on campus that end up becoming their community. Barkada leads the planning of the fair every year.</p>
+    <p class="cs-body reveal">As VP, I planned HGF end to end. Working with our PR team, I reached out to every cultural org on campus about tabling and performing. Interest came back from 40+ organizations, and performance sign-ups came in high enough that we had to cap the lineup at 12 slots and run a lottery to choose who performed. Beyond tabling and performances, I brought in a food truck and organized four additional activities to round out the day.</p>
+    <div class="two-col reveal" style="margin-top: 32px;">
+      <div class="img-wrap img-land"><img src="images/barkada/hgf/hgf-performance.jpg" alt="A performing org on stage at Husky Global Fair"></div>
+      <div class="img-wrap img-land"><img src="images/barkada/hgf/hgf-stage.jpg" alt="A performer on stage at Husky Global Fair"></div>
+    </div>
+    <div class="stats-strip reveal">
+      <div class="stat-item">
+        <p class="stat-number">40+</p>
+        <p class="stat-label">Organizations tabling or performing</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">12</p>
+        <p class="stat-label">Performance slots, chosen by lottery</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">4</p>
+        <p class="stat-label">Additional activities, plus a food truck</p>
+      </div>
+    </div>
+  </section>
+
+  <a href="bn.html" class="next-project">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">B&amp;N Sandwiches</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
