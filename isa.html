@@ -264,6 +264,11 @@
       .overview-item:nth-child(2) { border-right: none; }
       .cs-section { padding: 60px 24px; }
       .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 40px; }
+      /* Text and image sit side by side above this breakpoint, so DOM
+         order (text, then image) doesn't matter — once they stack,
+         though, put the image first so it leads instead of the reader
+         hitting a wall of text before any visual. */
+      .two-col-wide > *:last-child { order: -1; }
       .img-grid-2 { grid-template-columns: 1fr 1fr; }
       .img-grid-4 { grid-template-columns: 1fr 1fr; }
       .next-project { padding: 60px 24px; }
@@ -369,10 +374,6 @@
   <section class="cs-section">
     <p class="cs-eyebrow reveal">Website</p>
     <h2 class="cs-headline reveal">An e-commerce platform designed to feel like culture, not a store.</h2>
-    <p class="cs-body reveal">The ISA website isn't just a place to shop. It's a space to learn, explore, and actually connect with Filipino-American fashion.</p>
-    <p class="cs-body reveal">A lot of the site is built around being intentional about culture. There are sections dedicated to clothing inspired by the Barong Tagalog, pieces that incorporate Baybayin script, and traditional Filipino clothing alongside contemporary designers, because that's still such an important part of Filipino culture and it deserves its own space.</p>
-    <p class="cs-body reveal">Each brand on the platform gets a dedicated page where they can share their story and mission. The Abakada page, for example, talks about who they are, what they make, and what inspires them culturally. It felt important for the brands to have a voice, not just a product listing.</p>
-    <p class="cs-body reveal">There's also a page about the history of Filipino-American fashion, giving people context for the designers they're discovering and the larger movement ISA is part of.</p>
 
     <div class="figma-embed-wrap reveal">
       <iframe
@@ -381,6 +382,11 @@
         title="ISA Figma prototype">
       </iframe>
     </div>
+
+    <p class="cs-body reveal" style="margin-top: 32px;">The ISA website isn't just a place to shop. It's a space to learn, explore, and actually connect with Filipino-American fashion.</p>
+    <p class="cs-body reveal">A lot of the site is built around being intentional about culture. There are sections dedicated to clothing inspired by the Barong Tagalog, pieces that incorporate Baybayin script, and traditional Filipino clothing alongside contemporary designers, because that's still such an important part of Filipino culture and it deserves its own space.</p>
+    <p class="cs-body reveal">Each brand on the platform gets a dedicated page where they can share their story and mission. The Abakada page, for example, talks about who they are, what they make, and what inspires them culturally. It felt important for the brands to have a voice, not just a product listing.</p>
+    <p class="cs-body reveal">There's also a page about the history of Filipino-American fashion, giving people context for the designers they're discovering and the larger movement ISA is part of.</p>
 
     <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 32px;">
       <div class="img-wrap reveal" style="border-radius:8px; overflow:hidden; box-shadow: 0 4px 24px rgba(66,66,66,0.1);">
