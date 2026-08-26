@@ -277,18 +277,14 @@
     .filter-pill[data-filter="branding"]   { color: #C2542B; border-color: #C2542B; }
     .filter-pill[data-filter="ui-ux"]      { color: #1E8A8A; border-color: #1E8A8A; }
     .filter-pill[data-filter="print"]      { color: #B8860B; border-color: #B8860B; }
-    .filter-pill[data-filter="packaging"]  { color: #4C8C4A; border-color: #4C8C4A; }
     .filter-pill[data-filter="marketing"]  { color: #A6326B; border-color: #A6326B; }
     .filter-pill[data-filter="events"]     { color: #4F46E5; border-color: #4F46E5; }
-    .filter-pill[data-filter="animations"] { color: #E85D75; border-color: #E85D75; }
     .filter-pill[data-filter="featured"].active   { background: #D97706; color: var(--white); box-shadow: 0 4px 14px rgba(217,119,6,0.3); }
     .filter-pill[data-filter="branding"].active   { background: #C2542B; color: var(--white); box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
     .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; color: var(--white); box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
     .filter-pill[data-filter="print"].active      { background: #B8860B; color: var(--white); box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
-    .filter-pill[data-filter="packaging"].active  { background: #4C8C4A; color: var(--white); box-shadow: 0 4px 14px rgba(76,140,74,0.3); }
     .filter-pill[data-filter="marketing"].active  { background: #A6326B; color: var(--white); box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
     .filter-pill[data-filter="events"].active     { background: #4F46E5; color: var(--white); box-shadow: 0 4px 14px rgba(79,70,229,0.3); }
-    .filter-pill[data-filter="animations"].active { background: #E85D75; color: var(--white); box-shadow: 0 4px 14px rgba(232,93,117,0.3); }
 
     /* ── Work grid ── */
     #work {
@@ -601,111 +597,6 @@
     #about .section-label { color: var(--accent); }
     #about .section-label::after { background: var(--accent); }
 
-    /* ── Timeline ── */
-    .timeline {
-      margin-top: 72px;
-      overflow-x: auto;
-    }
-    .timeline-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 64px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .timeline-label::after {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
-    }
-    .timeline-track-wrap {
-      position: relative;
-      height: 280px;
-      margin: 0 24px;
-      min-width: 820px;
-    }
-    .timeline-track-wrap::before {
-      content: '';
-      position: absolute;
-      left: 0; right: 0;
-      top: 50%;
-      height: 1px;
-      background: rgba(15,27,45,0.15);
-    }
-    .timeline-node {
-      position: absolute;
-      top: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .timeline-node:nth-child(1) { left: 8.33%; }
-    .timeline-node:nth-child(2) { left: 25%; }
-    .timeline-node:nth-child(3) { left: 41.67%; }
-    .timeline-node:nth-child(4) { left: 58.33%; }
-    .timeline-node:nth-child(5) { left: 75%; }
-    .timeline-node:nth-child(6) { left: 91.67%; }
-    .timeline-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent-lt);
-      border: 2px solid #E3EDF8;
-      box-shadow: 0 0 0 1px var(--accent-lt);
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      margin-top: -5px;
-    }
-    .timeline-connector {
-      width: 1px;
-      border-left: 1px dashed rgba(15,27,45,0.2);
-      height: 36px;
-      flex-shrink: 0;
-    }
-    .timeline-content {
-      text-align: center;
-      width: 150px;
-    }
-    .timeline-node.above {
-      flex-direction: column-reverse;
-      transform: translateX(-50%) translateY(-100%);
-    }
-    .timeline-node.above .timeline-dot { margin-top: 0; margin-bottom: -5px; }
-    .timeline-node.above .timeline-content { margin-bottom: 8px; }
-    .timeline-node.below {
-      flex-direction: column;
-      transform: translateX(-50%);
-    }
-    .timeline-node.below .timeline-content { margin-top: 8px; }
-    .timeline-date {
-      font-size: 10px;
-      font-weight: 400;
-      color: rgba(15,27,45,0.4);
-      margin-bottom: 4px;
-      letter-spacing: 0.02em;
-    }
-    .timeline-role {
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(15,27,45,0.85);
-      line-height: 1.35;
-      margin-bottom: 3px;
-    }
-    .timeline-org {
-      font-size: 11px;
-      font-weight: 300;
-      color: var(--accent-lt);
-    }
-
     /* ── Contact ── */
     #contact {
       border-top: 1px solid var(--border);
@@ -873,7 +764,7 @@
       <p class="hero-eyebrow">Brand · Marketing · Experiential</p>
       <h1 class="hero-headline">paulina acosta&nbsp;<span style="color: var(--accent);">♥</span></h1>
       <p class="hero-sub">
-        A multidisciplinary designer and marketer based in NJ/NY working across brand, marketing, and design. I make work that connects with the people it's meant for!
+        A designer who creates experiences from idea to production, based in the NJ and NYC area. I bring experience in branding and graphic design, event planning, and marketing strategy, driving results that connect with the people the work is meant for.
       </p>
     </div>
     <button id="heroBounceToggle" class="hero-bounce-toggle" type="button" aria-pressed="false">Pause motion</button>
@@ -890,10 +781,8 @@
         <button class="filter-pill" data-filter="branding">Branding</button>
         <button class="filter-pill" data-filter="ui-ux">UI/UX</button>
         <button class="filter-pill" data-filter="print">Print</button>
-        <button class="filter-pill" data-filter="packaging">Packaging</button>
         <button class="filter-pill" data-filter="marketing">Marketing</button>
         <button class="filter-pill" data-filter="events">Events</button>
-        <button class="filter-pill" data-filter="animations">Animations</button>
       </div>
     </div>
 
@@ -965,7 +854,7 @@
 
       <div class="work-col-narrow">
       <!-- 3. Nextflix -->
-      <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux featured" data-h="56">
+      <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux" data-h="56">
       <article class="card">
         <div class="card-inner">
           <img class="card-img active" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="object-position: center;">
@@ -1164,10 +1053,10 @@
           Outside of work, I'm passionate about my Filipino culture. I served on the e-board of Barkada, Northeastern's Filipino student organization, for two years and as a mentor for four years. I started as their Media Specialist in 2023, connecting my love for design and my culture through graphics and merchandise. As Vice President the next year, I continued designing events to bring my community together. That passion for design and my culture came full circle this past semester when I developed my senior capstone project, ISA, an e-commerce site spotlighting Filipino-American fashion brands.
         </p>
         <p class="about-body" style="margin-top: 16px;">
-          Through these experiences, I realized how design and marketing can be used to connect, support, and build up people and their communities. That is exactly why I want to continue working at the intersection of the two. I've also come to see design and growth as connected, not separate. The same instincts that shape a strong brand system are what get people to actually show up, whether that's an Instagram feed averaging 800+ impressions a post or a show that sold out 250+ tickets in five minutes. I'm curious about where AI fits into that too, and I've been folding tools like Claude into my own design and marketing process as I explore it.
+          Through these experiences, I realized design and marketing aren't separate disciplines. The same instincts that build a strong brand are what get people to actually show up, and that's exactly why I want to keep working at the intersection of the two.
         </p>
         <p class="about-body" style="margin-top: 16px;">
-          Beyond that, I love travelling, fashion, eating my way through any city, and collecting trinkets and blind boxes!
+          Beyond that, I love traveling, fashion, eating my way through any city, and collecting trinkets and blind boxes!
         </p>
       </div>
       <div class="skills-block reveal">
@@ -1209,80 +1098,6 @@
             <span class="skill-chip">Claude Code</span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Horizontal Timeline -->
-    <div class="timeline reveal">
-      <p class="timeline-label">Relevant Experience</p>
-      <div class="timeline-track-wrap">
-
-        <!-- 1. Media Specialist — above -->
-        <div class="timeline-node above">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Apr 2023–Apr 2024</p>
-            <p class="timeline-role">Media Specialist</p>
-            <p class="timeline-org">NU Barkada</p>
-          </div>
-        </div>
-
-        <!-- 2. Harvard — below -->
-        <div class="timeline-node below">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Jul–Dec 2023</p>
-            <p class="timeline-role">Instructional Technology Assistant</p>
-            <p class="timeline-org">Harvard T.H. Chan</p>
-          </div>
-        </div>
-
-        <!-- 3. B&N — above -->
-        <div class="timeline-node above">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Apr–Jul 2024</p>
-            <p class="timeline-role">Freelance Brand Designer</p>
-            <p class="timeline-org">B&N Sandwiches</p>
-          </div>
-        </div>
-
-        <!-- 4. Vice President — below -->
-        <div class="timeline-node below">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Apr 2024–Apr 2025</p>
-            <p class="timeline-role">Vice President</p>
-            <p class="timeline-org">NU Barkada</p>
-          </div>
-        </div>
-
-        <!-- 5. Paul Lukez — above -->
-        <div class="timeline-node above">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Jul–Dec 2024</p>
-            <p class="timeline-role">Graphic Designer & Marketing Intern</p>
-            <p class="timeline-org">Paul Lukez Architecture</p>
-          </div>
-        </div>
-
-        <!-- 6. Sandbox — below -->
-        <div class="timeline-node below">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-          <div class="timeline-content">
-            <p class="timeline-date">Sep–Dec 2024</p>
-            <p class="timeline-role">Brand Designer</p>
-            <p class="timeline-org">Sandbox at Northeastern</p>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
