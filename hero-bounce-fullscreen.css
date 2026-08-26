@@ -78,8 +78,17 @@
   border-radius: 12px;
 }
 
-/* If you ever add a real interactive element inside the text panel
-   (a resume link, a CTA button), it needs pointer-events restored
-   individually, since the parent panel blocks clicks by default:
+/* The panel blocks pointer events by default so empty space passes
+   clicks through to whatever's floating behind it, but that also
+   blocked selecting the name/bio text itself (a click-drag over text
+   has nothing to select if the text can't receive the mousedown).
+   Opting the actual text content back in fixes that without losing
+   the click-through on the panel's own background. Any future
+   interactive element (a link, a button) needs the same treatment:
    .hero-text-panel a { pointer-events: auto; }
 */
+.hero-text-panel .hero-eyebrow,
+.hero-text-panel .hero-headline,
+.hero-text-panel .hero-sub {
+  pointer-events: auto;
+}
