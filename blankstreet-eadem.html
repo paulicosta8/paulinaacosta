@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blank Street x Eadem: a concept campaign pairing five matcha flavors with five Eadem lip balm shades into a limited-edition collection and a 3-day NYC pop-up. By Paulina Acosta." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💙</text></svg>" />
+  <title>Blank Street x Eadem Collab and Pop-Up, Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #F5F4EE;
+      --sage:      #7CA26C;
+      --eadem:     #7D5D24;
+      --cream:     #F0EDDF;
+      --charcoal:  #1E1E1E;
+      --muted:     #6B6B5A;
+      --border:    #DDDCD0;
+      --serif:     'Bricolage Grotesque', 'Inter', sans-serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(245, 244, 238, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--sage);
+    }
+
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      max-height: 70vh;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-stat-banner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--sage);
+    }
+    .hero-stat {
+      padding: 56px 32px;
+      text-align: center;
+      border-right: 1px solid rgba(240,237,223,0.15);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .hero-stat-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(240,237,223,0.75);
+      letter-spacing: 0.02em;
+    }
+    .hero-text {
+      padding: 48px 56px 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-text-inner { max-width: 760px; }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5.5vw, 76px);
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-item { padding: 32px 40px; border-right: 1px solid var(--border); }
+    .overview-item:last-child { border-right: none; }
+    .overview-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
+
+    .subnav {
+      border-bottom: 1px solid var(--border);
+      padding: 0 56px;
+      display: flex;
+      gap: 32px;
+      overflow-x: auto;
+    }
+    .subnav a {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); padding: 16px 0; border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+    }
+    .subnav a:hover { color: var(--sage); border-color: var(--sage); }
+
+    .cs-section { padding: 100px 56px; border-bottom: 1px solid var(--border); }
+    .cs-eyebrow {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .cs-eyebrow::after { content: ''; display: block; width: 32px; height: 1px; background: var(--sage); opacity: 0.4; }
+    .cs-headline {
+      font-family: var(--serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
+      color: var(--charcoal); line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 24px; max-width: 720px;
+    }
+    .cs-body { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 680px; }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    /* Standard image grid classes, shared across case studies */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .img-wrap { overflow: hidden; border-radius: 4px; background: var(--cream); }
+    .img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
+    .img-wrap:hover img { transform: scale(1.03); }
+    .img-sq { aspect-ratio: 1/1; }
+    .img-land { aspect-ratio: 4/3; }
+
+    /* Brand / audience comparison grid (matches the deck's own comparison slides) */
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      border: 1px solid var(--border); border-radius: 4px; margin: 40px 0 32px;
+    }
+    .compare-col { padding: 28px 32px; border-right: 1px solid var(--border); }
+    .compare-col:last-child { border-right: none; background: var(--cream); }
+    .compare-brand { font-family: var(--serif); font-weight: 700; font-size: 15px; margin-bottom: 14px; color: var(--sage); }
+    .compare-col ul { list-style: none; }
+    .compare-col li { font-size: 14px; color: var(--muted); margin-bottom: 8px; padding-left: 14px; position: relative; }
+    .compare-col li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
+    .compare-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .logo-chip { display: inline-block; padding: 14px 20px; border-radius: 6px; margin-bottom: 16px; }
+    .logo-chip img { width: 108px; height: auto; display: block; }
+
+    /* Flavor collection pairings */
+    .flavor-pair-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      border-radius: 8px; overflow: hidden; margin-top: 20px;
+    }
+    .flavor-panel {
+      padding: 28px 20px 22px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      min-height: 300px;
+    }
+    .flavor-panel img { max-height: 210px; width: auto; margin-bottom: auto; object-fit: contain; }
+    .flavor-caption { font-family: var(--serif); font-weight: 700; font-size: 14px; margin-top: 14px; text-align: center; }
+    .flavor-sub { font-size: 12px; margin-top: 3px; text-align: center; }
+
+    /* Station cards (pop-up) */
+    .station-name { font-family: var(--serif); font-weight: 700; font-size: 17px; margin: 18px 0 8px; }
+    .station-desc { font-size: 14px; line-height: 1.75; color: var(--muted); }
+
+    /* Sensory bar photo composite (transparent product cutouts on a coral panel, matching the deck's flat-lay layout) */
+    .station-composite {
+      position: relative; aspect-ratio: 1/1; background: #FF7775; border-radius: 4px; overflow: hidden;
+    }
+    .station-composite .composite-matcha {
+      position: absolute; top: 4%; right: 4%; width: 58%; height: auto;
+    }
+    .station-composite .composite-card {
+      position: absolute; bottom: 4%; left: 2%; width: 48%; height: auto;
+    }
+    /* Rollout timeline */
+    .rollout-timeline {
+      display: flex; flex-direction: column; gap: 32px;
+      margin: 56px 0 8px; position: relative; padding-left: 22px;
+    }
+    .rollout-timeline::before {
+      content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px;
+      background: rgba(240,237,223,0.3);
+    }
+    .rollout-step { position: relative; }
+    .rollout-step::before {
+      content: ''; position: absolute; left: -22px; top: 4px; width: 12px; height: 12px;
+      border-radius: 50%; background: var(--cream); box-shadow: 0 0 0 3px rgba(240,237,223,0.2);
+    }
+    .rollout-when { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; margin-bottom: 10px; }
+    .rollout-desc { font-size: 14px; line-height: 1.75; }
+    @media (min-width: 901px) {
+      .rollout-timeline { flex-direction: row; padding-left: 0; gap: 20px; }
+      .rollout-timeline::before { left: 0; right: 0; top: 5px; bottom: auto; height: 2px; width: auto; }
+      .rollout-step { flex: 1; padding-top: 30px; }
+      .rollout-step::before { left: 0; top: 0; }
+    }
+
+    .stats-title {
+      font-family: var(--serif); font-weight: 700; font-size: 22px;
+      color: var(--charcoal); margin: 56px 0 20px;
+    }
+    .stats-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .stat-item {
+      padding: 36px 26px; text-align: center;
+      background: var(--cream); border: 1px solid var(--border); border-radius: 8px;
+    }
+    .stat-number { font-family: var(--serif); font-size: clamp(48px, 5.5vw, 72px); font-weight: 700; color: var(--sage); line-height: 1; margin-bottom: 14px; }
+    .stat-label { font-size: 13px; font-weight: 300; color: var(--muted); }
+
+    .rollout-section {
+      background: var(--eadem);
+      padding: 100px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .rollout-section .cs-eyebrow { color: rgba(240,237,223,0.75); }
+    .rollout-section .cs-eyebrow::after { background: rgba(240,237,223,0.4); }
+    .rollout-section .cs-headline { color: var(--cream); }
+    .rollout-section .cs-body { color: rgba(240,237,223,0.65); }
+    .rollout-section .rollout-when { color: var(--cream); }
+    .rollout-section .rollout-desc { color: rgba(240,237,223,0.7); }
+    .rollout-section .stats-title { color: var(--cream); }
+    .rollout-section .stat-item { background: var(--sage); border-color: var(--sage); }
+    .rollout-section .stat-number { color: var(--cream); }
+    .rollout-section .stat-label { color: rgba(240,237,223,0.6); }
+
+    .collection-section { background: var(--cream); padding: 100px 56px; border-bottom: 1px solid var(--border); }
+
+    /* PDF deck embed */
+    .pdf-embed-wrap {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 32px;
+      background: var(--cream);
+    }
+    .pdf-embed-wrap iframe { width: 100%; height: 100%; border: 0; }
+    .pdf-fallback-link {
+      display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 500;
+      color: var(--sage); border-bottom: 1px solid var(--sage);
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .next-project {
+      padding: 80px 56px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .next-title { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--charcoal); }
+    .next-arrow { font-size: 28px; color: var(--sage); transition: transform 0.2s var(--ease); }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-stat { padding: 40px 16px; }
+      .hero-text { padding: 40px 24px 36px; }
+      .cs-section, .collection-section, .rollout-section { padding: 60px 24px; }
+      .subnav { padding: 0 24px; }
+      .overview { grid-template-columns: 1fr 1fr; }
+      .overview-item:nth-child(2) { border-right: none; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .compare-col { border-right: none; border-bottom: 1px solid var(--border); }
+      .two-col, .three-col { grid-template-columns: 1fr; gap: 14px; }
+      .flavor-pair-row { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: 1fr 1fr; }
+      .next-project { padding: 60px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-stat-banner { grid-template-columns: 1fr; }
+      .hero-stat { border-right: none; border-bottom: 1px solid rgba(240,237,223,0.15); }
+      .stats-strip { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">Blank Street x Eadem Collab and Pop-Up</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/blankstreet-eadem/hero.jpg" alt="Blank Street and Eadem logos side by side on a split green and olive background">
+    </div>
+    <div class="hero-stat-banner">
+      <div class="hero-stat">
+        <span class="hero-stat-num">30%</span>
+        <span class="hero-stat-label">Target increase in foot traffic over baseline days</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">500+</span>
+        <span class="hero-stat-label">Products targeted per day, across both brands</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">1,000+</span>
+        <span class="hero-stat-label">Target posts tagging Blank Street or Eadem</span>
+      </div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Brand Strategy · Campaign Concept · Marketing · 2026</p>
+        <h1 class="hero-title">Blank Street x Eadem Collab and Pop-Up</h1>
+        <p class="hero-sub">A concept campaign pairing Blank Street's matcha flavors with Eadem's lip balm shades into a limited-edition collection and a 3-day pop-up in New York City.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Brand Strategy · Concept Project</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Timeline</p>
+      <p class="overview-value">2026</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Campaign strategy, flavor-and-shade collection, pop-up activation plan, rollout timeline</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Tools</p>
+      <p class="overview-value">Strategy · Canva</p>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <a href="#concept">The Concept</a>
+    <a href="#collection">The Collection</a>
+    <a href="#popup">The Pop-Up</a>
+    <a href="#rollout">The Rollout</a>
+    <a href="#deck">The Deck</a>
+  </div>
+
+  <section id="concept" class="cs-section">
+    <p class="cs-eyebrow reveal">The concept</p>
+    <h2 class="cs-headline reveal">Two brands that treat flavor as memory, not description.</h2>
+    <p class="cs-body reveal">Blank Street is a trendy coffee and matcha chain known for creative matcha flavors, and has run real-world brand takeovers before. Eadem is a skincare and lip brand founded by women from distinct cultural backgrounds, known for naming their shades after personal food memories instead of generic descriptors. The premise behind this campaign is that both brands already treat flavor as a storytelling device rooted in specific personal and cultural memories, which makes a shared flavor-and-shade collection feel native to both, not like a bolted-on collab.</p>
+
+    <div class="compare-grid reveal">
+      <div class="compare-col">
+        <div class="logo-chip" style="background: var(--sage);">
+          <img src="images/blankstreet-eadem/blank-street-logo.png" alt="Blank Street logo">
+        </div>
+        <p class="compare-desc">A trendy coffee and matcha chain known for creative matcha flavors. Has already run real-world brand takeovers before.</p>
+      </div>
+      <div class="compare-col">
+        <div class="logo-chip" style="background: var(--eadem);">
+          <img src="images/blankstreet-eadem/eadem-logo.png" alt="Eadem logo">
+        </div>
+        <p class="compare-desc">A skincare and lip brand founded by women from distinct cultural backgrounds. Known for naming shades after personal food memories rather than generic descriptors.</p>
+      </div>
+      <div class="compare-col">
+        <p class="compare-brand">Why this partnership?</p>
+        <p class="compare-desc">Both brands treat flavor as a storytelling device rooted in specific personal and cultural memories, rather than a general description.</p>
+      </div>
+    </div>
+
+    <div class="compare-grid reveal">
+      <div class="compare-col">
+        <p class="compare-brand">Blank Street audience</p>
+        <ul>
+          <li>Gen Z and younger millennials</li>
+          <li>Wellness-minded</li>
+          <li>Trend-forward aesthetic</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <p class="compare-brand">Eadem audience</p>
+        <ul>
+          <li>Millennials and Gen Z</li>
+          <li>Women of color, melanin-rich skin</li>
+          <li>Sephora shopper base</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <p class="compare-brand">Where they overlap</p>
+        <ul>
+          <li>Ages 18–34</li>
+          <li>Comfortable buying via app and in person</li>
+          <li>Social media natives, UGC-driven purchasing</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cs-body reveal">That overlap in age, shopping behavior, and social habits is what makes a joint collection and pop-up worth running: the same person is a plausible customer for both brands already, and both audiences are used to discovering products through content rather than advertising.</p>
+  </section>
+
+  <section id="collection" class="collection-section">
+    <p class="cs-eyebrow reveal">The collection</p>
+    <h2 class="cs-headline reveal">Five matcha flavors, five lip balm shades.</h2>
+    <p class="cs-body reveal">Each matcha flavor is paired with the Eadem lip balm shade closest to it in color and story, so the pairing reads as one idea instead of two products stapled together.</p>
+
+    <div class="flavor-pair-row reveal">
+      <div class="flavor-panel" style="background:#FF8270;">
+        <img src="images/blankstreet-eadem/guava-matcha-spritz.png" alt="Guava Matcha Spritz">
+        <p class="flavor-caption" style="color:#fff;">Guava Matcha Spritz</p>
+      </div>
+      <div class="flavor-panel" style="background:#fff; border:1px solid var(--border);">
+        <img src="images/blankstreet-eadem/guava-fresca-lip-balm.png" alt="Guava Fresca lip balm">
+        <p class="flavor-caption" style="color:var(--eadem);">Guava Fresca</p>
+      </div>
+    </div>
+
+    <div class="flavor-pair-row reveal">
+      <div class="flavor-panel" style="background:#E8993D;">
+        <img src="images/blankstreet-eadem/churro-matcha.png" alt="Churro Matcha">
+        <p class="flavor-caption" style="color:#fff;">Churro Matcha</p>
+      </div>
+      <div class="flavor-panel" style="background:#fff; border:1px solid var(--border);">
+        <img src="images/blankstreet-eadem/churro-de-canela-lip-balm.png" alt="Churro de Canela lip balm">
+        <p class="flavor-caption" style="color:var(--eadem);">Churro de Canela</p>
+      </div>
+    </div>
+
+    <div class="flavor-pair-row reveal">
+      <div class="flavor-panel" style="background:#96285F;">
+        <img src="images/blankstreet-eadem/fig-sauce-matcha.png" alt="Fig Sauce Matcha">
+        <p class="flavor-caption" style="color:#fff;">Fig Sauce Matcha</p>
+      </div>
+      <div class="flavor-panel" style="background:#fff; border:1px solid var(--border);">
+        <img src="images/blankstreet-eadem/fig-sauce-lip-balm.png" alt="Fig Sauce lip balm">
+        <p class="flavor-caption" style="color:var(--eadem);">Fig Sauce</p>
+      </div>
+    </div>
+
+    <div class="flavor-pair-row reveal">
+      <div class="flavor-panel" style="background:#BF2337;">
+        <img src="images/blankstreet-eadem/hibiscus-bissap-matcha.png" alt="Hibiscus Bissap Matcha">
+        <p class="flavor-caption" style="color:#fff;">Hibiscus Bissap Matcha</p>
+      </div>
+      <div class="flavor-panel" style="background:#fff; border:1px solid var(--border);">
+        <img src="images/blankstreet-eadem/bissap-glaze-lip-balm.png" alt="Bissap Glaze lip balm">
+        <p class="flavor-caption" style="color:var(--eadem);">Bissap Glaze</p>
+      </div>
+    </div>
+
+    <div class="flavor-pair-row reveal">
+      <div class="flavor-panel" style="background:#966945;">
+        <img src="images/blankstreet-eadem/brown-sugar-boba-matcha.png" alt="Brown Sugar Boba Matcha">
+        <p class="flavor-caption" style="color:#fff;">Brown Sugar Boba Matcha</p>
+      </div>
+      <div class="flavor-panel" style="background:#fff; border:1px solid var(--border);">
+        <img src="images/blankstreet-eadem/boba-bounce-lip-balm.png" alt="Boba Bounce lip balm">
+        <p class="flavor-caption" style="color:var(--eadem);">Boba Bounce</p>
+      </div>
+    </div>
+
+    <p class="cs-body reveal" style="margin-top: 32px;">With every matcha purchase from the collection, customers get a free mini balm in the matching shade, so the pairing is something people leave with, not just something they see on a menu board.</p>
+  </section>
+
+  <section id="popup" class="cs-section">
+    <p class="cs-eyebrow reveal">The pop-up</p>
+    <h2 class="cs-headline reveal">A 3-day activation built around three stations.</h2>
+
+    <div class="three-col reveal">
+      <div>
+        <div class="station-composite">
+          <img class="composite-matcha" src="images/blankstreet-eadem/matcha-shot.png" alt="A matcha flavor shot at the sensory bar">
+          <img class="composite-card" src="images/blankstreet-eadem/scent-card.png" alt="An Eadem scent card">
+        </div>
+        <p class="station-name">Sensory Bar</p>
+        <p class="station-desc">Visitors taste a shot of each Blank Street matcha flavor and smell a scent card of each Eadem balm, then choose their favorite pair before buying anything.</p>
+      </div>
+      <div>
+        <div class="img-wrap img-sq"><img src="images/blankstreet-eadem/station-matcha.jpg" alt="A custom Blank Street matcha drink at the matcha bar"></div>
+        <p class="station-name">Matcha Bar &amp; Cashier</p>
+        <p class="station-desc">Any custom Blank Street matcha purchase comes with a free mini Eadem lip balm in the matching shade, so the collection is something every customer takes home.</p>
+      </div>
+      <div>
+        <div class="img-wrap img-sq"><img src="images/blankstreet-eadem/station-photobooth.jpg" alt="Matcha drinks, an Eadem lip balm, and a photo strip at the photobooth"></div>
+        <p class="station-name">Photobooth</p>
+        <p class="station-desc">Visitors take photos with their drink and balm, then post and tag to spin a wheel for a free gift or coupon, and keep a physical photo strip.</p>
+      </div>
+    </div>
+
+    <p class="cs-body reveal" style="margin-top: 40px;">Visitors move through the space in one direction, from a sampling station through the products themselves to checkout and a photobooth on the way out, so every stop leads naturally into the next.</p>
+    <div class="img-wrap reveal" style="margin-top: 24px; aspect-ratio: 16/9;">
+      <img src="images/blankstreet-eadem/event-layout.png" alt="Event layout diagram: entrance into the sensory bar and Eadem products, to the cashier and matcha bar, to the photobooth, and out the exit">
+    </div>
+  </section>
+
+  <section id="rollout" class="rollout-section">
+    <p class="cs-eyebrow reveal">The rollout</p>
+    <h2 class="cs-headline reveal">A three-week build-up, then three days of live content.</h2>
+    <p class="cs-body reveal">The campaign is designed to build anticipation before the pop-up opens, then keep producing content through all three days it runs.</p>
+    <div class="rollout-timeline reveal">
+      <div class="rollout-step">
+        <p class="rollout-when">3 weeks before</p>
+        <p class="rollout-desc">A first post hints at a big collaboration and new flavors without naming it, to generate buzz. Influencer outreach begins so creators can plan the event into their calendars.</p>
+      </div>
+      <div class="rollout-step">
+        <p class="rollout-when">2 weeks before</p>
+        <p class="rollout-desc">The Blank Street x Eadem collaboration is revealed, with photos and videos of the paired products posted throughout the week.</p>
+      </div>
+      <div class="rollout-step">
+        <p class="rollout-when">1 week before</p>
+        <p class="rollout-desc">Content shifts to the activation itself, the sensory bar and photobooth, and introduces the free mini balm with every matcha purchase.</p>
+      </div>
+      <div class="rollout-step">
+        <p class="rollout-when">Event days 1–3</p>
+        <p class="rollout-desc">Story posts run throughout each day, featuring visitors who tag the brands and interviews conducted on site. The final day includes a surprise creator guest for interviews.</p>
+      </div>
+      <div class="rollout-step">
+        <p class="rollout-when">1 day after</p>
+        <p class="rollout-desc">A recap post and video close out the campaign.</p>
+      </div>
+    </div>
+    <p class="stats-title reveal">Campaign Targets</p>
+    <div class="stats-strip reveal">
+      <div class="stat-item">
+        <p class="stat-number">30%</p>
+        <p class="stat-label">Target increase in foot traffic vs. baseline</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">50%</p>
+        <p class="stat-label">Target increase in social engagement, launch vs. pre-launch</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">500+</p>
+        <p class="stat-label">Products targeted per day, both brands combined</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">1,000+</p>
+        <p class="stat-label">Target posts tagging Blank Street or Eadem</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="deck" class="cs-section">
+    <p class="cs-eyebrow reveal">The full deck</p>
+    <h2 class="cs-headline reveal">The complete campaign presentation.</h2>
+    <p class="cs-body reveal">The original strategy deck this case study is drawn from, including the full moodboard and creative references behind the concept.</p>
+    <div class="pdf-embed-wrap reveal">
+      <iframe src="images/blankstreet-eadem/blank-street-x-eadem-deck.pdf" loading="lazy" title="Blank Street x Eadem campaign deck"></iframe>
+    </div>
+    <a class="pdf-fallback-link reveal" href="images/blankstreet-eadem/blank-street-x-eadem-deck.pdf" target="_blank" rel="noopener">Open the full deck (PDF) ↗</a>
+  </section>
+
+  <a href="noaa.html" class="next-project">
+    <div>
+      <p class="next-label">Next project</p>
+      <p class="next-title">NOAA Redesign</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

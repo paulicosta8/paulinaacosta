@@ -278,13 +278,13 @@
     .filter-pill[data-filter="ui-ux"]      { color: #1E8A8A; border-color: #1E8A8A; }
     .filter-pill[data-filter="print"]      { color: #B8860B; border-color: #B8860B; }
     .filter-pill[data-filter="marketing"]  { color: #A6326B; border-color: #A6326B; }
-    .filter-pill[data-filter="events"]     { color: #4F46E5; border-color: #4F46E5; }
+    .filter-pill[data-filter="events"]     { color: #7C3AED; border-color: #7C3AED; }
     .filter-pill[data-filter="featured"].active   { background: #D97706; color: var(--white); box-shadow: 0 4px 14px rgba(217,119,6,0.3); }
     .filter-pill[data-filter="branding"].active   { background: #C2542B; color: var(--white); box-shadow: 0 4px 14px rgba(194,84,43,0.3); }
     .filter-pill[data-filter="ui-ux"].active      { background: #1E8A8A; color: var(--white); box-shadow: 0 4px 14px rgba(30,138,138,0.3); }
     .filter-pill[data-filter="print"].active      { background: #B8860B; color: var(--white); box-shadow: 0 4px 14px rgba(184,134,11,0.3); }
     .filter-pill[data-filter="marketing"].active  { background: #A6326B; color: var(--white); box-shadow: 0 4px 14px rgba(166,50,107,0.3); }
-    .filter-pill[data-filter="events"].active     { background: #4F46E5; color: var(--white); box-shadow: 0 4px 14px rgba(79,70,229,0.3); }
+    .filter-pill[data-filter="events"].active     { background: #7C3AED; color: var(--white); box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
 
     /* ── Work grid ── */
     #work {
@@ -324,6 +324,7 @@
     .card-noaa .card-inner      { padding-bottom: 194.1%; }  /* matches noaa-cover.png */
     .card-mbta .card-inner      { padding-bottom: 216.4%; }  /* matches mbta-cover.png */
     .card-barkada-events .card-inner { padding-bottom: 66.7%; }  /* matches bk-crowd.jpg */
+    .card-blankstreet-eadem .card-inner { padding-bottom: 66.7%; }  /* matches blankstreet-eadem/hero.jpg */
 
     .card-img {
       position: absolute;
@@ -782,7 +783,7 @@
         <button class="filter-pill" data-filter="ui-ux">UI/UX</button>
         <button class="filter-pill" data-filter="print">Print</button>
         <button class="filter-pill" data-filter="marketing">Marketing</button>
-        <button class="filter-pill" data-filter="events">Events</button>
+        <button class="filter-pill" data-filter="events">Experiential Marketing + Events</button>
       </div>
     </div>
 
@@ -888,6 +889,24 @@
       <div class="card-caption">
         <h2 class="card-title">B&amp;N Sandwiches</h2>
         <p class="card-type">Brand Identity · Print · Social</p>
+      </div>
+      </a>
+
+      <!-- Blank Street x Eadem -->
+      <a href="blankstreet-eadem.html" class="card-link card-blankstreet-eadem reveal reveal-delay-2" data-cats="marketing branding featured events" data-h="67">
+      <article class="card">
+        <div class="card-inner">
+          <img class="card-img active" src="images/blankstreet-eadem/hero.jpg" alt="Blank Street x Eadem flavor and shade collection">
+        </div>
+        <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
+        <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
+        <div class="card-dots">
+          <button class="card-dot active" aria-label="Image 1"></button>
+        </div>
+      </article>
+      <div class="card-caption">
+        <h2 class="card-title">Blank Street x Eadem Collab and Pop-Up</h2>
+        <p class="card-type">Brand Strategy · Campaign Concept · Brand Activation</p>
       </div>
       </a>
 
@@ -1115,7 +1134,7 @@
 
   <!-- Typeface credits -->
   <div style="border-top: 1px solid var(--border); padding: 28px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; background: var(--white);">
-    <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(15,27,45,0.3);">Typefaces</p>
+    <p style="font-family: 'Bricolage Grotesque', 'Inter', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: rgba(15,27,45,0.4);">Typefaces</p>
     <div style="display: flex; gap: 48px; align-items: baseline;">
       <div style="text-align: center;">
         <p style="font-family: 'Bricolage Grotesque', 'Inter', sans-serif; font-weight: 700; font-size: 20px; color: rgba(15,27,45,0.45); letter-spacing: -0.01em; margin-bottom: 4px;">Bricolage Grotesque</p>
@@ -1129,7 +1148,7 @@
   </div>
   <!-- Coded by -->
   <div style="border-top: 1px solid var(--border); padding: 16px 56px; background: var(--white); text-align: center;">
-    <p style="font-size: 10px; font-weight: 400; letter-spacing: 0.04em; color: rgba(15,27,45,0.3);">Designed and coded in HTML, CSS, and JavaScript.</p>
+    <p style="font-size: 14px; font-weight: 700; letter-spacing: 0.02em; color: rgba(15,27,45,0.4);">Designed and coded in HTML, CSS, and JavaScript.</p>
   </div>
 
   <script src="hero-bounce-fullscreen.js"></script>
@@ -1234,11 +1253,12 @@
       const colWide      = document.querySelector('.work-col-wide');
       const colNarrow    = document.querySelector('.work-col-narrow');
       const isaCard      = document.querySelector('.card-isa');
+      const blankstreetEademCard = document.querySelector('.card-blankstreet-eadem');
       const barkadaEventsCard   = document.querySelector('.card-barkada-events');
       const barkadaGraphicsCard = document.querySelector('.card-barkada');
       const bnCard       = document.querySelector('.card-bn');
       const workCards    = Array.from(document.querySelectorAll('.work-grid .card-link'));
-      const otherCards   = workCards.filter(c => c !== isaCard && c !== barkadaEventsCard && c !== barkadaGraphicsCard);
+      const otherCards   = workCards.filter(c => c !== isaCard && c !== blankstreetEademCard && c !== barkadaEventsCard && c !== barkadaGraphicsCard);
       const archiveCols  = Array.from(document.querySelectorAll('.archive-col'));
       const archiveCards = Array.from(document.querySelectorAll('.archive-grid .archive-card-link'));
 
@@ -1251,9 +1271,9 @@
         return width * h / 100 + CAPTION_H;
       }
 
-      // ISA and Barkada Events always live in the wide column (bigger), and
-      // Barkada Graphics always lives in the narrow column (smaller) — a
-      // deliberate size difference between the two Barkada projects, not
+      // Blank Street x Eadem, ISA, and Barkada Events always live in the
+      // wide column (bigger), and Barkada Graphics always lives in the
+      // narrow column (smaller) — a deliberate size difference, not
       // something the balancer should be free to flip. For the remaining
       // cards, brute-force every subset (only 4 items, so 16 combinations)
       // to find which ones should join the wide column so both sides end
@@ -1293,7 +1313,7 @@
         const pinNarrowThisFilter = filter === 'featured' ? [bnCard] : [];
         const otherCardsThisFilter = otherCards.filter(c => !pinNarrowThisFilter.includes(c));
 
-        const visibleFixedWide   = [isaCard, barkadaEventsCard].filter(show);
+        const visibleFixedWide   = [blankstreetEademCard, isaCard, barkadaEventsCard].filter(show);
         const visibleFixedNarrow = [barkadaGraphicsCard, ...pinNarrowThisFilter].filter(show);
         const visibleOthers = otherCardsThisFilter.filter(show);
         const hidden = workCards.filter(c => !show(c));
