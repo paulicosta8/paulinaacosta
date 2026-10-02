@@ -1027,6 +1027,18 @@
           <p class="archive-caption-type">Print · Packaging</p>
         </div>
         </a>
+
+        <a href="hennessy-gift.html" class="archive-card-link" data-cats="print packaging playground" data-h="123" style="display:block; text-decoration:none; color:inherit;">
+        <article class="archive-card reveal">
+          <div class="archive-card-inner" style="padding-bottom: 122.9%;">
+            <img class="archive-img" src="images/hennessy-gift/packaging.jpg" alt="Custom Hennessy bottle box packaging">
+          </div>
+        </article>
+        <div class="archive-caption">
+          <p class="archive-caption-title">Custom Hennessy Packaging</p>
+          <p class="archive-caption-type">Print · Packaging</p>
+        </div>
+        </a>
       </div>
 
     </div>
@@ -1271,7 +1283,7 @@
         return width * h / 100 + CAPTION_H;
       }
 
-      // Blank Street x Eadem, ISA, and Barkada Events always live in the
+      // ISA, Blank Street x Eadem, and Barkada Events always live in the
       // wide column (bigger), and Barkada Graphics always lives in the
       // narrow column (smaller) — a deliberate size difference, not
       // something the balancer should be free to flip. For the remaining
@@ -1313,7 +1325,7 @@
         const pinNarrowThisFilter = filter === 'featured' ? [bnCard] : [];
         const otherCardsThisFilter = otherCards.filter(c => !pinNarrowThisFilter.includes(c));
 
-        const visibleFixedWide   = [blankstreetEademCard, isaCard, barkadaEventsCard].filter(show);
+        const visibleFixedWide   = [isaCard, blankstreetEademCard, barkadaEventsCard].filter(show);
         const visibleFixedNarrow = [barkadaGraphicsCard, ...pinNarrowThisFilter].filter(show);
         const visibleOthers = otherCardsThisFilter.filter(show);
         const hidden = workCards.filter(c => !show(c));

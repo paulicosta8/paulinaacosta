@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Custom Hennessy Packaging: a personal gift project recreating a limited-edition Hennessy bottle and box, personalized with a friend's portrait and a logo he designed himself, brought to life as packaging. By Paulina Acosta." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💙</text></svg>" />
+  <title>Custom Hennessy Packaging, Paulina Acosta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #FFF8EC;
+      --orange:    #F0A030;
+      --navy:      #2B1B45;
+      --magenta:   #C81E4A;
+      --yellow:    #F0D030;
+      --cream:     #F5EEDD;
+      --charcoal:  #1E1A18;
+      --muted:     #7A6F63;
+      --border:    #E6DCC8;
+      --serif:     'Bricolage Grotesque', 'Inter', sans-serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(255, 248, 236, 0.93);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back::before { content: '←'; }
+    .nav-project-name { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--magenta); }
+
+    .hero { padding-top: 64px; }
+    .hero-img-wrap {
+      position: relative; width: 100%; aspect-ratio: 545/399; max-height: 75vh; overflow: hidden;
+      background: var(--cream);
+    }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .hero-text { padding: 48px 56px 44px; border-bottom: 1px solid var(--border); }
+    .hero-text-inner { max-width: 720px; }
+    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--magenta); margin-bottom: 14px; }
+    .hero-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 64px); font-weight: 700; color: var(--charcoal); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero-sub { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+    .overview { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+    .overview-item { padding: 28px 40px; border-right: 1px solid var(--border); }
+    .overview-item:last-child { border-right: none; }
+    .overview-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .overview-value { font-size: 15px; color: var(--charcoal); line-height: 1.4; }
+
+    .cs-section { padding: 80px 56px; }
+    .cs-body { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 640px; }
+    .cs-body + .cs-body { margin-top: 16px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .img-wrap { overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .img-wrap img { width: 100%; height: 100%; object-fit: contain; }
+    .dieline-panel { background: var(--cream); aspect-ratio: 664/816; padding: 24px; }
+    .logo-panel { background: var(--navy); aspect-ratio: 1/1; padding: 40px; }
+    .panel-caption { font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center; }
+
+    .original-panel { background: #fff; border: 1px solid var(--border); aspect-ratio: 1/1; max-width: 520px; padding: 12px; margin-top: 40px; }
+    .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .photo-panel { background: var(--cream); aspect-ratio: 3/4; padding: 14px; }
+
+    .next-project {
+      padding: 64px 56px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;
+    }
+    .next-project:hover { background: var(--cream); }
+    .next-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .next-title { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--charcoal); }
+    .next-arrow { font-size: 24px; color: var(--magenta); transition: transform 0.2s var(--ease); }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero-text { padding: 40px 24px 36px; }
+      .overview { grid-template-columns: 1fr; }
+      .overview-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .cs-section { padding: 56px 24px; }
+      .two-col { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .next-project { padding: 48px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html#work" class="nav-back">All work</a>
+    <span class="nav-project-name">Custom Hennessy Packaging</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="images/hennessy-gift/label-hero.jpg" alt="Custom Hennessy bottle label">
+    </div>
+    <div class="hero-text">
+      <div class="hero-text-inner">
+        <p class="hero-tag">Packaging Design · Personal Gift · 2026</p>
+        <h1 class="hero-title">Custom Hennessy Packaging</h1>
+        <p class="hero-sub">A one-off packaging design recreating a limited-edition Hennessy bottle and box, personalized for a friend with his own portrait and a logo he designed himself, which I brought to life on the bottle and box.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="overview">
+    <div class="overview-item">
+      <p class="overview-label">Role</p>
+      <p class="overview-value">Solo designer</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Context</p>
+      <p class="overview-value">Personal gift, 2026</p>
+    </div>
+    <div class="overview-item">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Bottle label · Bottle box packaging</p>
+    </div>
+  </div>
+
+  <section class="cs-section">
+    <p class="cs-body reveal">Inspired by LeBron James' own limited-edition Hennessy collaboration, this recreates the same bottle and box format with a friend's face on the label. The logo he designed himself takes the place of the celebrity signature, and my job was to bring it to life across the label and box.</p>
+
+    <div class="reveal">
+      <div class="img-wrap original-panel">
+        <img src="images/hennessy-gift/original-lebron.jpg" alt="The original Hennessy Very Special x LeBron James limited edition bottle and box">
+      </div>
+      <p class="panel-caption" style="text-align:left; max-width:520px;">The original: Hennessy Very Special x LeBron James limited edition</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <div>
+        <div class="img-wrap dieline-panel">
+          <img src="images/hennessy-gift/packaging.jpg" alt="Full Hennessy box packaging dieline">
+        </div>
+        <p class="panel-caption">Full packaging dieline</p>
+      </div>
+      <div>
+        <div class="img-wrap logo-panel">
+          <img src="images/hennessy-gift/logo.png" alt="The logo he designed, used in place of the celebrity signature">
+        </div>
+        <p class="panel-caption">The logo he designed, brought to life as the signature</p>
+      </div>
+    </div>
+
+    <div class="photo-grid reveal">
+      <div class="img-wrap photo-panel">
+        <img src="images/hennessy-gift/irl-1.png" alt="The printed Hennessy box held in hand, front panel">
+      </div>
+      <div class="img-wrap photo-panel">
+        <img src="images/hennessy-gift/irl-2.png" alt="The printed Hennessy box on its side, Hennessy wordmark panel">
+      </div>
+      <div class="img-wrap photo-panel">
+        <img src="images/hennessy-gift/irl-3.png" alt="The printed Hennessy box on its side, opposite panel">
+      </div>
+      <div class="img-wrap photo-panel">
+        <img src="images/hennessy-gift/irl-4.png" alt="Top of the box with the Limited Edition seal">
+      </div>
+    </div>
+    <p class="panel-caption reveal">The finished box, printed and assembled</p>
+  </section>
+
+  <a href="index.html#work" class="next-project">
+    <div>
+      <p class="next-label">Back to</p>
+      <p class="next-title">All work</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
