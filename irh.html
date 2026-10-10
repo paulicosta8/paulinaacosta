@@ -379,6 +379,13 @@
       .slide-grid { grid-template-columns: 1fr 1fr; }
       .next-project { padding: 48px 24px; }
     }
+    @media (max-width: 900px) {
+      .meta-bar { grid-template-columns: 1fr 1fr !important; }
+      .meta-bar > div { padding: 20px 24px !important; border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    }
+    @media (max-width: 600px) {
+      .meta-bar { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -403,7 +410,7 @@
   </section>
 
   <!-- OVERVIEW STRIP -->
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid rgba(91,61,138,0.2); background: #F5F0FA;">
+  <div class="meta-bar" style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid rgba(91,61,138,0.2); background: #F5F0FA;">
     <div style="padding: 32px 40px; border-right: 1px solid rgba(91,61,138,0.2);">
       <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #9B7AB8; margin-bottom: 8px;">Role</p>
       <p style="font-size: 15px; color: #1A1208; line-height: 1.4;">Card design · Booklet · Presentation</p>
@@ -440,15 +447,15 @@
 
     <div class="card-types reveal">
       <div class="card-type-wrap identity">
-        <img src="images/irh/cards-identity.png" alt="Identity Shift cards" />
+        <img src="images/irh/cards-identity.png" alt="Identity Shift cards" loading="lazy" decoding="async" />
         <div class="card-type-label">Identity Shift</div>
       </div>
       <div class="card-type-wrap memory">
-        <img src="images/irh/cards-memory.png" alt="Memory Fragment cards" />
+        <img src="images/irh/cards-memory.png" alt="Memory Fragment cards" loading="lazy" decoding="async" />
         <div class="card-type-label">Memory Fragment</div>
       </div>
       <div class="card-type-wrap event">
-        <img src="images/irh/cards-event.png" alt="Event cards" />
+        <img src="images/irh/cards-event.png" alt="Event cards" loading="lazy" decoding="async" />
         <div class="card-type-label">Event</div>
       </div>
     </div>
@@ -460,15 +467,15 @@
     <h2 class="reveal">Seven residents, seven secrets.</h2>
     <p class="characters-intro reveal">Each character has a public-facing card with their overview and a hidden trait only they know. That asymmetry is what drives the social deduction throughout the game.</p>
     <div class="character-grid reveal">
-      <div class="character-item"><img src="images/irh/char-gallop.png" alt="Sir Gallop IV" /></div>
-      <div class="character-item"><img src="images/irh/char-shell.png" alt="Old Shell" /></div>
-      <div class="character-item"><img src="images/irh/char-piuma.png" alt="Don Piuma" /></div>
-      <div class="character-item"><img src="images/irh/char-txz.png" alt="TXZ-79" /></div>
+      <div class="character-item"><img src="images/irh/char-gallop.jpg" alt="Sir Gallop IV" loading="lazy" decoding="async" /></div>
+      <div class="character-item"><img src="images/irh/char-shell.jpg" alt="Old Shell" loading="lazy" decoding="async" /></div>
+      <div class="character-item"><img src="images/irh/char-piuma.jpg" alt="Don Piuma" loading="lazy" decoding="async" /></div>
+      <div class="character-item"><img src="images/irh/char-txz.png" alt="TXZ-79" loading="lazy" decoding="async" /></div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; max-width: 75%; margin-left: auto; margin-right: auto;" class="reveal">
-      <div class="character-item"><img src="images/irh/char-buzz.png" alt="Buzz" /></div>
-      <div class="character-item"><img src="images/irh/char-pearl.png" alt="Thy Pearl" /></div>
-      <div class="character-item"><img src="images/irh/char-janeter.png" alt="Janetor" /></div>
+      <div class="character-item"><img src="images/irh/char-buzz.jpg" alt="Buzz" loading="lazy" decoding="async" /></div>
+      <div class="character-item"><img src="images/irh/char-pearl.jpg" alt="Thy Pearl" loading="lazy" decoding="async" /></div>
+      <div class="character-item"><img src="images/irh/char-janeter.jpg" alt="Janetor" loading="lazy" decoding="async" /></div>
     </div>
   </section>
 
@@ -478,16 +485,16 @@
     <h2 class="reveal">The in-universe lore book.</h2>
     <p class="encyclopedia-intro reveal">A companion booklet covering the retirement home's mysterious origins and each species' history. The blue hardcover and cream interior make it feel like a real reference book you might find drifting through space.</p>
     <div class="encyclopedia-feature reveal">
-      <img src="images/irh/encyc-cover.png" alt="Encyclopedia cover and table of contents" />
-      <img src="images/irh/encyc-origin.png" alt="The Retirement Home origin entry" />
+      <img src="images/irh/encyc-cover.jpg" alt="Encyclopedia cover and table of contents" loading="lazy" decoding="async" />
+      <img src="images/irh/encyc-origin.jpg" alt="The Retirement Home origin entry" loading="lazy" decoding="async" />
     </div>
     <div class="encyclopedia-grid reveal">
-      <img src="images/irh/encyc-horsemen.png" alt="The Horsemen entry" />
-      <img src="images/irh/encyc-tortoises.png" alt="The Tortoises entry" />
-      <img src="images/irh/encyc-aliens.png" alt="The Aliens entry" />
-      <img src="images/irh/encyc-birdmen.png" alt="The Mafia Birdmen entry" />
-      <img src="images/irh/encyc-oysters.png" alt="The Giant Oysters entry" />
-      <img src="images/irh/encyc-flies.png" alt="The Flies entry" />
+      <img src="images/irh/encyc-horsemen.jpg" alt="The Horsemen entry" loading="lazy" decoding="async" />
+      <img src="images/irh/encyc-tortoises.jpg" alt="The Tortoises entry" loading="lazy" decoding="async" />
+      <img src="images/irh/encyc-aliens.jpg" alt="The Aliens entry" loading="lazy" decoding="async" />
+      <img src="images/irh/encyc-birdmen.jpg" alt="The Mafia Birdmen entry" loading="lazy" decoding="async" />
+      <img src="images/irh/encyc-oysters.jpg" alt="The Giant Oysters entry" loading="lazy" decoding="async" />
+      <img src="images/irh/encyc-flies.jpg" alt="The Flies entry" loading="lazy" decoding="async" />
     </div>
   </section>
 
@@ -497,12 +504,12 @@
     <h2 class="reveal">A pitch deck that matched the game's world.</h2>
     <p class="presentation-intro reveal">The full pitch deck was designed to match the game's tone: clean, editorial typography with a sci-fi edge. Each section was laid out to communicate the game's world just as much as its rules.</p>
     <div class="slide-grid reveal">
-      <img src="images/irh/slide-premise.png" alt="Premise slide" />
-      <img src="images/irh/slide-characters-1.png" alt="Characters slide 1" />
-      <img src="images/irh/slide-characters-2.png" alt="Characters slide 2" />
-      <img src="images/irh/slide-mechanics.png" alt="Core mechanics slide" />
-      <img src="images/irh/slide-voting.png" alt="Voting system slide" />
-      <img src="images/irh/slide-gameplay.png" alt="Sample gameplay slide" />
+      <img src="images/irh/slide-premise.jpg" alt="Premise slide" loading="lazy" decoding="async" />
+      <img src="images/irh/slide-characters-1.jpg" alt="Characters slide 1" loading="lazy" decoding="async" />
+      <img src="images/irh/slide-characters-2.jpg" alt="Characters slide 2" loading="lazy" decoding="async" />
+      <img src="images/irh/slide-mechanics.png" alt="Core mechanics slide" loading="lazy" decoding="async" />
+      <img src="images/irh/slide-voting.png" alt="Voting system slide" loading="lazy" decoding="async" />
+      <img src="images/irh/slide-gameplay.png" alt="Sample gameplay slide" loading="lazy" decoding="async" />
     </div>
   </section>
 
@@ -512,7 +519,7 @@
     <h2 class="reveal" style="font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--space); margin-bottom: 12px;">Everything a new resident needs to know</h2>
     <p class="cards-intro reveal">A single-page reference sheet covering the full game: the premise, all six characters, the memory system, identity shifts, voting, event cards, and materials list. Designed to be handed to players before the game starts.</p>
     <div class="reveal">
-      <img src="images/irh/instruction-manual.png" alt="The Retirement Home instruction manual" style="width: 100%; display: block; border-radius: 6px; box-shadow: 0 4px 32px rgba(26,26,46,0.12);" />
+      <img src="images/irh/instruction-manual.jpg" alt="The Retirement Home instruction manual" style="width: 100%; display: block; border-radius: 6px; box-shadow: 0 4px 32px rgba(26,26,46,0.12);" loading="lazy" decoding="async" />
     </div>
   </section>
 

@@ -148,6 +148,13 @@
       .img-grid-3 { grid-template-columns: 1fr 1fr; }
       .next-project { padding: 60px 24px; }
     }
+    @media (max-width: 900px) {
+      .meta-bar { grid-template-columns: 1fr 1fr !important; }
+      .meta-bar > div { padding: 20px 24px !important; border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    }
+    @media (max-width: 600px) {
+      .meta-bar { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -170,7 +177,7 @@
     </div>
   </section>
 
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); background: #F8F5EE;">
+  <div class="meta-bar" style="display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); background: #F8F5EE;">
     <div style="padding: 32px 40px; border-right: 1px solid var(--border);">
       <p style="font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Role</p>
       <p style="font-size: 15px; color: var(--ink); line-height: 1.4;">Solo designer</p>
@@ -227,21 +234,21 @@
     <p class="body-text" style="margin-bottom: 2.5rem;">Each card has a printed face with the "curl in / curl out" S-wave motif and humidity instructions, and a plain mylar back. The curving typography literally echoes the curl of the card itself.</p>
     <div class="img-grid-2" style="margin-bottom: 1.25rem;">
       <div class="img-wrap" style="aspect-ratio: 3/4;">
-        <img src="images/curl/card-front.jpg" alt="Card front blue and amber colorway" />
+        <img src="images/curl/card-front.jpg" alt="Card front blue and amber colorway" loading="lazy" decoding="async" />
       </div>
       <div class="img-wrap" style="aspect-ratio: 3/4;">
-        <img src="images/curl/card-front-back.jpg" alt="Card front and mylar back side by side" />
+        <img src="images/curl/card-front-back.jpg" alt="Card front and mylar back side by side" loading="lazy" decoding="async" />
       </div>
     </div>
     <div class="img-grid-3">
       <div class="img-wrap" style="aspect-ratio: 4/3;">
-        <img src="images/curl/cards-dark-spread.jpg" alt="Cards spread on dark surface" />
+        <img src="images/curl/cards-dark-spread.jpg" alt="Cards spread on dark surface" loading="lazy" decoding="async" />
       </div>
       <div class="img-wrap" style="aspect-ratio: 4/3;">
-        <img src="images/curl/cards-printed-rows.jpg" alt="Card variants in rows" />
+        <img src="images/curl/cards-printed-rows.jpg" alt="Card variants in rows" loading="lazy" decoding="async" />
       </div>
       <div class="img-wrap" style="aspect-ratio: 4/3;">
-        <img src="images/curl/card-window.jpg" alt="Card and mylar on windowsill" />
+        <img src="images/curl/card-window.jpg" alt="Card and mylar on windowsill" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
@@ -252,10 +259,10 @@
       <h2 class="section-heading">Four color variants</h2>
       <p class="body-text">The S-wave motif was designed in four colorways, each a different warm/cool pairing that maintains the bold, graphic quality of the card face.</p>
       <div class="colorways-grid">
-        <div class="colorway-item"><img src="images/curl/mockup-blue-orange.png" alt="Blue and orange colorway" /></div>
-        <div class="colorway-item"><img src="images/curl/mockup-pink-purple.png" alt="Pink and purple colorway" /></div>
-        <div class="colorway-item"><img src="images/curl/mockup-gold-purple.png" alt="Gold and purple colorway" /></div>
-        <div class="colorway-item"><img src="images/curl/mockup-pink-orange.png" alt="Pink and orange colorway" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-blue-orange.png" alt="Blue and orange colorway" loading="lazy" decoding="async" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-pink-purple.png" alt="Pink and purple colorway" loading="lazy" decoding="async" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-gold-purple.png" alt="Gold and purple colorway" loading="lazy" decoding="async" /></div>
+        <div class="colorway-item"><img src="images/curl/mockup-pink-orange.png" alt="Pink and orange colorway" loading="lazy" decoding="async" /></div>
       </div>
     </div>
   </div>
@@ -271,10 +278,10 @@
       <div>
         <div class="img-grid-2" style="margin-bottom: 1.25rem;">
           <div class="img-wrap" style="aspect-ratio: 3/4;">
-            <img src="images/curl/box-front.jpg" alt="Box front" />
+            <img src="images/curl/box-front.jpg" alt="Box front" loading="lazy" decoding="async" />
           </div>
           <div class="img-wrap" style="aspect-ratio: 3/4;">
-            <img src="images/curl/box-back-light.jpg" alt="Box back with How To Curl guide" />
+            <img src="images/curl/box-back-light.jpg" alt="Box back with How To Curl guide" loading="lazy" decoding="async" />
           </div>
         </div>
         <p class="img-caption">Front and back of the printed card box</p>
@@ -288,7 +295,7 @@
       <h2 class="section-heading">Box dieline</h2>
       <p class="body-text">The packaging was designed as a flat dieline before being printed and assembled. The S-curve graphic wraps across panels, so the assembled box reads as one continuous design.</p>
       <div class="dieline-img">
-        <img src="images/curl/dieline.png" alt="Box packaging dieline flat" />
+        <img src="images/curl/dieline.png" alt="Box packaging dieline flat" loading="lazy" decoding="async" />
       </div>
     </div>
   </div>

@@ -665,16 +665,18 @@
       nav { padding: 0 24px; }
       .hero { padding: 120px 24px 60px; }
       .hero, .section, #contact { padding-left: 24px; padding-right: 24px; }
-      .work-grid { flex-direction: column; gap: 18px; }
+      .work-grid { flex-direction: column; align-items: stretch; gap: 18px; }
+      .work-col-wide, .work-col-narrow { flex: none; width: 100%; }
       .archive-grid { flex-wrap: wrap; }
       .archive-col { flex: 1 1 45%; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .card .card-arrow { opacity: 0.7; }
     }
     @media (max-width: 600px) {
-      .hero { padding: 100px 20px 48px; }
+      .hero { padding: 100px 20px 48px; flex-direction: column; align-items: stretch; justify-content: flex-end; gap: 16px; }
+      .hero-content { max-width: none; width: 100%; }
+      .hero-bounce-toggle { align-self: flex-start; }
       .section, #contact { padding-left: 20px; padding-right: 20px; }
-      .work-grid .card-link .card-inner { padding-bottom: 75%; }
       .archive-grid { gap: 12px; }
       .archive-col { flex: 1 1 100%; }
       .archive-card-inner, .archive-card-inner.portrait { padding-bottom: 75%; }
@@ -715,7 +717,7 @@
        could clip thumbnails. Kept as a body-level sibling instead. -->
   <div id="heroBounceArena" class="hero-bounce-arena">
     <a href="isa.html" class="bounce-item" style="width: 160px; height: 111px;">
-      <img src="images/homepage/isa-cover.png" alt="">
+      <img src="images/homepage/isa-cover.jpg" alt="">
       <span class="bounce-item-label">ISA</span>
     </a>
     <a href="isa.html" class="bounce-item" style="width: 160px; height: 100px;">
@@ -727,7 +729,7 @@
       <span class="bounce-item-label">Barkada Graphics</span>
     </a>
     <a href="barkada.html" class="bounce-item" style="width: 160px; height: 124px;">
-      <img src="images/homepage/barkada-cover.png" alt="">
+      <img src="images/homepage/barkada-cover.jpg" alt="">
       <span class="bounce-item-label">Barkada Graphics</span>
     </a>
     <a href="barkada.html" class="bounce-item" style="width: 160px; height: 160px;">
@@ -755,7 +757,7 @@
       <span class="bounce-item-label">Anona Specimen Cards</span>
     </a>
     <a href="toad.html" class="bounce-item" style="width: 124px; height: 160px;">
-      <img src="images/homepage/toad-cover.png" alt="">
+      <img src="images/homepage/toad-cover.jpg" alt="">
       <span class="bounce-item-label">Toad's Survival Guide</span>
     </a>
   </div>
@@ -794,9 +796,9 @@
       <a href="isa.html" class="card-link card-isa reveal reveal-delay-1" data-cats="branding packaging ui-ux featured" data-h="70">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/isa-cover.png" alt="ISA brand identity">
-          <img class="card-img" src="images/homepage/isa-website.png" alt="ISA website">
-          <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging">
+          <img class="card-img active" src="images/homepage/isa-cover.jpg" alt="ISA brand identity" loading="lazy" decoding="async">
+          <img class="card-img" src="images/homepage/isa-website.jpg" alt="ISA website" loading="lazy" decoding="async">
+          <img class="card-img" src="images/homepage/isa-packaging.png" alt="ISA packaging" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -816,9 +818,9 @@
       <a href="barkada.html" class="card-link card-barkada reveal reveal-delay-2" data-cats="branding print marketing featured" data-h="100">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post">
-          <img class="card-img" src="images/homepage/barkada-cover.png" alt="Barkada sticker" style="object-position: center center;">
-          <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch">
+          <img class="card-img active" src="images/homepage/barkada-benefit.jpg" alt="Barkada Benefit Post" loading="lazy" decoding="async">
+          <img class="card-img" src="images/homepage/barkada-cover.jpg" alt="Barkada sticker" style="object-position: center center;" loading="lazy" decoding="async">
+          <img class="card-img" src="images/barkada/jacket-front.png" alt="Barkada jacket merch" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -838,7 +840,7 @@
       <a href="barkada-events.html" class="card-link card-barkada-events reveal reveal-delay-3" data-cats="marketing events featured" data-h="67">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/barkada/bk/bk-crowd.jpg" alt="Sold-out crowd at Bahay Kubo">
+          <img class="card-img active" src="images/barkada/bk/bk-crowd.jpg" alt="Sold-out crowd at Bahay Kubo" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -858,7 +860,7 @@
       <a href="nextflix.html" class="card-link card-nextflix reveal reveal-delay-3" data-cats="ui-ux" data-h="56">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="object-position: center;">
+          <img class="card-img active" src="images/homepage/nextflix-cover.png" alt="Nextflix UX case study" style="object-position: center;" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -876,8 +878,8 @@
       <a href="bn.html" class="card-link card-bn reveal reveal-delay-1" data-cats="branding print marketing featured" data-h="129">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese">
-          <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster">
+          <img class="card-img active" src="images/homepage/bn-viet.jpg" alt="B&N Sandwiches Poster Vietnamese" loading="lazy" decoding="async">
+          <img class="card-img" src="images/homepage/bn-cover.jpg" alt="B&N Sandwiches Poster" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -896,7 +898,7 @@
       <a href="blankstreet-eadem.html" class="card-link card-blankstreet-eadem reveal reveal-delay-2" data-cats="marketing branding featured events" data-h="67">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/blankstreet-eadem/hero.jpg" alt="Blank Street x Eadem flavor and shade collection">
+          <img class="card-img active" src="images/blankstreet-eadem/hero.jpg" alt="Blank Street x Eadem flavor and shade collection" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -914,7 +916,7 @@
       <a href="noaa.html" class="card-link card-noaa reveal reveal-delay-2" data-cats="ui-ux print" data-h="194">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign">
+          <img class="card-img active" src="images/homepage/noaa-cover.png" alt="NOAA redesign" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -932,7 +934,7 @@
       <a href="mbta.html" class="card-link card-mbta reveal reveal-delay-3" data-cats="ui-ux" data-h="216">
       <article class="card">
         <div class="card-inner">
-          <img class="card-img active" src="images/homepage/mbta-cover.png" alt="Charlie's Card — an MBTA app">
+          <img class="card-img active" src="images/homepage/mbta-cover.jpg" alt="Charlie's Card — an MBTA app" loading="lazy" decoding="async">
         </div>
         <button class="card-arrow card-arrow-prev" aria-label="Previous image">&#8592;</button>
         <button class="card-arrow card-arrow-next" aria-label="Next image">&#8594;</button>
@@ -955,7 +957,7 @@
         <a href="mermaid.html" class="archive-card-link" data-cats="print ui-ux" data-h="155" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 154.6%;">
-            <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet">
+            <img class="archive-img" src="images/homepage/mermaid-cover.jpg" alt="Little Mermaid booklet" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -967,7 +969,7 @@
         <a href="translations.html" class="archive-card-link" data-cats="print animations" data-h="75" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 75%;">
-            <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet">
+            <img class="archive-img" src="images/homepage/translations-cover.jpg" alt="Translations typography booklet" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -981,7 +983,7 @@
         <a href="anona.html" class="archive-card-link" data-cats="print animations" data-h="178" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 177.8%;">
-            <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards">
+            <img class="archive-img" src="images/homepage/anona-cover.gif" alt="Anona Specimen Cards" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -993,7 +995,7 @@
         <a href="irh.html" class="archive-card-link" data-cats="print fun playground" data-h="68" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 68.1%;">
-            <img class="archive-img" src="images/homepage/irh-cover.png" alt="Intergalactic Retirement Home">
+            <img class="archive-img" src="images/homepage/irh-cover.jpg" alt="Intergalactic Retirement Home" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -1007,7 +1009,7 @@
         <a href="toad.html" class="archive-card-link" data-cats="print fun playground" data-h="129" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 129.4%;">
-            <img class="archive-img" src="images/homepage/toad-cover.png" alt="Toad's Survival Guide">
+            <img class="archive-img" src="images/homepage/toad-cover.jpg" alt="Toad's Survival Guide" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -1019,7 +1021,7 @@
         <a href="curl.html" class="archive-card-link" data-cats="print packaging playground" data-h="56" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal" style="background: none;">
           <div class="archive-card-inner" style="padding-bottom: 56.3%;">
-            <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards">
+            <img class="archive-img" src="images/homepage/curl-cover.png" alt="Curl In / Curl Out humidity sensor cards" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -1031,7 +1033,7 @@
         <a href="hennessy-gift.html" class="archive-card-link" data-cats="print packaging playground" data-h="123" style="display:block; text-decoration:none; color:inherit;">
         <article class="archive-card reveal">
           <div class="archive-card-inner" style="padding-bottom: 122.9%;">
-            <img class="archive-img" src="images/hennessy-gift/packaging.jpg" alt="Custom Hennessy bottle box packaging">
+            <img class="archive-img" src="images/hennessy-gift/packaging.jpg" alt="Custom Hennessy bottle box packaging" loading="lazy" decoding="async">
           </div>
         </article>
         <div class="archive-caption">
@@ -1050,25 +1052,25 @@
 
     <div class="about-photo-row reveal">
       <div class="about-photo-track">
-        <div class="about-photo-tile"><img src="images/homepage/pao1.JPG" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao2.JPG" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao3.JPG" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao4.JPG" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao5.jpg" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao6.jpg" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao7.jpg" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao8.jpg" alt="Paulina Acosta"></div>
-        <div class="about-photo-tile"><img src="images/homepage/pao9.jpg" alt="Paulina Acosta"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao1.JPG" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao2.JPG" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao3.JPG" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao4.JPG" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao5.jpg" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao6.jpg" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao7.jpg" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao8.jpg" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile"><img src="images/homepage/pao9.jpg" alt="Paulina Acosta" loading="lazy" decoding="async"></div>
         <!-- duplicated for a seamless infinite loop -->
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao1.JPG" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao2.JPG" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao3.JPG" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao4.JPG" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao5.jpg" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao6.jpg" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao7.jpg" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao8.jpg" alt=""></div>
-        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao9.jpg" alt=""></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao1.JPG" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao2.JPG" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao3.JPG" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao4.JPG" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao5.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao6.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao7.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao8.jpg" alt="" loading="lazy" decoding="async"></div>
+        <div class="about-photo-tile" aria-hidden="true"><img src="images/homepage/pao9.jpg" alt="" loading="lazy" decoding="async"></div>
       </div>
     </div>
 
